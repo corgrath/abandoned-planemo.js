@@ -1,0 +1,36 @@
+{
+  "name": "Planemo",
+  "version": "0.0.1",
+  "description": "Planemo JavaScript Open Source Software Quality Software",
+  "main": "planemo.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "htmlparser2": "~3.2.3",
+    "nodeunit": "~0.8.0",
+    "underscore": "~1.4.4",
+    "underscore.string": "~2.3.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "run_tests.bat"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/corgrath/planemo-javascript-open-source-software-quality-platform/"
+  },
+  "keywords": [
+    "javascript",
+    "planemo",
+    "open",
+    "source",
+    "software",
+    "quality",
+    "static",
+    "code",
+    "analysis"
+  ],
+  "author": "Christoffer Pettersson",
+  "license": "BSD"
+}

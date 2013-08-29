@@ -1,0 +1,41 @@
+{
+	"source":
+		[
+			{
+				"basePath": "C:\\christoffer\\git_repos\\ft-thejungle-64599\\src\\Client\\Client\\web\\assets\\",
+				"fullPath": "C:\\christoffer\\git_repos\\ft-thejungle-64599\\src\\Client\\Client\\web\\assets\\datamodelviewer\\",
+				"directoryName": "datamodelviewer"
+			}
+		],
+	"plugins": {
+		"check-directory-name-plugin": {
+			"regexp": "^\\w+$"
+		},
+		"check-file-name-plugin": {
+			"regexp": "^[\\w-]+\\.js|less|html|css$"
+		},
+		"check-file-line-length-plugin": {
+			"length": 600
+		},
+		"check-html-attributes-plugin": {
+			"notAllowedToStartWith":
+				[
+					"ng-"
+				]
+		},
+		"check-file-contents-plugin": {
+			"notAllowedToContainRegexp":
+				[
+					"TODO",
+					"FIXME",
+					"/\\*global.+console"
+				]
+		},
+		"check-css-selectors-plugin": {
+			"disallow":
+				[
+					"touch-off"
+				]
+		}
+	}
+}
