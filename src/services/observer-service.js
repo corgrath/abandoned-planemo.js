@@ -17,9 +17,10 @@ var KEY_FILE_FOUND = "KEY_FILE_FOUND";
 var KEY_FILE_READ = "KEY_FILE_READ";
 var KEY_FILE_LINE_READ = "KEY_FILE_LINE_READ";
 var KEY_ON_FILE_READ = "KEY_ON_FILE_READ";
-var KEY_ON_HTML_ELEMENT_READ = "KEY_ON_HTML_ELEMENT_READ";
+var KEY_ON_HTML_PROPERTY_VALUE_READ = "KEY_ON_HTML_PROPERTY_VALUE_READ";
 var KEY_ON_CSS_FILE_READ = "KEY_ON_CSS_FILE_READ";
 var KEY_ON_CSS_PROPERTY_AND_ATTRIBUTE_READ = "KEY_ON_CSS_PROPERTY_AND_ATTRIBUTE_READ";
+var KEY_ON_HTML_FILE_READ = "KEY_ON_HTML_FILE_READ";
 
 function addObserver ( observerFunction, key ) {
 
@@ -132,6 +133,26 @@ exports.fileRead = function ( file, fileContents, callbackFunction ) {
 }
 
 {
+	exports.onHTMLFileRead = function ( observer ) {
+		addObserver( observer, KEY_ON_HTML_FILE_READ );
+	}
+
+	exports.HTMLFileRead = function ( file, fileContents ) {
+		notifyAll( KEY_ON_HTML_FILE_READ, file, fileContents );
+	}
+}
+
+{
+	exports.onHTMLPropertyValueRead = function ( observer ) {
+		addObserver( observer, KEY_ON_HTML_PROPERTY_VALUE_READ );
+	}
+
+	exports.HTMLPropertyValueRead = function ( file, elementName, property, value ) {
+		notifyAll( KEY_ON_HTML_PROPERTY_VALUE_READ, file, elementName, property, value );
+	}
+}
+
+{
 	exports.onCSSPropertyAndAttributeRead = function ( observer ) {
 		addObserver( observer, KEY_ON_CSS_PROPERTY_AND_ATTRIBUTE_READ );
 	}
@@ -139,16 +160,4 @@ exports.fileRead = function ( file, fileContents, callbackFunction ) {
 	exports.CSSPropertyAndAttributeRead = function ( file, selectors, property, value ) {
 		notifyAll( KEY_ON_CSS_PROPERTY_AND_ATTRIBUTE_READ, file, selectors, property, value );
 	}
-}
-
-/*
- * HTMLElementRead
- */
-
-exports.onHTMLElementRead = function ( observer ) {
-	addObserver( observer, KEY_ON_HTML_ELEMENT_READ );
-}
-
-exports.HTMLElementRead = function ( file, elementName, attributes ) {
-	notifyAll( KEY_ON_HTML_ELEMENT_READ, file, elementName, attributes );
 }

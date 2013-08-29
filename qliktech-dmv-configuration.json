@@ -17,8 +17,8 @@
 		"check-file-line-length-plugin": {
 			"length": 600
 		},
-		"check-html-attributes-plugin": {
-			"notAllowedToStartWith":
+		"check-html-properties-and-values-plugin": {
+			"disallowPropertiesStartingWith":
 				[
 					"ng-"
 				]
