@@ -1,7 +1,7 @@
 Planemo
 =================================================
 
-Planemo is an JavaScript Open Source Software Quality Platform.
+Planemo is a plugin-friendly JavaScript Open Source Software Quality Platform.
 
 
 

@@ -32,4 +32,41 @@ exports.onHTMLPropertyValueRead = function ( options, file, elementName, propert
 
 	}
 
+	var options = {
+		"disallowValuesStartingWith": {
+			"-translation$": "^DataModelViewer\\."
+		}
+	};
+
+	/*
+	 * disallowValuesStartingWith
+	 */
+
+	if ( options.disallowValuesStartingWith ) {
+
+		for ( var propertyPattern in options.disallowValuesStartingWith ) {
+
+			var propertyRegexp = new RegExp( propertyPattern );
+
+			if ( propertyRegexp.test( property ) ) {
+
+				var valuePattern = options.disallowValuesStartingWith[propertyPattern];
+
+				var valueRegexp = new RegExp( valuePattern );
+
+				if ( !valueRegexp.test( value ) ) {
+					var error = new Error( "Found disallowed value \"" + value + "\" for property \"" + property + "\"." );
+					error.file = file;
+					error.elementName = elementName;
+					error.property = property;
+					error.value = value;
+					throw error;
+				}
+
+			}
+
+		}
+
+	}
+
 }

@@ -53,3 +53,31 @@ exports.testNotAllowedToStartWithValid = function ( test ) {
 	test.done();
 
 }
+
+exports.testDisallowValuesStartingWith = function ( test ) {
+
+	var options = {
+		"disallowValuesStartingWith": {
+			"-translation$": "DataModelViewer\\."
+		}
+	};
+
+	var file = "c:\\page.html";
+	var elementName = "p";
+	var property = "data-title-translation";
+	var value = "DataModelShower.Key.Value";
+
+	try {
+		plugin.onHTMLPropertyValueRead( options, file, elementName, property, value );
+	} catch ( error ) {
+		test.equal( error.message, "Found disallowed value \"DataModelShower.Key.Value\" for property \"data-title-translation\"." );
+		test.equal( error.elementName, elementName );
+		test.equal( error.property, property );
+		test.equal( error.value, value );
+		test.equal( error.file, file );
+	}
+
+	test.expect( 5 );
+	test.done();
+
+}

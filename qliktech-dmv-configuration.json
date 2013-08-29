@@ -20,8 +20,12 @@
 		"check-html-properties-and-values-plugin": {
 			"disallowPropertiesStartingWith":
 				[
-					"ng-"
-				]
+					"ng-",
+					"style"
+				],
+			"disallowValuesStartingWith": {
+				"-translation$": "^DataModelViewer\\."
+			}
 		},
 		"check-file-contents-plugin": {
 			"notAllowedToContainRegexp":
