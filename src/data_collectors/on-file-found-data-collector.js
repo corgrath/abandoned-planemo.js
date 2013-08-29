@@ -43,6 +43,11 @@ exports.onFileFound = function onFileFound ( path, filename ) {
 		return;
 	}
 
+	if ( fileTypeService.isLESSFile( filename ) ) {
+		readLineContents( path, filename, observerService.LESSFileRead );
+		return;
+	}
+
 	if ( !fileTypeService.isPlainText( filename ) ) {
 		logService.log( "Will not parse conents of file \"" + filename + "\" since it is not plain text." );
 		return;

@@ -40,6 +40,15 @@
 				[
 					"touch-off"
 				]
+		},
+		"check-less-file-contents-plugin": {
+			"disallow":
+				[
+					"-moz-",
+					"-webkit-",
+					"-o-",
+					"-ms-"
+				]
 		}
 	}
 }
