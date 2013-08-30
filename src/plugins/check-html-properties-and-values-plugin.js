@@ -26,8 +26,12 @@ exports.onHTMLPropertyValueRead = function ( options, file, elementName, propert
 
 	if ( options.disallowPropertiesStartingWith ) {
 
-		if ( stringUtil.startsWith( property, options.disallowPropertiesStartingWith ) ) {
-			throw new Error( "Found HTML property \"" + property + "\" name that starts invalid in file \"" + file + "\"." );
+		for ( var i in options.disallowPropertiesStartingWith ) {
+
+			if ( stringUtil.startsWith( property, options.disallowPropertiesStartingWith[i] ) ) {
+				throw new Error( "Found HTML property \"" + property + "\" name that starts invalid in file \"" + file + "\"." );
+			}
+
 		}
 
 	}

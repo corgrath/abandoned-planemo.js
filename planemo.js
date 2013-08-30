@@ -62,7 +62,6 @@ for ( var i = 0; i < configuration.source.length; i++ ) {
 	} catch ( error ) {
 
 		logService.error( error );
-
 		console.log( error );
 		throw error;
 

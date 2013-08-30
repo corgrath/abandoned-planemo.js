@@ -43,9 +43,16 @@ exports.onCSSFileRead = function ( file, fileContents ) {
 
 					observerService.CSSPropertyAndAttributeRead( file, selectors, declaration.property, declaration.value );
 
+				} else if ( declaration.type !== "comment" ) {
+
+					observerService.CSSCommentRead( file, declaration.comment );
+
 				}
 
 			}
+
+		} else if ( rule.type === "comment" ) {
+			observerService.CSSCommentRead( file, rule.comment );
 
 		}
 

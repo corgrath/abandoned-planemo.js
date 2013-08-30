@@ -22,6 +22,7 @@ var KEY_ON_CSS_FILE_READ = "KEY_ON_CSS_FILE_READ";
 var KEY_ON_CSS_PROPERTY_AND_ATTRIBUTE_READ = "KEY_ON_CSS_PROPERTY_AND_ATTRIBUTE_READ";
 var KEY_ON_HTML_FILE_READ = "KEY_ON_HTML_FILE_READ";
 var KEY_ON_LESS_FILE_READ = "KEY_ON_LESS_FILE_READ";
+var KEY_ON_CSS_COMMENT_READ = "KEY_ON_CSS_COMMENT_READ";
 
 function addObserver ( observerFunction, key ) {
 
@@ -170,5 +171,15 @@ exports.fileRead = function ( file, fileContents, callbackFunction ) {
 
 	exports.CSSPropertyAndAttributeRead = function ( file, selectors, property, value ) {
 		notifyAll( KEY_ON_CSS_PROPERTY_AND_ATTRIBUTE_READ, file, selectors, property, value );
+	}
+}
+
+{
+	exports.onCSSCommentRead = function ( observer ) {
+		addObserver( observer, KEY_ON_CSS_COMMENT_READ );
+	}
+
+	exports.CSSCommentRead = function ( file, comment ) {
+		notifyAll( KEY_ON_CSS_COMMENT_READ, file, comment );
 	}
 }

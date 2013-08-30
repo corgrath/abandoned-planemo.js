@@ -19,3 +19,8 @@ exports.startsWith = function startsWith ( string, startsWith ) {
 	return nodeUnderscoreString.startsWith( string, startsWith );
 
 };
+
+exports.contains = function contains ( string, contains ) {
+
+	return string.indexOf( contains ) !== -1;
+};
