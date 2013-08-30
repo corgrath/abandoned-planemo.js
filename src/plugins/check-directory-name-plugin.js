@@ -3,6 +3,7 @@
  */
 
 var observerService = require( "../services/observer-service.js" );
+var errorUtil = require( "../utils/error-util.js" );
 
 /*
  * Public functions
@@ -18,12 +19,6 @@ exports.init = function ( options ) {
 
 exports.onDirectoryFound = function onDirectoryFound ( options, basePath, fullPath, directoryName ) {
 
-	//	console.log( "lol" );
-	//	console.log( options )
-	//	console.log( "basePath=" + basePath );
-	//	console.log( "fullPath=" + fullPath );
-	//	console.log( "directoryName=" + directoryName );
-
 	if ( !options ) {
 		throw new Error( "No options were defined." );
 	}
@@ -36,12 +31,14 @@ exports.onDirectoryFound = function onDirectoryFound ( options, basePath, fullPa
 
 	var isLegalFilename = pattern.test( directoryName );
 
-	//	console.log( "options.name " + options.name )
-	//	console.log( "checking " + directoryName )
-	//	console.log( "isLegalFilename " + isLegalFilename )
-
 	if ( !isLegalFilename ) {
-		throw new Error( "The directory name \"" + directoryName + "\" is not valid." );
+
+		throw errorUtil.create( "The directory name \"" + directoryName + "\" is not valid.", {
+			basePath: basePath,
+			fullPath: fullPath,
+			directoryName: directoryName
+		} );
+
 	}
 
 }

@@ -22,6 +22,6 @@ exports.register = function ( pluginName, options ) {
 
 	plugin.init( options );
 
-	logService.log( "Installed the plugin \"" + pluginName + "\" is done." );
+	logService.log( "Registered the plugin \"" + pluginName + "\"." );
 
 };

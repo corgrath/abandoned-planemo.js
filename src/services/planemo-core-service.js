@@ -6,16 +6,6 @@ var logService = require( "./log-service.js" );
 var fileService = require( "./file-service.js" );
 
 /*
- * Private
- */
-
-function validateConfiguration ( configuration ) {
-
-	console.log( configuration );
-
-}
-
-/*
  * Public
  */
 
@@ -38,8 +28,6 @@ exports.getConfigurationFromArgument = function ( configurationArgumentFile ) {
 	var configurationFilecontents = fileService.readFile( configurationArgumentFile );
 
 	var configuration = JSON.parse( configurationFilecontents );
-
-	validateConfiguration( configuration );
 
 	return configuration;
 

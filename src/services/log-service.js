@@ -23,7 +23,6 @@ exports.log = function log ( object ) {
 	var timestamp = getFormattedTime();
 
 	console.log( "[" + timestamp + "] " + object );
-	//	console.log( ANSI_GREEN + "[" + timestamp + "] " + object + ANSI_CANCEL );
 
 };
 
@@ -36,8 +35,6 @@ exports.success = function log ( object ) {
 };
 
 exports.error = function error ( error ) {
-
-	console.log( typeof error )
 
 	var message = error.message;
 

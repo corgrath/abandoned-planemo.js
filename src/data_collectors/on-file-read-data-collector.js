@@ -26,17 +26,6 @@ exports.onFileRead = function onFileRead ( file, contents ) {
 			var lineContents = lines[i].substring( 0, lines[i].length - 1 );
 
 			observerService.fileLineRead( file, lineNumber, lineContents );
-			//			observerService.fileLineRead( file, lineNumber, lineContents, function ( error ) {
-			//
-			//				if ( error ) {
-			//					error.file = file;
-			//					error.lineNumber = lineNumber;
-			//					error.lineContents = lineContents;
-			//				}
-			//
-			//				callbackFunction( error );
-			//
-			//			} );
 
 		}
 

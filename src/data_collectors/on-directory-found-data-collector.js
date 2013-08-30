@@ -44,21 +44,9 @@ exports.onDirectoryFound = function onDirectoryFound ( basePath, fullPath, direc
 	for ( var i in items ) {
 
 		var item = items[i];
-		// console.log( "item222=" + item );
-		//		var pathAndItem = fileService.join( path, item );
 		var newDirectory = fullPath + item;
-		//		console.log( "path=" + path );
-		//		console.log( "item=" + item );
-		//		console.log( "newDirectory=" + newDirectory );
-
-		// console.log( "file1=" + file );
 		var stat = fs.statSync( newDirectory );
-		// console.log( "file2=" + file );
-		//
-		// if( error ) {
-		// throw error;
-		// }
-		//
+
 		if ( stat.isDirectory() ) {
 
 			newDirectory = fileService.prettifyDirectory( newDirectory );
@@ -71,8 +59,6 @@ exports.onDirectoryFound = function onDirectoryFound ( basePath, fullPath, direc
 
 			logService.log( "Found the file \"" + newDirectory + "\"." );
 
-			// console.log( "path=" + path );
-			// console.log( "2233item=" + item );
 			observerService.fileFound( fullPath, item );
 
 		}

@@ -20,13 +20,19 @@ exports.isPlainText = function ( file ) {
 };
 
 exports.isHTMLFile = function ( file ) {
+
 	return stringUtil.endsWith( file, ".html" );
+
 };
 
 exports.isLESSFile = function ( file ) {
+
 	return stringUtil.endsWith( file, ".less" );
+
 };
 
 exports.isCSSFile = function ( file ) {
+
 	return stringUtil.endsWith( file, ".css" );
+
 };

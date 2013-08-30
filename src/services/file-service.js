@@ -66,7 +66,7 @@ exports.getAllFilesInDirectory = function ( directory ) {
 		}
 
 	}
-	console.log( files );
+
 	return files;
 
 }
@@ -89,19 +89,6 @@ exports.readFile = function ( file ) {
 
 };
 
-///**
-// * Joins a path and an item using the operating system's specific path seperator.
-// *
-// * @param path The base path.
-// * @param item The item to be appened to the path.
-// */
-//
-//exports.join = function ( path, item ) {
-//
-//	return path + nodePath.sep + item;
-//
-//}
-
 exports.prettifyDirectory = function ( directory ) {
 
 	if ( !stringUtil.endsWith( directory, nodePath.sep ) ) {
@@ -109,11 +96,3 @@ exports.prettifyDirectory = function ( directory ) {
 	}
 
 }
-
-//exports.writeFile = function ( file, data ) {
-//
-//	logService.log( "Writing \"" + Buffer.byteLength( data, "UTF-8" ) + "\" bytes to the file \"" + file + "\"." );
-//
-//	fs.writeFileSync( file, data, "UTF-8" );
-//
-//};

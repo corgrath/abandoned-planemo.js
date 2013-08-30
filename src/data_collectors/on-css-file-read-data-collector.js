@@ -3,10 +3,7 @@
  */
 
 var nodeCSS = require( "css" );
-//var fileService = require( "./../services/file-service.js" );
 var observerService = require( "./../services/observer-service.js" );
-//var logService = require( "./../services/log-service.js" );
-//var fileTypeService = require( "./../services/file-type-service.js" );
 
 /*
  * Public functions
@@ -20,13 +17,7 @@ exports.init = function () {
 
 exports.onCSSFileRead = function ( file, fileContents ) {
 
-	//	console.log( "onCSSFileRead" );
-	//	console.log( "file=" + file );
-	//	console.log( "fileContents=" + fileContents );
-
 	var css = nodeCSS.parse( fileContents )
-
-	//	console.log( JSON.stringify( css, null, "\t" ) );
 
 	for ( var i in css.stylesheet.rules ) {
 
@@ -41,11 +32,6 @@ exports.onCSSFileRead = function ( file, fileContents ) {
 				var declaration = rule.declarations[k];
 
 				if ( declaration.type === "declaration" ) {
-
-//					console.log( "rule" );
-					//					console.log( rule );
-					//					console.log( "declaration" );
-					//					console.log( declaration );
 
 					var value = declaration.value;
 
@@ -62,8 +48,6 @@ exports.onCSSFileRead = function ( file, fileContents ) {
 			}
 
 		}
-
-		//		console.log( rule );
 
 	}
 
