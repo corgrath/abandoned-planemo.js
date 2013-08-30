@@ -8,7 +8,7 @@ var errorUtil = require( "../../src/utils/error-util.js" );
  * Tests
  */
 
-exports.testCreateMessage = function ( test ) {
+exports.testMessage = function ( test ) {
 
 	var error = errorUtil.create( "This is the message" );
 
@@ -19,7 +19,7 @@ exports.testCreateMessage = function ( test ) {
 
 }
 
-exports.testCreateData = function ( test ) {
+exports.testData = function ( test ) {
 
 	var file = "c:\\source.js";
 	var object = {
