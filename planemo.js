@@ -36,8 +36,6 @@ for ( var i in dataCollectors ) {
 for ( var pluginName in configuration.plugins ) {
 
 	var options = configuration.plugins[pluginName];
-	console.log( " plugin" );
-	console.log( pluginName );
 
 	pluginService.register( pluginName, options );
 

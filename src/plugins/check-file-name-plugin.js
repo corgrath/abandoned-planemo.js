@@ -10,18 +10,13 @@ var observerService = require( "../services/observer-service.js" );
 
 exports.init = function ( options ) {
 
-	observerService.onFileFound( function checkFileNameOnFileFound ( path, fileName ) {
+	observerService.onFileFound( function ( path, fileName ) {
 		exports.onFileFound( options, path, fileName );
 	} );
 
 };
 
 exports.onFileFound = function ( options, path, fileName ) {
-
-//	console.log( "options=" + options );
-	//	console.log( "path=" + path );
-	//	console.log( "fileName=" + fileName );
-	//	console.log( " options.regexp =" + options.regexp );
 
 	if ( !options ) {
 		throw new Error( "No options were defined." );
@@ -35,12 +30,15 @@ exports.onFileFound = function ( options, path, fileName ) {
 
 	var isLegalFilename = pattern.test( fileName );
 
-	//	console.log( "options.name " + options.name )
-	//	console.log( "checking " + directoryName )
-	//	console.log( "isLegalFilename " + isLegalFilename )
-
 	if ( !isLegalFilename ) {
-		throw new Error( "The file name \"" + fileName + "\" is not valid." );
+		var error = new Error( "The file name \"" + fileName + "\" is not valid." );
+		error.path = path;
+		error.fileName = fileName;
+		throw error;
+	}
+
+	if ( fileName.indexOf( ".ng" ) !== -1 ) {
+		process.exit();
 	}
 
 }
