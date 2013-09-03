@@ -10,11 +10,11 @@ var observerService = require( "./../services/observer-service.js" );
 
 exports.init = function () {
 
-	observerService.onFileRead( exports.onFileRead );
+	observerService.onJavaScriptFileRead( exports.onJavaScriptFileRead );
 
 };
 
-exports.onFileRead = function onFileRead ( file, contents ) {
+exports.onJavaScriptFileRead = function onFileRead ( file, contents ) {
 
 	var lines = contents.split( "\n" );
 
@@ -25,7 +25,7 @@ exports.onFileRead = function onFileRead ( file, contents ) {
 			var lineNumber = (i + 1);
 			var lineContents = lines[i].substring( 0, lines[i].length - 1 );
 
-			observerService.fileLineRead( file, lineNumber, lineContents );
+			observerService.JavaScriptFileLineRead( file, lineNumber, lineContents );
 
 		}
 

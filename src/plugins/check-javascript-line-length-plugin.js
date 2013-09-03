@@ -12,15 +12,15 @@ var observerService = require( "../services/observer-service.js" );
 
 exports.init = function ( options ) {
 
-	observerService.onFileLineRead( function onFileLineRead ( file, lineNumber, lineContents ) {
+	observerService.onJavaScriptFileLineRead( function ( file, lineNumber, lineContents ) {
 
-		exports.onFileLineRead( options, file, lineNumber, lineContents );
+		exports.onJavaScriptFileLineRead( options, file, lineNumber, lineContents );
 
 	} );
 
 };
 
-exports.onFileLineRead = function ( options, file, lineNumber, lineContents ) {
+exports.onJavaScriptFileLineRead = function ( options, file, lineNumber, lineContents ) {
 
 	if ( !options ) {
 		throw new Error( "Invalid options." );

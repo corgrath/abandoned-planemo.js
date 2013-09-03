@@ -15,7 +15,6 @@ var observers = {
 var KEY_DIRECTORY_FOUND = "KEY_DIRECTORY_FOUND";
 var KEY_FILE_FOUND = "KEY_FILE_FOUND";
 var KEY_FILE_READ = "KEY_FILE_READ";
-var KEY_FILE_LINE_READ = "KEY_FILE_LINE_READ";
 var KEY_ON_FILE_READ = "KEY_ON_FILE_READ";
 var KEY_ON_HTML_PROPERTY_VALUE_READ = "KEY_ON_HTML_PROPERTY_VALUE_READ";
 var KEY_ON_CSS_FILE_READ = "KEY_ON_CSS_FILE_READ";
@@ -24,6 +23,7 @@ var KEY_ON_HTML_FILE_READ = "KEY_ON_HTML_FILE_READ";
 var KEY_ON_LESS_FILE_READ = "KEY_ON_LESS_FILE_READ";
 var KEY_ON_CSS_COMMENT_READ = "KEY_ON_CSS_COMMENT_READ";
 var KEY_ON_JAVASCRIPT_FILE_READ = "KEY_ON_JAVASCRIPT_FILE_READ";
+var KEY_JAVASCRIPT_FILE_LINE_READ = "KEY_JAVASCRIPT_FILE_LINE_READ";
 
 function addObserver ( observerFunction, key ) {
 
@@ -92,37 +92,24 @@ exports.directoryFound = function ( basePath, fullPath, directoryName ) {
 }
 
 // ------------- all above is confirmed
+{
+	exports.onFileFound = function ( observer ) {
+		addObserver( observer, KEY_FILE_FOUND );
+	}
 
-exports.onFileFound = function ( observer ) {
-	addObserver( observer, KEY_FILE_FOUND );
+	exports.fileFound = function ( path, fileName, callbackFunction ) {
+		notifyAll( KEY_FILE_FOUND, path, fileName, callbackFunction );
+	}
 }
 
-exports.fileFound = function ( path, fileName, callbackFunction ) {
-	notifyAll( KEY_FILE_FOUND, path, fileName, callbackFunction );
-}
+{
+	exports.onFileRead = function ( observer ) {
+		addObserver( observer, KEY_ON_FILE_READ );
+	}
 
-exports.onFileRead = function ( observer ) {
-	addObserver( observer, KEY_FILE_READ );
-}
-
-exports.fileRead = function ( file, contents, callbackFunction ) {
-	notifyAll( KEY_FILE_READ, file, contents, callbackFunction );
-}
-
-exports.onFileLineRead = function ( observer ) {
-	addObserver( observer, KEY_FILE_LINE_READ );
-}
-
-exports.fileLineRead = function ( file, lineNumber, lineContents, callbackFunction ) {
-	notifyAll( KEY_FILE_LINE_READ, file, lineNumber, lineContents, callbackFunction );
-}
-
-exports.onFileRead = function ( observer ) {
-	addObserver( observer, KEY_ON_FILE_READ );
-}
-
-exports.fileRead = function ( file, fileContents, callbackFunction ) {
-	notifyAll( KEY_ON_FILE_READ, file, fileContents, callbackFunction );
+	exports.fileRead = function ( file, fileContents, callbackFunction ) {
+		notifyAll( KEY_ON_FILE_READ, file, fileContents, callbackFunction );
+	}
 }
 
 {
@@ -132,6 +119,16 @@ exports.fileRead = function ( file, fileContents, callbackFunction ) {
 
 	exports.CSSFileRead = function ( file, fileContents ) {
 		notifyAll( KEY_ON_CSS_FILE_READ, file, fileContents );
+	}
+}
+
+{
+	exports.onJavaScriptFileLineRead = function ( observer ) {
+		addObserver( observer, KEY_JAVASCRIPT_FILE_LINE_READ );
+	}
+
+	exports.JavaScriptFileLineRead = function ( file, lineNumber, lineContents ) {
+		notifyAll( KEY_JAVASCRIPT_FILE_LINE_READ, file, lineNumber, lineContents );
 	}
 }
 

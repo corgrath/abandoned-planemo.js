@@ -19,13 +19,7 @@ exports.testOptions = function ( test ) {
 		test.equal( error.message, "No options were defined." );
 	}
 
-	try {
-		plugin.onJavaScriptFileRead( options );
-	} catch ( error ) {
-		test.equal( error.message, "The option \"mustcontain\" is not defined." );
-	}
-
-	test.expect( 2 );
+	test.expect( 1 );
 	test.done();
 
 }
@@ -59,6 +53,36 @@ exports.testMustContains = function ( test ) {
 	} );
 
 	test.expect( 2 );
+	test.done();
+
+}
+
+exports.testDisallow = function ( test ) {
+
+	var file = "c:\\folder\\file.txt";
+
+	var options = {
+		disallow:
+			[
+				"/\\*global.+console"
+			]
+	};
+
+	try {
+		plugin.onJavaScriptFileRead( options, file, "/*global console */" );
+	} catch ( error ) {
+		test.equal( error.message, "Found the invalid pattern \"" + options.disallow[0] + "\"." );
+		test.equal( error.file, file );
+	}
+
+	try {
+		plugin.onJavaScriptFileRead( options, file, "/*global pubsub, console */" );
+	} catch ( error ) {
+		test.equal( error.message, "Found the invalid pattern \"" + options.disallow[0] + "\"." );
+		test.equal( error.file, file );
+	}
+
+	test.expect( 4 );
 	test.done();
 
 }

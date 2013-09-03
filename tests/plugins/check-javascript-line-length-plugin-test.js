@@ -2,7 +2,7 @@
  * Dependencies
  */
 
-var plugin = require( "../../src/plugins/check-file-line-length-plugin.js" );
+var plugin = require( "../../src/plugins/check-javascript-line-length-plugin.js" );
 
 /*
  * Tests
@@ -11,7 +11,7 @@ var plugin = require( "../../src/plugins/check-file-line-length-plugin.js" );
 exports.testOptions = function ( test ) {
 
 	try {
-		plugin.onFileLineRead( undefined, "file", "linenumber", "lineContents" );
+		plugin.onJavaScriptFileLineRead( undefined, "file", "linenumber", "lineContents" );
 	} catch ( error ) {
 		test.equal( error.message, "Invalid options." );
 	}
@@ -20,7 +20,7 @@ exports.testOptions = function ( test ) {
 	}
 
 	try {
-		plugin.onFileLineRead( options, "file", "linenumber", "lineContents" );
+		plugin.onJavaScriptFileLineRead( options, "file", "linenumber", "lineContents" );
 	} catch ( error ) {
 		test.equal( error.message, "No length is defined in the options." );
 	}
@@ -28,7 +28,7 @@ exports.testOptions = function ( test ) {
 	options.length = "string";
 
 	try {
-		plugin.onFileLineRead( options, "file", "linenumber", "lineContents" );
+		plugin.onJavaScriptFileLineRead( options, "file", "linenumber", "lineContents" );
 	} catch ( error ) {
 		test.equal( error.message, "The length \"string\" is not a number." );
 	}
@@ -36,7 +36,7 @@ exports.testOptions = function ( test ) {
 	options.length = -1;
 
 	try {
-		plugin.onFileLineRead( options, "file", "linenumber", "lineContents" );
+		plugin.onJavaScriptFileLineRead( options, "file", "linenumber", "lineContents" );
 	} catch ( error ) {
 		test.equal( error.message, "The length \"-1\" cannot be less than 0." );
 	}
@@ -54,7 +54,7 @@ exports.testInvalid = function ( test ) {
 
 	try {
 
-		plugin.onFileLineRead( options, "file", "linenumber", "hello world line" );
+		plugin.onJavaScriptFileLineRead( options, "file", "linenumber", "hello world line" );
 
 	} catch ( error ) {
 
@@ -74,7 +74,7 @@ exports.testValid = function ( test ) {
 
 	test.doesNotThrow( function () {
 
-		plugin.onFileLineRead( options, "file", "linenumber", "hello world line" );
+		plugin.onJavaScriptFileLineRead( options, "file", "linenumber", "hello world line" );
 
 	} );
 
