@@ -11,6 +11,12 @@ No seriously, what is it?
 -------------------------------------------------
 Not yet written.
 
+
+Continuous build status
+-------------------------------------------------
+[![Build Status](https://drone.io/github.com/corgrath/planemo-javascript-open-source-software-quality-platform/status.png)](https://drone.io/github.com/corgrath/planemo-javascript-open-source-software-quality-platform/latest)
+
+
 Downloading and running Planemo
 -------------------------------------------------
 
