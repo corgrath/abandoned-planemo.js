@@ -1,4 +1,10 @@
 /*
+ * Dependencies
+ */
+
+//var dateFormat = require( "dateformat" );
+
+/*
  * Private functions
  */
 
@@ -10,6 +16,7 @@ var ANSI_CANCEL = "\x1b[0m";
 
 function getFormattedTime () {
 
+	//	return dateFormat( "yyyy-mm-dd hh:MM:ss" );
 	return new Date().toUTCString();
 
 }
