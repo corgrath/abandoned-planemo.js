@@ -48,6 +48,11 @@ exports.onFileFound = function onFileFound ( path, filename ) {
 		return;
 	}
 
+	if ( fileTypeService.isJavaScriptFile( filename ) ) {
+		readLineContents( path, filename, observerService.JavaScriptFileRead );
+		return;
+	}
+
 	if ( !fileTypeService.isPlainText( filename ) ) {
 		logService.log( "Will not parse conents of file \"" + filename + "\" since it is not plain text." );
 		return;

@@ -34,7 +34,7 @@ The configuration file
 Not yet written.
 
 
-Avaialable plugin configurations
+Available plugin configurations
 -------------------------------------------------
 Not yet written.
 

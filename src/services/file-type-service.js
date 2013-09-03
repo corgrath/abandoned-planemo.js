@@ -36,3 +36,9 @@ exports.isCSSFile = function ( file ) {
 	return stringUtil.endsWith( file, ".css" );
 
 };
+
+exports.isJavaScriptFile = function ( file ) {
+
+	return stringUtil.endsWith( file, ".js" );
+
+};
