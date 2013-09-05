@@ -79,26 +79,27 @@ have [Git installed][21] as well.
 
 The configuration file
 -------------------------------------------------
-In order to launch Planemo you need to specify a [JSON] formatted *configuration file* as the first argument. The best way to describe it is to look at a sample file.
+In order to launch Planemo you need to specify a [JSON] formatted *configuration file* as the first argument. The best way to describe it is to look at a sample file, and then
+look at the property explanations to better understand how it works.
 
-	{
-		"source":
-			[
-				{
-					"basePath": "C:\\project\\",
-					"fullPath": "C:\\project\\src\\",
-					"directoryName": "src"
-				}
-			],
-		"plugins": {
-			"check-directory-name-plugin": {
-				"regexp": "^[a-z]+$"
-			},
-			"check-file-name-plugin": {
-				"regexp": "^[a-z|-]+\\.(?:js|html|css|less)$"
-			}
-		}
-	}
+	01	{
+	02		"source":
+	03			[
+	04				{
+	05					"basePath": "C:\\project\\",
+	06					"fullPath": "C:\\project\\src\\",
+	07					"directoryName": "src"
+	08				}
+	09			],
+	10		"plugins": {
+	11			"check-directory-name-plugin": {
+	12				"regexp": "^[a-z]+$"
+	13			},
+	14			"check-file-name-plugin": {
+	15				"regexp": "^[a-z|-]+\\.(?:js|html|css|less)$"
+	16			}
+	17		}
+	18	}
 
 
 
