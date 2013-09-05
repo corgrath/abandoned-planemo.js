@@ -15,13 +15,17 @@ Planemo is a [plugin-friendly] [open source] [software quality platform] written
 No seriously, what is it?
 -------------------------------------------------
 Planemo is basically a [static code analysis tool] written for the [Node.js platform][01]. Its main goal is to read everything in given directory (and recursively downwards) and
-checks all the found files (no matter if its its .js, .css, .html or whatever) and check them against a set of rules, configurable by the user.
+checks any found file (no matter if its its .js, .css, .html or whatever) and its contents against a set of rules, configurable by the user.
 
 The whole idea is that Planemo should help your project to maintain [coding conventions][02], [best practices][03] and other fun rules your software project might have, for any source code file or languge.
 
 Currently it has a lot of [available built in plugins to choose from][04], but it also super easy to [write your own plugin][05] and even contribute it back to the project.
 
+Fun fact #184: The word *Planemo* comes from *[planetary-mass object]*!
+
 [static code analysis tool]: http://en.wikipedia.org/wiki/Static_code_analysis
+[planetary-mass object]: http://en.wikipedia.org/wiki/Planemo#Planetary-mass_objects
+
 [01]: http://nodejs.org/
 [02]: http://en.wikipedia.org/wiki/Coding_conventions
 [03]: http://en.wikipedia.org/wiki/Best_practice
