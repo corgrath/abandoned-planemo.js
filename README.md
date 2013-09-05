@@ -37,12 +37,8 @@ The configuration file
 Not yet written.
 
 
-The configuration file
--------------------------------------------------
-Not yet written.
 
-
-Avaialable plugin configurations
+Available plugin configurations
 -------------------------------------------------
 Not yet written.
 
@@ -53,11 +49,22 @@ Writing your own plugins
 Not yet written.
 
 
-Writing and running tests
--------------------------------------------------
 
-Not yet written.
+Running the tests
+-------------------------------------------------
+Planemo is currently using [nodeunit][2] as its test framework.
+
+You can execute the tests by running `npm test` if you are running from a [Windows Command Prompt][1] or `run_tests.bat` is you are using a [Shell][0], such as [Git Bash][3].
+
+
+
 
 
 Major changes
 -------------------------------------------------
+
+
+[0]: http://en.wikipedia.org/wiki/Shell_%28computing%29
+[1]: http://en.wikipedia.org/wiki/Command_Prompt
+[2]: https://github.com/caolan/nodeunit
+[3]: http://git-scm.com/downloads
