@@ -49,12 +49,12 @@ Table of Contents
 
 Continuous build status
 -------------------------------------------------
-Planemo is continously built by [drone.io][10]. You can find the build history [here][11].
+Planemo is continously built by [drone.io]. You can find the build history [here][11].
 
 [![Build Status](https://drone.io/github.com/corgrath/planemo-open-source-software-quality-platform/status.png)](https://drone.io/github.com/corgrath/planemo-open-source-software-quality-platform/latest)
 
 
-[10]: https://www.drone.io
+[drone.io]: http://www.drone.io/
 [11]: https://drone.io/github.com/corgrath/planemo-open-source-software-quality-platform
 
 
@@ -77,11 +77,34 @@ have [Git installed][21] as well.
 
 
 
-
 The configuration file
 -------------------------------------------------
-Not yet written.
+In order to launch Planemo you need to specify a [JSON] formatted *configuration file* as the first argument. The best way to describe it is to look at a sample file.
 
+	{
+		"source":
+			[
+				{
+					"basePath": "C:\\project\\",
+					"fullPath": "C:\\project\\src\\",
+					"directoryName": "src"
+				}
+			],
+		"plugins": {
+			"check-directory-name-plugin": {
+				"regexp": "^[a-z]+$"
+			},
+			"check-file-name-plugin": {
+				"regexp": "^[a-z|-]+\\.(?:js|html|css|less)$"
+			}
+		}
+	}
+
+
+
+
+
+[JSON]: http://en.wikipedia.org/wiki/JSON
 
 
 Available plugin configurations
@@ -104,6 +127,8 @@ You can execute the tests by running `npm test` if you are running from a [Windo
 [61]: http://en.wikipedia.org/wiki/Shell_%28computing%29
 [62]: http://en.wikipedia.org/wiki/Command_Prompt
 [63]: http://git-scm.com/downloads
+
+
 
 Writing tests
 -------------------------------------------------
