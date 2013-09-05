@@ -16,6 +16,8 @@ Continuous build status
 -------------------------------------------------
 [![Build Status](https://drone.io/github.com/corgrath/planemo-javascript-open-source-software-quality-platform/status.png)](https://drone.io/github.com/corgrath/planemo-javascript-open-source-software-quality-platform/latest)
 
+https://drone.io/github.com/corgrath/planemo-javascript-open-source-software-quality-platform
+
 
 Downloading and running Planemo
 -------------------------------------------------
