@@ -4,8 +4,11 @@
 
 Planemo
 =================================================
-Planemo is a plugin-friendly Open Source Software Quality Platform written in [JavaScript].
+Planemo is a [plugin-friendly] [open source] [software quality platform] written in [JavaScript].
 
+[plugin-friendly]: http://en.wikipedia.org/wiki/Plug-in_%28computing%29
+[software quality platform]: http://en.wikipedia.org/wiki/Software_quality
+[open source]: http://en.wikipedia.org/wiki/Open-source_software
 [JavaScript]: http://en.wikipedia.org/wiki/JavaScript
 
 
