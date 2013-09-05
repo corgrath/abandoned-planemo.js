@@ -80,7 +80,7 @@ have [Git installed][21] as well.
 The configuration file
 -------------------------------------------------
 In order to launch Planemo you need to specify a [JSON] formatted *configuration file* as the first argument. The best way to describe it is to look at a sample file, and then
-look at the property explanations to better understand how it works.
+look at the property explanations below to better understand what and how the different parts works.
 
 	01	{
 	02		"source":
