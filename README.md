@@ -14,13 +14,14 @@ checks all the found files (no matter if its its .js, .css, .html or whatever) a
 
 The whole idea is that Planemo should help your project to maintain [coding conventions][02], [best practices][03] and other fun rules your software project might have, for any language.
 
-Currently it has a lot of [available built in plugins] to choose from, but it also super easy to write your own plugin and even contribute it back to the project.
+Currently it has a lot of [available built in plugins to choose from][04], but it also super easy to [write your own plugin][05] and even contribute it back to the project.
 
 [00]: http://en.wikipedia.org/wiki/Static_code_analysis
 [01]: http://nodejs.org/
 [02]: http://en.wikipedia.org/wiki/Coding_conventions
 [03]: http://en.wikipedia.org/wiki/Best_practice
 [04]: #available-plugin-configurations
+[05]: #writing-your-own-plugins
 
 
 
