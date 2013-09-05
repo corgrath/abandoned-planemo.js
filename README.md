@@ -14,7 +14,7 @@ No seriously, what is it?
 Planemo is basically a [static code analysis tool] written for the [Node.js platform][01]. Its main goal is to read everything in given directory (and recursively downwards) and
 checks all the found files (no matter if its its .js, .css, .html or whatever) and check them against a set of rules, configurable by the user.
 
-The whole idea is that Planemo should help your project to maintain [coding conventions][02], [best practices][03] and other fun rules your software project might have, for any source code or any languge.
+The whole idea is that Planemo should help your project to maintain [coding conventions][02], [best practices][03] and other fun rules your software project might have, for any source code file or languge.
 
 Currently it has a lot of [available built in plugins to choose from][04], but it also super easy to [write your own plugin][05] and even contribute it back to the project.
 
@@ -91,8 +91,6 @@ Not yet written.
 
 Running the tests
 -------------------------------------------------
-Planemo is currently using [nodeunit][60] as its test framework.
-
 You can execute the tests by running `npm test` if you are running from a [Windows Command Prompt][62] or `run_tests.bat` is you are using a [Shell][61], such as [Git Bash][63].
 
 [60]: https://github.com/caolan/nodeunit
@@ -102,7 +100,15 @@ You can execute the tests by running `npm test` if you are running from a [Windo
 
 Writing tests
 -------------------------------------------------
-Not yet written.
+For obvious reasons, the [more tests we have for Planemo the happier we are]. So it is encouraged that we write supporting [unit tests] for each code logic we have.
+
+Planemo is currently using [nodeunit][60] as its test framework. If you are planning to write tests it would be a good idea to look at [their examples] and read
+their [API Documentation] to understand how to write new tests. If you looking for examples you can find them in the `/tests/`.
+
+[unit tests]: http://en.wikipedia.org/wiki/Unit_testing
+[more tests we have for Planemo the happier we are]: http://en.wikipedia.org/wiki/Unit_testing#Benefits
+[their examples]: https://github.com/caolan/nodeunit#usage
+[API Documentation]: https://github.com/caolan/nodeunit#api-documentation
 
 
 
