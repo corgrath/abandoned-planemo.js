@@ -12,11 +12,18 @@ No seriously, what is it?
 Not yet written.
 
 
+Table of Contents
+-------------------------------------------------
+[The configuration file](#the-configuration-file)
+
+
+
 Continuous build status
 -------------------------------------------------
 [![Build Status](https://drone.io/github.com/corgrath/planemo-javascript-open-source-software-quality-platform/status.png)](https://drone.io/github.com/corgrath/planemo-javascript-open-source-software-quality-platform/latest)
 
 https://drone.io/github.com/corgrath/planemo-javascript-open-source-software-quality-platform
+
 
 
 Downloading and running Planemo
@@ -28,7 +35,10 @@ Downloading and running Planemo
 
 3. Download Node dependencies by typing in `npm install`.
 
-4. Now you should be able to start Planemo using a *configuration file* by using the command `node planemo <configuration file>`
+4. Now you should be able to start Planemo using a [configuration file](#the-configuration-file) by using the command `node planemo <configuration file>`
+
+
+
 
 
 
