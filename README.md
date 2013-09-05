@@ -100,10 +100,10 @@ You can execute the tests by running `npm test` if you are running from a [Windo
 
 Writing tests
 -------------------------------------------------
-For obvious reasons, the [more tests we have for Planemo the happier we are]. So it is encouraged that we write supporting [unit tests] for each code logic we have.
+For obvious reasons, the [more tests we have for Planemo the happier we are]. So it is encouraged that we write supporting [unit tests] for our code.
 
 Planemo is currently using [nodeunit][60] as its test framework. If you are planning to write tests it would be a good idea to look at [their examples] and read
-their [API Documentation] to understand how to write new tests. If you looking for examples you can find them in the `/tests/`.
+their [API Documentation] to better understand how to write new or maintain old tests. If you looking for examples you can find them in the `/tests/` folder in this project.
 
 [unit tests]: http://en.wikipedia.org/wiki/Unit_testing
 [more tests we have for Planemo the happier we are]: http://en.wikipedia.org/wiki/Unit_testing#Benefits
