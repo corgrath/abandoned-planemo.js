@@ -4,15 +4,17 @@
 
 Planemo
 =================================================
+Planemo is a plugin-friendly Open Source Software Quality Platform written in [JavaScript][JavaScript]  [JavaScript].
 
-Planemo is a plugin-friendly JavaScript Open Source Software Quality Platform.
+[JavaScript]: http://en.wikipedia.org/wiki/JavaScript
+
 
 No seriously, what is it?
 -------------------------------------------------
 Planemo is basically a [static code analysis tool][00] written for the [Node.js platform][01]. Its main goal is to read everything in given directory (and recursively downwards) and
-checks all the found files (no matter if its its .js, .css, .html or whatever) and checks them against a set of rules, configurable by the user.
+checks all the found files (no matter if its its .js, .css, .html or whatever) and check them against a set of rules, configurable by the user.
 
-The whole idea is that Planemo should help your project to maintain [coding conventions][02], [best practices][03] and other fun rules your software project might have, for any language.
+The whole idea is that Planemo should help your project to maintain [coding conventions][02], [best practices][03] and other fun rules your software project might have, for any source code or any languge.
 
 Currently it has a lot of [available built in plugins to choose from][04], but it also super easy to [write your own plugin][05] and even contribute it back to the project.
 
