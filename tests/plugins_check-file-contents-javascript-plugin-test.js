@@ -2,7 +2,7 @@
  * Dependencies
  */
 
-var plugin = require( "../../src/plugins/check-file-contents-javascript-plugin.js" );
+var plugin = require( "../src/plugins/check-file-contents-javascript-plugin.js" );
 
 /*
  * Tests

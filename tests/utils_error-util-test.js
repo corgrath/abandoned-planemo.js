@@ -2,7 +2,7 @@
  * Dependencies
  */
 
-var errorUtil = require( "../../src/utils/error-util.js" );
+var errorUtil = require( "../src/utils/error-util.js" );
 
 /*
  * Tests

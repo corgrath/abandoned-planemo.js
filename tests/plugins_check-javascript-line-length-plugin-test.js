@@ -2,7 +2,7 @@
  * Dependencies
  */
 
-var plugin = require( "../../src/plugins/check-javascript-line-length-plugin.js" );
+var plugin = require( "../src/plugins/check-javascript-line-length-plugin.js" );
 
 /*
  * Tests

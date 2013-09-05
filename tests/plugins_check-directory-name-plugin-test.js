@@ -2,7 +2,7 @@
  * Dependencies
  */
 
-var plugin = require( "../../src/plugins/check-directory-name-plugin.js" );
+var plugin = require( "../src/plugins/check-directory-name-plugin.js" );
 
 /*
  * Tests
