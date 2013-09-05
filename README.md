@@ -27,10 +27,13 @@ Table of Contents
 
 Continuous build status
 -------------------------------------------------
+Planemo is continously built by [drone.io][10]. You can see the [build history here][11].
+
 [![Build Status](https://drone.io/github.com/corgrath/planemo-javascript-open-source-software-quality-platform/status.png)](https://drone.io/github.com/corgrath/planemo-javascript-open-source-software-quality-platform/latest)
 
-https://drone.io/github.com/corgrath/planemo-javascript-open-source-software-quality-platform
 
+[10]: https://www.drone.io
+[11]: https://drone.io/github.com/corgrath/planemo-javascript-open-source-software-quality-platform
 
 
 Downloading and running Planemo
@@ -73,11 +76,14 @@ Not yet written.
 
 Running the tests
 -------------------------------------------------
-Planemo is currently using [nodeunit](https://github.com/caolan/nodeunit) as its test framework.
+Planemo is currently using [nodeunit][60] as its test framework.
 
-You can execute the tests by running `npm test` if you are running from a [Windows Command Prompt][1] or `run_tests.bat` is you are using a [Shell][0], such as [Git Bash][3].
+You can execute the tests by running `npm test` if you are running from a [Windows Command Prompt][62] or `run_tests.bat` is you are using a [Shell][61], such as [Git Bash][63].
 
-
+[60]: https://github.com/caolan/nodeunit
+[61]: http://en.wikipedia.org/wiki/Shell_%28computing%29
+[62]: http://en.wikipedia.org/wiki/Command_Prompt
+[63]: http://git-scm.com/downloads
 
 Writing tests
 -------------------------------------------------
@@ -90,7 +96,3 @@ Major changes
 Not yet written.
 
 
-
-[0]: http://en.wikipedia.org/wiki/Shell_%28computing%29
-[1]: http://en.wikipedia.org/wiki/Command_Prompt
-[3]: http://git-scm.com/downloads
