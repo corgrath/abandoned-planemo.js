@@ -44,11 +44,11 @@ Continuous build status
 -------------------------------------------------
 Planemo is continously built by [drone.io][10]. You can find the build history [here][11].
 
-[![Build Status](https://drone.io/github.com/corgrath/planemo-javascript-open-source-software-quality-platform/status.png)](https://drone.io/github.com/corgrath/planemo-javascript-open-source-software-quality-platform/latest)
+[![Build Status](https://drone.io/github.com/corgrath/planemo-open-source-software-quality-platform/status.png)](https://drone.io/github.com/corgrath/planemo-open-source-software-quality-platform/latest)
 
 
 [10]: https://www.drone.io
-[11]: https://drone.io/github.com/corgrath/planemo-javascript-open-source-software-quality-platform
+[11]: https://drone.io/github.com/corgrath/planemo-open-source-software-quality-platform
 
 
 Downloading and running Planemo
