@@ -36,15 +36,17 @@ https://drone.io/github.com/corgrath/planemo-javascript-open-source-software-qua
 Downloading and running Planemo
 -------------------------------------------------
 
-1. Planemo runs on Node.js, so make sure you have that [installed](http://nodejs.org/). If you want to contribute you need to have [Git installed](https://help.github.com/articles/set-up-git/) as well.
+1. Planemo runs on Node.js, so make sure you have that [installed](http://nodejs.org/). If you want to contribute you need to
+have [Git installed][dd] as well.
 
-2. Download the whole Planemo GitHub project, either by downloading and extracting a ZIP copy of the project (there is a button on the page) or using the `git clone` command.
+2. Download the whole Planemo GitHub project, either by [downloading](https://github.com/corgrath/planemo-javascript-open-source-software-quality-platform/archive/master.zip)
+and extracting a ZIP copy of the project (there is a button on the page) or using the `git clone` command.
 
 3. Download Node dependencies by typing in `npm install`.
 
 4. Now you should be able to start Planemo using a [configuration file](#the-configuration-file) by using the command `node planemo <configuration file>`
 
-
+[dd]: https://help.github.com/articles/set-up-git/
 
 
 
