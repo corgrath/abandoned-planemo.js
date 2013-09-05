@@ -1,1 +1,2 @@
-node_modules/.bin/nodeunit tests/*
+./node_modules/.bin/nodeunit tests/plugins
+./node_modules/.bin/nodeunit tests/utils
