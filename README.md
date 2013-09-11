@@ -4,11 +4,10 @@
 
 Planemo
 =================================================
-Planemo is a [plugin-friendly] [open source] [software quality platform] written in [JavaScript] running on the [Node.js] platform.
+Planemo is a [plugin-friendly] [open source][0] [software quality platform] written in [JavaScript] running on the [Node.js] platform.
 
 [plugin-friendly]: http://en.wikipedia.org/wiki/Plug-in_%28computing%29
 [software quality platform]: http://en.wikipedia.org/wiki/Software_quality
-[open source]: http://en.wikipedia.org/wiki/Open-source_software
 [JavaScript]: http://en.wikipedia.org/wiki/JavaScript
 [Node.js]: http://nodejs.org/
 
@@ -155,3 +154,6 @@ License
 -------------------------------------------------
  * Planemo licensed under the Apache License, Version 2.0. See the NOTICE file distributed with this work for additional information regarding copyright ownership.
  * Planemo logotype images Copyright (C) Christoffer Pettersson, christoffer[at]christoffer.me. All Rights Reserved! Please contact Christoffer regarding the possible use of these images.
+
+
+[0]: http://en.wikipedia.org/wiki/Open-source_software
