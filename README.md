@@ -145,10 +145,16 @@ Major changes
 Not yet written.
 
 
+
+Contributors
+-------------------------------------------------
+ * Christoffer Pettersson, christoffer[at]christoffer[dot]me
+
+
 License
 -------------------------------------------------
  * Planemo licensed under the Apache License, Version 2.0. See the NOTICE file distributed with this work for additional information regarding copyright ownership.
- * Planemo logotype images Copyright (C) Christoffer Pettersson, christoffer[at]christoffer.me. All Rights Reserved! Please contact Christoffer regarding the possible use of these images.
+ * Planemo logotype images Copyright (C) Christoffer Pettersson, christoffer[at]christoffer[dot]me. All Rights Reserved! Please contact Christoffer regarding the possible use of these images.
 
 
 
