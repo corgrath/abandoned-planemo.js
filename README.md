@@ -23,7 +23,7 @@ Fun fact #184: The word *Planemo* comes from *[planetary-mass object][08]*!
 
 Table of Contents
 -------------------------------------------------
- * [Continuous build status](#continuous-build-status)
+ * [Continuous build status][TOC-01]
  * [Downloading and running Planemo](#downloading-and-running-planemo)
  * [The configuration file](#the-configuration-file)
  * [Available plugin configurations][TOC-00]
@@ -57,7 +57,7 @@ have [Git installed][21] as well.
 
     * Via [npm][10] by typing `npm install planemo` (preferred way)
     * Via Git by typing `git clone git@github.com:corgrath/planemo-open-source-software-quality-platform.git`
-    * Via [GitHub][29] by downloading the whole project and extracting the ZIP file (there is a button on the page)
+    * Via [GitHub][04] by downloading the whole project and extracting the ZIP file (there is a button on the page)
 
  * Once downloaded, install all the Node dependencies by typing in `npm install`.
 
@@ -105,7 +105,7 @@ Not yet written.
 
 Running the tests
 -------------------------------------------------
-You can execute the tests by running `npm test` if you are running from a [Windows Command Prompt][27] or `run_tests.bat` is you are using a [Shell][26], such as [Git Bash][28].
+You can execute the tests by running `npm test` if you are running from a [Windows Command Prompt][27] or `run_tests.bat` is you are using a [Shell][26], such as [Git Bash][12].
 
 
 
@@ -142,7 +142,7 @@ License
 [01]: http://nodejs.org/
 [02]: http://en.wikipedia.org/wiki/Coding_conventions
 [03]: http://en.wikipedia.org/wiki/Best_practice
-
+[04]: http://www.github.com/
 [05]: #writing-your-own-plugins
 [06]: http://en.wikipedia.org/wiki/Open-source_software
 [07]: http://en.wikipedia.org/wiki/Plug-in_%28computing%29
@@ -150,7 +150,7 @@ License
 [09]: http://en.wikipedia.org/wiki/Software_quality
 [10]: https://npmjs.org/
 [11]: http://en.wikipedia.org/wiki/JavaScript
-
+[12]: http://git-scm.com/downloads
 [13]: http://en.wikipedia.org/wiki/JSON
 [14]: http://en.wikipedia.org/wiki/Static_code_analysis
 [15]: https://drone.io/github.com/corgrath/planemo-open-source-software-quality-platform
@@ -166,9 +166,12 @@ License
 [25]: https://github.com/caolan/nodeunit#api-documentation
 [26]: http://en.wikipedia.org/wiki/Shell_%28computing%29
 [27]: http://en.wikipedia.org/wiki/Command_Prompt
-[28]: http://git-scm.com/downloads
-[29]: http://www.github.com/
+
+
 
 [TOC-00]: #available-plugin-configurations
+[TOC-01]: #continuous-build-status
+
+
 
 [C00]: http://www.christoffer.me/
