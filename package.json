@@ -1,6 +1,6 @@
 {
   "name": "planemo",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Planemo is a plugin-friendly open source software quality platform written in JavaScript running on the Node.js platform.",
   "main": "planemo.js",
   "directories": {
@@ -21,15 +21,10 @@
     "url": "https://github.com/corgrath/planemo-open-source-software-quality-platform/"
   },
   "keywords": [
-    "javascript",
     "planemo",
-    "open",
-    "source",
-    "software",
-    "quality",
-    "static",
-    "code",
-    "analysis"
+    "open source",
+    "software quality",
+    "static code analysis"
   ],
   "author": "Christoffer Pettersson, christoffer[at]christoffer[dot]me",
   "license": "Apache 2.0",
