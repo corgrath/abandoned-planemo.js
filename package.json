@@ -1,5 +1,5 @@
 {
-  "name": "Planemo",
+  "name": "planemo",
   "version": "0.0.2",
   "description": "Planemo is a plugin-friendly open source software quality platform written in JavaScript running on the Node.js platform.",
   "main": "planemo.js",

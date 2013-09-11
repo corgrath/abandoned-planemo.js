@@ -4,7 +4,7 @@
 
 Planemo
 =================================================
-Planemo is a [plugin-friendly][1] [open source][0] [software quality platform] written in [JavaScript] running on the [Node.js] platform.
+Planemo is a [plugin-friendly][07] [open source][06] [software quality platform] written in [JavaScript] running on the [Node.js] platform.
 
 [software quality platform]: http://en.wikipedia.org/wiki/Software_quality
 [JavaScript]: http://en.wikipedia.org/wiki/JavaScript
@@ -20,16 +20,12 @@ The whole idea is that Planemo should help your project to maintain [coding conv
 
 Currently it has a lot of [available built in plugins to choose from][04], but it also super easy to [write your own plugin][05] and even contribute it back to the project.
 
-Fun fact #184: The word *Planemo* comes from *[planetary-mass object]*!
+Fun fact #184: The word *Planemo* comes from *[planetary-mass object][08]*!
 
 [static code analysis tool]: http://en.wikipedia.org/wiki/Static_code_analysis
-[planetary-mass object]: http://en.wikipedia.org/wiki/Planemo#Planetary-mass_objects
 
-[01]: http://nodejs.org/
-[02]: http://en.wikipedia.org/wiki/Coding_conventions
-[03]: http://en.wikipedia.org/wiki/Best_practice
-[04]: #available-plugin-configurations
-[05]: #writing-your-own-plugins
+
+
 
 
 
@@ -155,5 +151,13 @@ License
  * Planemo logotype images Copyright (C) Christoffer Pettersson, christoffer[at]christoffer.me. All Rights Reserved! Please contact Christoffer regarding the possible use of these images.
 
 
-[0]: http://en.wikipedia.org/wiki/Open-source_software
-[1]: http://en.wikipedia.org/wiki/Plug-in_%28computing%29
+
+
+[01]: http://nodejs.org/
+[02]: http://en.wikipedia.org/wiki/Coding_conventions
+[03]: http://en.wikipedia.org/wiki/Best_practice
+[04]: #available-plugin-configurations
+[05]: #writing-your-own-plugins
+[06]: http://en.wikipedia.org/wiki/Open-source_software
+[07]: http://en.wikipedia.org/wiki/Plug-in_%28computing%29
+[08]: http://en.wikipedia.org/wiki/Planemo#Planetary-mass_objects
