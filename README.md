@@ -38,30 +38,30 @@ Table of Contents
 
 Continuous build status
 -------------------------------------------------
-Planemo is continously built by [drone.io]. You can find the build history [here][11].
+Planemo is continously built by [drone.io][16]. You can find the build history [here][15].
 
 [![Build Status](https://drone.io/github.com/corgrath/planemo-open-source-software-quality-platform/status.png)](https://drone.io/github.com/corgrath/planemo-open-source-software-quality-platform/latest)
 
 
-[drone.io]: http://www.drone.io/
-[11]: https://drone.io/github.com/corgrath/planemo-open-source-software-quality-platform
+
+
 
 
 Downloading and running Planemo
 -------------------------------------------------
 
-1. Planemo runs on Node.js, so make sure you have that [installed][20]. If you want to contribute you need to
+ 1. Planemo runs on Node.js, so make sure you have that [installed][20]. If you want to contribute you need to
 have [Git installed][21] as well.
 
-* You can download Planemo in three different ways:
+ * You can download Planemo in three different ways:
 
     * Via [npm][10] by typing `npm install planemo` (preferred way)
-    * Via GitHub by downloading the whole project and extracting the ZIP file (there is a button on the page)
     * Via Git by typing `git clone git@github.com:corgrath/planemo-open-source-software-quality-platform.git`
+    * Via GitHub by downloading the whole project and extracting the ZIP file (there is a button on the page)
 
-* Once downloaded, install all the Node dependencies by typing in `npm install`.
+ * Once downloaded, install all the Node dependencies by typing in `npm install`.
 
-* Now you should be able to start Planemo using a [configuration file][23] by using the command `node planemo <configuration file>`
+ * Now you should be able to start Planemo using a [configuration file][23] by using the command `node planemo <configuration file>`
 
 
 
@@ -105,7 +105,7 @@ Not yet written.
 
 Running the tests
 -------------------------------------------------
-You can execute the tests by running `npm test` if you are running from a [Windows Command Prompt][62] or `run_tests.bat` is you are using a [Shell][61], such as [Git Bash][63].
+You can execute the tests by running `npm test` if you are running from a [Windows Command Prompt][27] or `run_tests.bat` is you are using a [Shell][26], such as [Git Bash][28].
 
 
 
@@ -113,15 +113,10 @@ You can execute the tests by running `npm test` if you are running from a [Windo
 
 Writing tests
 -------------------------------------------------
-For obvious reasons, the [more tests we have for Planemo the happier we are]. So it is encouraged that we write supporting [unit tests] for our code.
+For obvious reasons, the [more tests we have for Planemo the happier we are][18]. So it is encouraged that we write supporting [unit tests][17] for our code.
 
-Planemo is currently using [nodeunit][60] as its test framework. If you are planning to write tests it would be a good idea to look at [their examples] and read
-their [API Documentation] to better understand how to write new or maintain old tests. If you looking for examples you can find them in the `/tests/` folder in this project.
-
-[unit tests]: http://en.wikipedia.org/wiki/Unit_testing
-[more tests we have for Planemo the happier we are]: http://en.wikipedia.org/wiki/Unit_testing#Benefits
-[their examples]: https://github.com/caolan/nodeunit#usage
-[API Documentation]: https://github.com/caolan/nodeunit#api-documentation
+Planemo is currently using [nodeunit][24] as its test framework. If you are planning to write tests it would be a good idea to look at [their examples][19] and read
+their [API Documentation][25] to better understand how to write new or maintain old tests. If you looking for examples you can find them in the `/tests/` folder in this project.
 
 
 
@@ -133,7 +128,7 @@ Not yet written.
 
 Contributors
 -------------------------------------------------
- * Christoffer Pettersson, christoffer[at]christoffer[dot]me
+ * [Christoffer Pettersson][C01]
 
 
 License
@@ -158,13 +153,19 @@ License
 [12]: http://nodejs.org/
 [13]: http://en.wikipedia.org/wiki/JSON
 [14]: http://en.wikipedia.org/wiki/Static_code_analysis
-
+[15]: https://drone.io/github.com/corgrath/planemo-open-source-software-quality-platform
+[16]: http://www.drone.io/
+[17]: http://en.wikipedia.org/wiki/Unit_testing
+[18]: http://en.wikipedia.org/wiki/Unit_testing#Benefits
+[19]: https://github.com/caolan/nodeunit#usage
 [20]: http://nodejs.org/
 [21]: https://help.github.com/articles/set-up-git/
 [22]: https://github.com/corgrath/planemo-javascript-open-source-software-quality-platform/archive/master.zip
 [23]: #the-configuration-file
+[24]: https://github.com/caolan/nodeunit
+[25]: https://github.com/caolan/nodeunit#api-documentation
+[26]: http://en.wikipedia.org/wiki/Shell_%28computing%29
+[27]: http://en.wikipedia.org/wiki/Command_Prompt
+[28]: http://git-scm.com/downloads
 
-[60]: https://github.com/caolan/nodeunit
-[61]: http://en.wikipedia.org/wiki/Shell_%28computing%29
-[62]: http://en.wikipedia.org/wiki/Command_Prompt
-[63]: http://git-scm.com/downloads
+[C01]: http://www.christoffer.me/
