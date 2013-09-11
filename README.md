@@ -57,7 +57,7 @@ have [Git installed][21] as well.
 
     * Via [npm][10] by typing `npm install planemo` (preferred way)
     * Via Git by typing `git clone git@github.com:corgrath/planemo-open-source-software-quality-platform.git`
-    * Via GitHub by downloading the whole project and extracting the ZIP file (there is a button on the page)
+    * Via [GitHub][29] by downloading the whole project and extracting the ZIP file (there is a button on the page)
 
  * Once downloaded, install all the Node dependencies by typing in `npm install`.
 
@@ -167,5 +167,6 @@ License
 [26]: http://en.wikipedia.org/wiki/Shell_%28computing%29
 [27]: http://en.wikipedia.org/wiki/Command_Prompt
 [28]: http://git-scm.com/downloads
+[29]: http://www.github.com/
 
 [C01]: http://www.christoffer.me/
