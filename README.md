@@ -4,7 +4,7 @@
 
 Planemo
 =================================================
-Planemo is a [plugin-friendly][07] [open source][06] [software quality platform][09] written in [JavaScript][11] running on the [Node.js][12] platform.
+Planemo is a [plugin-friendly][07] [open source][06] [software quality platform][09] written in [JavaScript][11] running on the [Node.js platform][01].
 
 
 
@@ -15,7 +15,7 @@ checks any found file (no matter if its its .js, .css, .html or whatever) and it
 
 The whole idea is that Planemo should help your project to maintain [coding conventions][02], [best practices][03] and other fun rules your software project might have, for any source code file or languge.
 
-Currently it has a lot of [available built in plugins to choose from][04], but it also super easy to [write your own plugin][05] and even contribute it back to the project.
+Currently it has a lot of [available built in plugins to choose from][TOC-00], but it also super easy to [write your own plugin][05] and even contribute it back to the project.
 
 Fun fact #184: The word *Planemo* comes from *[planetary-mass object][08]*!
 
@@ -26,7 +26,7 @@ Table of Contents
  * [Continuous build status](#continuous-build-status)
  * [Downloading and running Planemo](#downloading-and-running-planemo)
  * [The configuration file](#the-configuration-file)
- * [Available plugin configurations](#available-plugin-configurations)
+ * [Available plugin configurations][TOC-00]
  * [Writing your own plugins](#writing-your-own-plugins)
  * [Running the testsplugins](#running-the-tests)
  * [Writing tests](#writing-tests)
@@ -128,7 +128,7 @@ Not yet written.
 
 Contributors
 -------------------------------------------------
- * [Christoffer Pettersson][C01]
+ * [Christoffer Pettersson][C00]
 
 
 License
@@ -142,7 +142,7 @@ License
 [01]: http://nodejs.org/
 [02]: http://en.wikipedia.org/wiki/Coding_conventions
 [03]: http://en.wikipedia.org/wiki/Best_practice
-[04]: #available-plugin-configurations
+
 [05]: #writing-your-own-plugins
 [06]: http://en.wikipedia.org/wiki/Open-source_software
 [07]: http://en.wikipedia.org/wiki/Plug-in_%28computing%29
@@ -150,7 +150,7 @@ License
 [09]: http://en.wikipedia.org/wiki/Software_quality
 [10]: https://npmjs.org/
 [11]: http://en.wikipedia.org/wiki/JavaScript
-[12]: http://nodejs.org/
+
 [13]: http://en.wikipedia.org/wiki/JSON
 [14]: http://en.wikipedia.org/wiki/Static_code_analysis
 [15]: https://drone.io/github.com/corgrath/planemo-open-source-software-quality-platform
@@ -169,4 +169,6 @@ License
 [28]: http://git-scm.com/downloads
 [29]: http://www.github.com/
 
-[C01]: http://www.christoffer.me/
+[TOC-00]: #available-plugin-configurations
+
+[C00]: http://www.christoffer.me/
