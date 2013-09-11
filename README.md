@@ -4,11 +4,8 @@
 
 Planemo
 =================================================
-Planemo is a [plugin-friendly][07] [open source][06] [software quality platform] written in [JavaScript] running on the [Node.js] platform.
+Planemo is a [plugin-friendly][07] [open source][06] [software quality platform][09] written in [JavaScript][11] running on the [Node.js][12] platform.
 
-[software quality platform]: http://en.wikipedia.org/wiki/Software_quality
-[JavaScript]: http://en.wikipedia.org/wiki/JavaScript
-[Node.js]: http://nodejs.org/
 
 
 No seriously, what is it?
@@ -59,9 +56,13 @@ Downloading and running Planemo
 1. Planemo runs on Node.js, so make sure you have that [installed][20]. If you want to contribute you need to
 have [Git installed][21] as well.
 
-2. Download the whole Planemo GitHub project, either by [downloading][22] and extracting a ZIP copy of the project (there is a button on the page) or using the `git clone` command.
+2. You can download Planemo in three different ways:
 
-3. Download Node dependencies by typing in `npm install`.
+    * Via [npm][10] by typing `npm install planemo` (preferred way)
+    * Via GitHub by downloading the whole project and extracting the ZIP file (there is a button on the page)
+    * Via Git by typing `git clone git@github.com:corgrath/planemo-open-source-software-quality-platform.git`
+
+3. Once downloaded, install all the Node dependencies by typing in `npm install`.
 
 4. Now you should be able to start Planemo using a [configuration file][23] by using the command `node planemo <configuration file>`
 
@@ -74,7 +75,7 @@ have [Git installed][21] as well.
 
 The configuration file
 -------------------------------------------------
-In order to launch Planemo you need to specify a [JSON] formatted *configuration file* as the first argument. The best way to describe it is to look at a sample file, and then
+In order to launch Planemo you need to specify a [JSON][13] formatted *configuration file* as the first argument. The best way to describe it is to look at a sample file, and then
 look at the property explanations below to better understand what and how the different parts works.
 
 	01	{
@@ -100,8 +101,6 @@ look at the property explanations below to better understand what and how the di
 
 
 
-[JSON]: http://en.wikipedia.org/wiki/JSON
-
 
 Available plugin configurations
 -------------------------------------------------
@@ -119,10 +118,7 @@ Running the tests
 -------------------------------------------------
 You can execute the tests by running `npm test` if you are running from a [Windows Command Prompt][62] or `run_tests.bat` is you are using a [Shell][61], such as [Git Bash][63].
 
-[60]: https://github.com/caolan/nodeunit
-[61]: http://en.wikipedia.org/wiki/Shell_%28computing%29
-[62]: http://en.wikipedia.org/wiki/Command_Prompt
-[63]: http://git-scm.com/downloads
+
 
 
 
@@ -167,3 +163,13 @@ License
 [06]: http://en.wikipedia.org/wiki/Open-source_software
 [07]: http://en.wikipedia.org/wiki/Plug-in_%28computing%29
 [08]: http://en.wikipedia.org/wiki/Planemo#Planetary-mass_objects
+[09]: http://en.wikipedia.org/wiki/Software_quality
+[10]: https://npmjs.org/
+[11]: http://en.wikipedia.org/wiki/JavaScript
+[12]: http://nodejs.org/
+[13]: http://en.wikipedia.org/wiki/JSON
+
+[60]: https://github.com/caolan/nodeunit
+[61]: http://en.wikipedia.org/wiki/Shell_%28computing%29
+[62]: http://en.wikipedia.org/wiki/Command_Prompt
+[63]: http://git-scm.com/downloads
