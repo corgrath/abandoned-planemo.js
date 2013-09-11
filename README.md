@@ -10,7 +10,7 @@ Planemo is a [plugin-friendly][07] [open source][06] [software quality platform]
 
 No seriously, what is it?
 -------------------------------------------------
-Planemo is basically a [static code analysis tool] written for the [Node.js platform][01]. Its main goal is to read everything in given directory (and recursively downwards) and
+Planemo is basically a [static code analysis tool][14] written for the [Node.js platform][01]. Its main goal is to read everything in given directory (and recursively downwards) and
 checks any found file (no matter if its its .js, .css, .html or whatever) and its contents against a set of rules, configurable by the user.
 
 The whole idea is that Planemo should help your project to maintain [coding conventions][02], [best practices][03] and other fun rules your software project might have, for any source code file or languge.
@@ -18,11 +18,6 @@ The whole idea is that Planemo should help your project to maintain [coding conv
 Currently it has a lot of [available built in plugins to choose from][04], but it also super easy to [write your own plugin][05] and even contribute it back to the project.
 
 Fun fact #184: The word *Planemo* comes from *[planetary-mass object][08]*!
-
-[static code analysis tool]: http://en.wikipedia.org/wiki/Static_code_analysis
-
-
-
 
 
 
@@ -36,6 +31,8 @@ Table of Contents
  * [Running the testsplugins](#running-the-tests)
  * [Writing tests](#writing-tests)
  * [Major changes](#major-changes)
+ * [Contributors](#contributors)
+ * [License](#license)
 
 
 
@@ -56,20 +53,15 @@ Downloading and running Planemo
 1. Planemo runs on Node.js, so make sure you have that [installed][20]. If you want to contribute you need to
 have [Git installed][21] as well.
 
-2. You can download Planemo in three different ways:
+* You can download Planemo in three different ways:
 
     * Via [npm][10] by typing `npm install planemo` (preferred way)
     * Via GitHub by downloading the whole project and extracting the ZIP file (there is a button on the page)
     * Via Git by typing `git clone git@github.com:corgrath/planemo-open-source-software-quality-platform.git`
 
-3. Once downloaded, install all the Node dependencies by typing in `npm install`.
+* Once downloaded, install all the Node dependencies by typing in `npm install`.
 
-4. Now you should be able to start Planemo using a [configuration file][23] by using the command `node planemo <configuration file>`
-
-[20]: http://nodejs.org/
-[21]: https://help.github.com/articles/set-up-git/
-[22]: https://github.com/corgrath/planemo-javascript-open-source-software-quality-platform/archive/master.zip
-[23]: #the-configuration-file
+* Now you should be able to start Planemo using a [configuration file][23] by using the command `node planemo <configuration file>`
 
 
 
@@ -96,9 +88,6 @@ look at the property explanations below to better understand what and how the di
 	16			}
 	17		}
 	18	}
-
-
-
 
 
 
@@ -168,6 +157,12 @@ License
 [11]: http://en.wikipedia.org/wiki/JavaScript
 [12]: http://nodejs.org/
 [13]: http://en.wikipedia.org/wiki/JSON
+[14]: http://en.wikipedia.org/wiki/Static_code_analysis
+
+[20]: http://nodejs.org/
+[21]: https://help.github.com/articles/set-up-git/
+[22]: https://github.com/corgrath/planemo-javascript-open-source-software-quality-platform/archive/master.zip
+[23]: #the-configuration-file
 
 [60]: https://github.com/caolan/nodeunit
 [61]: http://en.wikipedia.org/wiki/Shell_%28computing%29
