@@ -152,5 +152,4 @@ Not yet written.
 
 License
 -------------------------------------------------
-Planemo logotype images Copyright (C) Christoffer Pettersson. All Rights Reserved!
-Please contact Christoffer regarding the possible use of these images.
+ * Planemo logotype images Copyright (C) Christoffer Pettersson. All Rights Reserved! Please contact Christoffer regarding the possible use of these images.
