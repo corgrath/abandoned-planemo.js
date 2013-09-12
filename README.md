@@ -30,7 +30,7 @@ Table of Contents
     * Download as a ZIP file (preferred way for people who really like ZIP files)
  * [The configuration file](#the-configuration-file)
  * [Available plugin configurations][TOC-00]
- * [Writing your own plugins](#writing-your-own-plugins)
+ * Writing your own plugin
  * [Running the testsplugins](#running-the-tests)
  * [Writing tests](#writing-tests)
  * Plugin and Data Collector hooks
@@ -120,7 +120,7 @@ Not yet written.
 
 
 
-Writing your own plugins
+Writing your own plugin
 -------------------------------------------------
 Writing new plugins to Planemo is fairly easy. A plugin is a stand alone file that is located in the `/plugins/` folder.
 
