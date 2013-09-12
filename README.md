@@ -13,7 +13,7 @@ No seriously, what is it?
 Planemo is basically a [static code analysis tool][14] written for the [Node.js platform][01]. Its main goal is to read everything in given directory (and recursively downwards) and
 checks any found file (no matter if its its .js, .css, .html or whatever) and its contents against a set of rules, configurable by the user.
 
-The whole idea is that Planemo should help your project to maintain [coding conventions][02], [best practices][03] and other fun rules your software project might have, for any source code file or languge.
+The whole idea is that Planemo should help your project to maintain [coding conventions][02], [best practices][03] and other fun rules your software project might have, for any source code file or language.
 
 Currently it has a lot of [available built in plugins to choose from][TOC-00], but it also super easy to [write your own plugin][05] and even contribute it back to the project.
 
@@ -25,11 +25,15 @@ Table of Contents
 -------------------------------------------------
  * [Continuous build status][TOC-01]
  * [Downloading and running Planemo](#downloading-and-running-planemo)
+    * Via npm (preferred way for end users)
+    * Via git clone (preferred way for plugin developers)
+    * Download as a ZIP file (preferred way for people who really like ZIP files)
  * [The configuration file](#the-configuration-file)
  * [Available plugin configurations][TOC-00]
  * [Writing your own plugins](#writing-your-own-plugins)
  * [Running the testsplugins](#running-the-tests)
  * [Writing tests](#writing-tests)
+ * Plugin and Data Collector hooks
  * [Major changes](#major-changes)
  * [Contributors](#contributors)
  * [License](#license)
@@ -38,7 +42,7 @@ Table of Contents
 
 Continuous build status
 -------------------------------------------------
-Planemo is continously built by [drone.io][16]. You can find the build history [here][15].
+Planemo is continuously built by [Drone.io][16]. You can find the build history [here][15].
 
 [![Build Status](https://drone.io/github.com/corgrath/planemo-open-source-software-quality-platform/status.png)](https://drone.io/github.com/corgrath/planemo-open-source-software-quality-platform/latest)
 
@@ -49,19 +53,30 @@ Planemo is continously built by [drone.io][16]. You can find the build history [
 
 Downloading and running Planemo
 -------------------------------------------------
+Planemo runs on Node.js, so make sure you have that [installed][20]. If you want to contribute you need to have [Git installed][21] as well.
 
- 1. Planemo runs on Node.js, so make sure you have that [installed][20]. If you want to contribute you need to
-have [Git installed][21] as well.
+### Via npm (preferred way for end users)
 
- * You can download Planemo in three different ways:
+Since Planemo is [published on npm][28], you maybe simply type `npm install planemo`. This should download Planemo and all its dependencies.
 
-    * Via [npm][10] by typing `npm install planemo` (preferred way)
-    * Via Git by typing `git clone git@github.com:corgrath/planemo-open-source-software-quality-platform.git`
-    * Via [GitHub][04] by downloading the whole project and extracting the ZIP file (there is a button on the page)
+To start Planemo you may simply type `cd node_modules/planemo/ && node planemo <configuration file>`.
 
- * Once downloaded, install all the Node dependencies by typing in `npm install`.
+### Via git clone (preferred way for plugin developers)
 
- * Now you should be able to start Planemo using a [configuration file][23] by using the command `node planemo <configuration file>`
+You can clone the Git project directly by typing `git clone git@github.com:corgrath/planemo-open-source-software-quality-platform.git`.
+
+After it you need to install the Node.js dependencies with `npm install`.
+
+Now you should be able to start Planemo using a [configuration file][23] by using
+the command `node planemo <configuration file>`
+
+### Download as a ZIP file (preferred way for people who really like ZIP files)
+
+On the Planemo GitHub page there is a button on the page with the text *"Download ZIP"*.
+
+After it you need to install the Node.js dependencies with `npm install`.
+
+Now you should be able to start Planemo using a [configuration file][23] by using the command `node planemo <configuration file>`
 
 
 
@@ -70,7 +85,7 @@ The configuration file
 In order to launch Planemo you need to specify a [JSON][13] formatted *configuration file* as the first argument. The best way to describe it is to look at a sample file, and then
 look at the property explanations below to better understand what and how the different parts works.
 
-	01	{
+    01	{
 	02		"source":
 	03			[
 	04				{
@@ -89,7 +104,15 @@ look at the property explanations below to better understand what and how the di
 	17		}
 	18	}
 
+Row explanations:
 
+ * 02: The *source* property is required to specify the starting directory which Planemo will start analyzing files in.
+ * 05: The starting directory without the final folder
+ * 06: The starting directory with the final folder
+ * 07: The name of the final folder
+ * 10: Here the user can define a list of plugins that should be invoked during the code analysis
+ * 11: The plugin name which should be used during the analysis is specified as a property
+ * 11 - 13: The the value of the property is the *options* that should be sent to the plugin
 
 Available plugin configurations
 -------------------------------------------------
@@ -99,8 +122,88 @@ Not yet written.
 
 Writing your own plugins
 -------------------------------------------------
-Not yet written.
+Writing new plugins to Planemo is fairly easy. A plugin is a stand alone file that is located in the `/plugins/` folder.
 
+To get a better understanding of how a simple plugin looks like, lets look at an existing one. The *check-directory-name-plugin.js* plugin that has the responsibility to validate directory names:
+
+    01 /*
+    02  * Licensed under the Apache License, Version 2.0 (the "License");
+    03  * you may not use this file except in compliance with the License.
+    04  * You may obtain a copy of the License at
+    05  *
+    06  * http://www.apache.org/licenses/LICENSE-2.0
+    07  *
+    08  * Unless required by applicable law or agreed to in writing, software
+    09  * distributed under the License is distributed on an "AS IS" BASIS,
+    10  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    11  * See the License for the specific language governing permissions and
+    12  * limitations under the License.
+    13  *
+    14  * See the NOTICE file distributed with this work for additional
+    15  * information regarding copyright ownership.
+    16  */
+    17
+    18 /*
+    19  * Dependencies
+    20  */
+    21
+    22 var observerService = require( "../services/observer-service.js" );
+    23 var errorUtil = require( "../utils/error-util.js" );
+    24
+    25 /*
+    26  * Public functions
+    27  */
+    28
+    29 exports.init = function ( options ) {
+    30
+    31     observerService.onDirectoryFound( function checkDirectoryNameOnDirectoryFound ( basePath, fullPath, directoryName ) {
+    32 		exports.onDirectoryFound( options, basePath, fullPath, directoryName );
+    33 	} );
+    34
+    35 };
+    36
+    37 exports.onDirectoryFound = function onDirectoryFound ( options, basePath, fullPath, directoryName ) {
+    38
+    39 	if ( !options ) {
+    40 		throw errorUtil.create( "No options were defined." );
+    41 	}
+    42
+    43 	if ( !options.regexp ) {
+    44 		throw errorUtil.create( "Invalid regexp option." );
+    45 	}
+    46
+    47 	var pattern = new RegExp( options.regexp );
+    48
+    49 	var isLegalFilename = pattern.test( directoryName );
+    50
+    51 	if ( !isLegalFilename ) {
+    52
+    53 		throw errorUtil.create( "The directory name \"" + directoryName + "\" is not valid.", {
+    54 			basePath: basePath,
+    55 			fullPath: fullPath,
+    56 			directoryName: directoryName
+    57 		} );
+    58
+    59 	}
+    60
+    61 }
+
+Row explanations:
+
+ * 01 - 16: This is the [Apache 2.0 license][29] information all source files needs to embed.
+ * 22 - 23: Module dependencies are declared here
+ * 29: Each Plugin needs to have a public init function. The *argument* to function the will be *options* the user has specified in the [*configuration file*][TOC-02]. The Plugin developer can come up with any (or no) options as they like. However, all options should be properly documented for other Planemo users.
+ * 31: In this plugin we simply hook into a new function once a new directory found is found. A plugin can hook function into a wide range of [hooks][TOC-03]. In this plugin we are only interested in the `onDirectoryFound` hook.
+ * 37: This is the primary function that will be called each time Planemo finds a directory. Since we did a fancy closure hook on row 32, we now get both the user options (*options*) and the hook information details ( *basePath*, *fullPath*, *directoryName*) to our function. The reason why this function is public (meaning its declared on the export object like `export.onDirectoryFound = `) is because we want to be able to [unit test it later][TOC-04].
+ * 39-45: Basic validation to make sure that the options are as we expect them to be.
+ * 53: Since the plugin's responsibility is to check a directory name towards a regular expression, we also need to be able tell Planemo that this plugin has found a problem. This is simply done by throwing an Error.
+
+
+
+
+Plugin and Data Collector hooks
+-------------------------------------------------
+Not yet written.
 
 
 Running the tests
@@ -166,12 +269,15 @@ License
 [25]: https://github.com/caolan/nodeunit#api-documentation
 [26]: http://en.wikipedia.org/wiki/Shell_%28computing%29
 [27]: http://en.wikipedia.org/wiki/Command_Prompt
-
+[28]: https://npmjs.org/package/planemo
+[29]: http://www.apache.org/licenses/LICENSE-2.0.html
 
 
 [TOC-00]: #available-plugin-configurations
 [TOC-01]: #continuous-build-status
+[TOC-02]: #the-configuration-file
+[TOC-03]: #plugin-and-data-collector-hooks
+[TOC-04]: #writing-tests
 
 
-
-[C00]: http://www.christoffer.me/
+[C00]: https://github.com/corgrath

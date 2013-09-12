@@ -37,11 +37,11 @@ exports.init = function ( options ) {
 exports.onDirectoryFound = function onDirectoryFound ( options, basePath, fullPath, directoryName ) {
 
 	if ( !options ) {
-		throw new Error( "No options were defined." );
+		throw errorUtil.create( "No options were defined." );
 	}
 
 	if ( !options.regexp ) {
-		throw new Error( "Invalid regexp option." );
+		throw errorUtil.create( "Invalid regexp option." );
 	}
 
 	var pattern = new RegExp( options.regexp );
