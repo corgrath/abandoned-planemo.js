@@ -2,7 +2,7 @@
 
 
 
-Planemo
+Planemo [we are working on creating 1.0!]
 =================================================
 Planemo is a [plugin-friendly][07] [open source][06] [software quality platform][09] written in [JavaScript][11] running on the [Node.js platform][01].
 
@@ -23,6 +23,7 @@ Fun fact #184: The word *Planemo* comes from *[planetary-mass object][08]*!
 
 Table of Contents
 -------------------------------------------------
+ * [Versioning][TOC-05]
  * [Continuous build status][TOC-01]
  * [Downloading and running Planemo](#downloading-and-running-planemo)
     * Via npm (preferred way for end users)
@@ -39,15 +40,20 @@ Table of Contents
  * [License](#license)
 
 
+Versioning
+-------------------------------------------------
+Two things you need to know:
+
+ * The [code on GitHub][30] should be regarded as unstable builds. We don't have any restrictions when and how things can be checked in there (within common sense though).
+ * The [project on npm][28] should be regarded as the stable builds. We will only publish a new version to npm once we feel Planemo is stable and has any new end user value.
+
+
 
 Continuous build status
 -------------------------------------------------
 Planemo is continuously built by [Drone.io][16]. You can find the build history [here][15].
 
 [![Build Status](https://drone.io/github.com/corgrath/planemo-open-source-software-quality-platform/status.png)](https://drone.io/github.com/corgrath/planemo-open-source-software-quality-platform/latest)
-
-
-
 
 
 
@@ -271,6 +277,7 @@ License
 [27]: http://en.wikipedia.org/wiki/Command_Prompt
 [28]: https://npmjs.org/package/planemo
 [29]: http://www.apache.org/licenses/LICENSE-2.0.html
+[30]: https://github.com/corgrath/planemo-open-source-software-quality-platform
 
 
 [TOC-00]: #available-plugin-configurations
@@ -278,6 +285,7 @@ License
 [TOC-02]: #the-configuration-file
 [TOC-03]: #plugin-and-data-collector-hooks
 [TOC-04]: #writing-tests
+[TOC-05]: #versioning
 
 
 [C00]: https://github.com/corgrath
