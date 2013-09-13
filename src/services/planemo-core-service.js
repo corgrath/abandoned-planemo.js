@@ -64,4 +64,4 @@ exports.validateConfigurationObject = function ( configuration ) {
 		throw errorUtil.create( "The \"verbose\" setting in the configuration file is not a Boolean (meaning the value is not true or false)." );
 	}
 
-}
+};

@@ -19,33 +19,37 @@
  * Dependencies
  */
 
-var observerService = require( "./../services/observer-service.js" );
+var logService = require( "../services/log-service.js" );
+
+/*
+ * Private
+ */
+
+var numberOfErrors = 0;
 
 /*
  * Public functions
  */
 
-exports.init = function () {
+exports.handlePluginResponse = function ( response ) {
 
-	observerService.onJavaScriptFileRead( exports.onJavaScriptFileRead );
+	if ( response.name === "Error" ) {
+
+		logService.error( response );
+
+		// Increase the number of errors
+		numberOfErrors++;
+
+	} else {
+
+		throw new Error( "Unknown plugin response type \"" + (typeof response) + "\"." );
+
+	}
 
 };
 
-exports.onJavaScriptFileRead = function onFileRead ( file, contents, responseFunction ) {
+exports.getNumberOfErrors = function () {
 
-	var lines = contents.split( "\n" );
-
-	if ( lines.length !== 0 ) {
-
-		for ( var i in lines ) {
-
-			var lineNumber = (i + 1);
-			var lineContents = lines[i].substring( 0, lines[i].length - 1 );
-
-			observerService.JavaScriptFileLineRead( file, lineNumber, lineContents, responseFunction );
-
-		}
-
-	}
+	return numberOfErrors;
 
 };

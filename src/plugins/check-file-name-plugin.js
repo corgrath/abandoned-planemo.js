@@ -20,6 +20,7 @@
  */
 
 var observerService = require( "../services/observer-service.js" );
+var errorUtils = require( "../utils/error-util.js" );
 
 /*
  * Public functions
@@ -27,35 +28,33 @@ var observerService = require( "../services/observer-service.js" );
 
 exports.init = function ( options ) {
 
-	observerService.onFileFound( function ( path, fileName ) {
-		exports.onFileFound( options, path, fileName );
+	observerService.onFileFound( function ( path, fileName, responseFunction ) {
+		exports.onFileFound( options, path, fileName, responseFunction );
 	} );
 
 };
 
-exports.onFileFound = function ( options, path, fileName ) {
+exports.onFileFound = function ( options, path, fileName, responseFunction ) {
 
 	if ( !options ) {
 		throw new Error( "No options were defined." );
 	}
 
-	if ( !options.regexp ) {
-		throw new Error( "Invalid regexp option." );
+	if ( !options.pattern ) {
+		throw new Error( "Invalid pattern option." );
 	}
 
-	var pattern = new RegExp( options.regexp );
+	var regexp = new RegExp( options.pattern );
 
-	var isLegalFilename = pattern.test( fileName );
+	var isLegalFilename = regexp.test( fileName );
 
 	if ( !isLegalFilename ) {
-		var error = new Error( "The file name \"" + fileName + "\" is not valid." );
-		error.path = path;
-		error.fileName = fileName;
-		throw error;
+
+		responseFunction( errorUtils.create( "The file name \"" + fileName + "\" is not valid.", {
+			path: path,
+			fileName: fileName
+		} ) );
+
 	}
 
-	if ( fileName.indexOf( ".ng" ) !== -1 ) {
-		process.exit();
-	}
-
-}
+};

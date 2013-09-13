@@ -28,33 +28,33 @@ var errorUtil = require( "../utils/error-util.js" );
 
 exports.init = function ( options ) {
 
-	observerService.onDirectoryFound( function checkDirectoryNameOnDirectoryFound ( basePath, fullPath, directoryName ) {
-		exports.onDirectoryFound( options, basePath, fullPath, directoryName );
+	observerService.onDirectoryFound( function checkDirectoryNameOnDirectoryFound ( basePath, fullPath, directoryName, responseFunction ) {
+		exports.onDirectoryFound( options, basePath, fullPath, directoryName, responseFunction );
 	} );
 
 };
 
-exports.onDirectoryFound = function onDirectoryFound ( options, basePath, fullPath, directoryName ) {
+exports.onDirectoryFound = function onDirectoryFound ( options, basePath, fullPath, directoryName, responseFunction ) {
 
 	if ( !options ) {
 		throw errorUtil.create( "No options were defined." );
 	}
 
-	if ( !options.regexp ) {
-		throw errorUtil.create( "Invalid regexp option." );
+	if ( !options.pattern ) {
+		throw errorUtil.create( "Invalid pattern option." );
 	}
 
-	var pattern = new RegExp( options.regexp );
+	var regexp = new RegExp( options.pattern );
 
-	var isLegalFilename = pattern.test( directoryName );
+	var isLegalFilename = regexp.test( directoryName );
 
 	if ( !isLegalFilename ) {
 
-		throw errorUtil.create( "The directory name \"" + directoryName + "\" is not valid.", {
+		responseFunction( errorUtil.create( "The directory name \"" + directoryName + "\" is not valid.", {
 			basePath: basePath,
 			fullPath: fullPath,
 			directoryName: directoryName
-		} );
+		} ) );
 
 	}
 

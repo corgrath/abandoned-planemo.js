@@ -32,7 +32,7 @@ exports.init = function () {
 
 };
 
-exports.onCSSFileRead = function ( file, fileContents ) {
+exports.onCSSFileRead = function ( file, fileContents, responseFunction ) {
 
 	var css = nodeCSS.parse( fileContents )
 
@@ -58,18 +58,18 @@ exports.onCSSFileRead = function ( file, fileContents ) {
 						throw error;
 					}
 
-					observerService.CSSPropertyAndAttributeRead( file, selectors, declaration.property, declaration.value );
+					observerService.CSSPropertyAndAttributeRead( file, selectors, declaration.property, declaration.value, responseFunction );
 
 				} else if ( declaration.type !== "comment" ) {
 
-					observerService.CSSCommentRead( file, declaration.comment );
+					observerService.CSSCommentRead( file, declaration.comment, responseFunction );
 
 				}
 
 			}
 
 		} else if ( rule.type === "comment" ) {
-			observerService.CSSCommentRead( file, rule.comment );
+			observerService.CSSCommentRead( file, rule.comment, responseFunction );
 
 		}
 

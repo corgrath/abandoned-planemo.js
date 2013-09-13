@@ -59,9 +59,6 @@ exports.getAllItemsInDirectory = function ( directory ) {
 
 	var items = fs.readdirSync( directory );
 
-	console.log( "items" );
-	console.log( items );
-
 	return items;
 
 }

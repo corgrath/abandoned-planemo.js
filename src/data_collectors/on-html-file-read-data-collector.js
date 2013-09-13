@@ -33,7 +33,7 @@ exports.init = function () {
 
 };
 
-exports.onHTMLFileRead = function onFileRead ( file, fileContents ) {
+exports.onHTMLFileRead = function onFileRead ( file, fileContents, responseFunction ) {
 
 	var parser = new htmlparser.Parser( {
 
@@ -41,7 +41,7 @@ exports.onHTMLFileRead = function onFileRead ( file, fileContents ) {
 
 			for ( var property in attributes ) {
 
-				observerService.HTMLPropertyValueRead( file, elementName, property, attributes[property] );
+				observerService.HTMLPropertyValueRead( file, elementName, property, attributes[property], responseFunction );
 
 			}
 

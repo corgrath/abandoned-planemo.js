@@ -26,6 +26,13 @@ var dataCollectorService = require( "./src/services/data-collector-service.js" )
 var fileService = require( "./src/services/file-service.js" );
 var pluginService = require( "./src/services/plugin-service.js" );
 var verboseService = require( "./src/services/verbose-service.js" );
+var pluginResponseService = require( "./src/services/plugin-response-service.js" );
+
+/*
+ * Private
+ */
+
+var errorDidHappen = false;
 
 /*
  * Get the configuration file
@@ -79,18 +86,16 @@ for ( var i = 0; i < configuration.source.length; i++ ) {
 
 	logService.log( "Source directory is \"" + fullPath + "\"." );
 
-	try {
-
-		observerService.directoryFound( basePath, fullPath, directoryName );
-
-	} catch ( error ) {
-
-		logService.error( error );
-		console.log( error );
-		throw error;
-
-	}
+	observerService.directoryFound( basePath, fullPath, directoryName, pluginResponseService.handlePluginResponse );
 
 }
 
-logService.success( "Planemo static code analysis done. No errors found. It's a great day!" );
+var numberOfErrors = pluginResponseService.getNumberOfErrors();
+
+if ( numberOfErrors > 0 ) {
+
+	logService.fail( "Planemo static code analysis failed with \"" + numberOfErrors + "\" errors." );
+
+} else {
+	logService.success( "Planemo static code analysis done. No errors found. It's a great day!" );
+}

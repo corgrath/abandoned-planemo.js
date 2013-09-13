@@ -104,8 +104,8 @@ exports.onDirectoryFound = function ( observer ) {
  * @param directory the directory name.
  */
 
-exports.directoryFound = function ( basePath, fullPath, directoryName ) {
-	notifyAll( KEY_DIRECTORY_FOUND, basePath, fullPath, directoryName );
+exports.directoryFound = function ( basePath, fullPath, directoryName, responseFunction ) {
+	notifyAll( KEY_DIRECTORY_FOUND, basePath, fullPath, directoryName, responseFunction );
 }
 
 // ------------- all above is confirmed
@@ -114,8 +114,8 @@ exports.directoryFound = function ( basePath, fullPath, directoryName ) {
 		addObserver( observer, KEY_FILE_FOUND );
 	}
 
-	exports.fileFound = function ( path, fileName, callbackFunction ) {
-		notifyAll( KEY_FILE_FOUND, path, fileName, callbackFunction );
+	exports.fileFound = function ( path, fileName, responseFunction ) {
+		notifyAll( KEY_FILE_FOUND, path, fileName, responseFunction );
 	}
 }
 
@@ -124,8 +124,8 @@ exports.directoryFound = function ( basePath, fullPath, directoryName ) {
 		addObserver( observer, KEY_ON_FILE_READ );
 	}
 
-	exports.fileRead = function ( file, fileContents, callbackFunction ) {
-		notifyAll( KEY_ON_FILE_READ, file, fileContents, callbackFunction );
+	exports.fileRead = function ( file, fileContents, responseFunction ) {
+		notifyAll( KEY_ON_FILE_READ, file, fileContents, responseFunction );
 	}
 }
 
@@ -134,8 +134,8 @@ exports.directoryFound = function ( basePath, fullPath, directoryName ) {
 		addObserver( observer, KEY_ON_CSS_FILE_READ );
 	}
 
-	exports.CSSFileRead = function ( file, fileContents ) {
-		notifyAll( KEY_ON_CSS_FILE_READ, file, fileContents );
+	exports.CSSFileRead = function ( file, fileContents, responseFunction ) {
+		notifyAll( KEY_ON_CSS_FILE_READ, file, fileContents, responseFunction );
 	}
 }
 
@@ -144,8 +144,8 @@ exports.directoryFound = function ( basePath, fullPath, directoryName ) {
 		addObserver( observer, KEY_JAVASCRIPT_FILE_LINE_READ );
 	}
 
-	exports.JavaScriptFileLineRead = function ( file, lineNumber, lineContents ) {
-		notifyAll( KEY_JAVASCRIPT_FILE_LINE_READ, file, lineNumber, lineContents );
+	exports.JavaScriptFileLineRead = function ( file, lineNumber, lineContents, responseFunction ) {
+		notifyAll( KEY_JAVASCRIPT_FILE_LINE_READ, file, lineNumber, lineContents, responseFunction );
 	}
 }
 
@@ -154,8 +154,8 @@ exports.directoryFound = function ( basePath, fullPath, directoryName ) {
 		addObserver( observer, KEY_ON_HTML_FILE_READ );
 	}
 
-	exports.HTMLFileRead = function ( file, fileContents ) {
-		notifyAll( KEY_ON_HTML_FILE_READ, file, fileContents );
+	exports.HTMLFileRead = function ( file, fileContents, responseFunction ) {
+		notifyAll( KEY_ON_HTML_FILE_READ, file, fileContents, responseFunction );
 	}
 }
 
@@ -164,8 +164,8 @@ exports.directoryFound = function ( basePath, fullPath, directoryName ) {
 		addObserver( observer, KEY_ON_JAVASCRIPT_FILE_READ );
 	}
 
-	exports.JavaScriptFileRead = function ( file, fileContents ) {
-		notifyAll( KEY_ON_JAVASCRIPT_FILE_READ, file, fileContents );
+	exports.JavaScriptFileRead = function ( file, fileContents, responseFunction ) {
+		notifyAll( KEY_ON_JAVASCRIPT_FILE_READ, file, fileContents, responseFunction );
 	}
 }
 
@@ -174,8 +174,8 @@ exports.directoryFound = function ( basePath, fullPath, directoryName ) {
 		addObserver( observer, KEY_ON_LESS_FILE_READ );
 	}
 
-	exports.LESSFileRead = function ( file, fileContents ) {
-		notifyAll( KEY_ON_LESS_FILE_READ, file, fileContents );
+	exports.LESSFileRead = function ( file, fileContents, responseFunction ) {
+		notifyAll( KEY_ON_LESS_FILE_READ, file, fileContents, responseFunction );
 	}
 }
 
@@ -184,8 +184,8 @@ exports.directoryFound = function ( basePath, fullPath, directoryName ) {
 		addObserver( observer, KEY_ON_HTML_PROPERTY_VALUE_READ );
 	}
 
-	exports.HTMLPropertyValueRead = function ( file, elementName, property, value ) {
-		notifyAll( KEY_ON_HTML_PROPERTY_VALUE_READ, file, elementName, property, value );
+	exports.HTMLPropertyValueRead = function ( file, elementName, property, value, responseFunction ) {
+		notifyAll( KEY_ON_HTML_PROPERTY_VALUE_READ, file, elementName, property, value, responseFunction );
 	}
 }
 
@@ -194,8 +194,8 @@ exports.directoryFound = function ( basePath, fullPath, directoryName ) {
 		addObserver( observer, KEY_ON_CSS_PROPERTY_AND_ATTRIBUTE_READ );
 	}
 
-	exports.CSSPropertyAndAttributeRead = function ( file, selectors, property, value ) {
-		notifyAll( KEY_ON_CSS_PROPERTY_AND_ATTRIBUTE_READ, file, selectors, property, value );
+	exports.CSSPropertyAndAttributeRead = function ( file, selectors, property, value, responseFunction ) {
+		notifyAll( KEY_ON_CSS_PROPERTY_AND_ATTRIBUTE_READ, file, selectors, property, value, responseFunction );
 	}
 }
 
@@ -204,7 +204,7 @@ exports.directoryFound = function ( basePath, fullPath, directoryName ) {
 		addObserver( observer, KEY_ON_CSS_COMMENT_READ );
 	}
 
-	exports.CSSCommentRead = function ( file, comment ) {
-		notifyAll( KEY_ON_CSS_COMMENT_READ, file, comment );
+	exports.CSSCommentRead = function ( file, comment, responseFunction ) {
+		notifyAll( KEY_ON_CSS_COMMENT_READ, file, comment, responseFunction );
 	}
 }

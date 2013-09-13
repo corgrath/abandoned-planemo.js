@@ -76,10 +76,18 @@ exports.error = function error ( error ) {
 
 	var message = error.message;
 
-	console.log( ANSI_RED + message + ANSI_CANCEL + "\n" );
+	console.log( ANSI_RED + message + ANSI_CANCEL );
 
 	for ( var property in error ) {
 		console.log( ANSI_RED + property + " = " + JSON.stringify( error[property], null, "\t" ) + ANSI_CANCEL );
 	}
+
+	console.log( "\n" );
+
+};
+
+exports.fail = function error ( message ) {
+
+	console.log( "\n" + ANSI_RED + message + ANSI_CANCEL + "\n" );
 
 };

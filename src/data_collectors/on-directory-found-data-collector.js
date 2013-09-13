@@ -35,7 +35,7 @@ exports.init = function () {
 
 };
 
-exports.onDirectoryFound = function onDirectoryFound ( basePath, fullPath, directoryName ) {
+exports.onDirectoryFound = function onDirectoryFound ( basePath, fullPath, directoryName, responseFunction ) {
 
 	if ( !basePath ) {
 		throw new Error( "Base path \"" + basePath + "\" is invalid. Full path is \"" + fullPath + "\"." )
@@ -70,13 +70,13 @@ exports.onDirectoryFound = function onDirectoryFound ( basePath, fullPath, direc
 
 			logService.log( "Found the directory \"" + newDirectory + "\"." )
 
-			observerService.directoryFound( fullPath, newDirectory, item )
+			observerService.directoryFound( fullPath, newDirectory, item, responseFunction )
 
 		} else {
 
 			logService.log( "Found the file \"" + newDirectory + "\"." );
 
-			observerService.fileFound( fullPath, item );
+			observerService.fileFound( fullPath, item, responseFunction );
 
 		}
 

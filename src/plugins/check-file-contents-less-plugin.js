@@ -20,6 +20,7 @@
  */
 
 var observerService = require( "../services/observer-service.js" );
+var errorUtils = require( "../utils/error-util.js" );
 
 /*
  * Public functions
@@ -27,13 +28,13 @@ var observerService = require( "../services/observer-service.js" );
 
 exports.init = function ( options ) {
 
-	observerService.onLESSFileRead( function ( file, fileContents ) {
-		exports.onLESSFileRead( options, file, fileContents );
+	observerService.onLESSFileRead( function ( file, fileContents, responseFunction ) {
+		exports.onLESSFileRead( options, file, fileContents, responseFunction );
 	} );
 
 };
 
-exports.onLESSFileRead = function ( options, file, fileContents ) {
+exports.onLESSFileRead = function ( options, file, fileContents, responseFunction ) {
 
 	if ( !options ) {
 		throw new Error( "Invalid options." );
@@ -46,9 +47,11 @@ exports.onLESSFileRead = function ( options, file, fileContents ) {
 		var regexp = new RegExp( pattern );
 
 		if ( regexp.test( fileContents ) ) {
-			var error = new Error( "Found disallowed pattern \"" + pattern + "\"." );
-			error.file = file;
-			throw error;
+
+			responseFunction( errorUtils.create( "Found disallowed pattern \"" + pattern + "\".", {
+				file: file
+			} ) );
+
 		}
 
 	}

@@ -39,7 +39,7 @@ exports.invalidOptions = function ( test ) {
 	try {
 		plugin.onDirectoryFound( options );
 	} catch ( error ) {
-		test.equal( error.message, "Invalid regexp option." );
+		test.equal( error.message, "Invalid pattern option." );
 	}
 
 	test.expect( 2 );
@@ -54,18 +54,14 @@ exports.invalidDirectoryName = function ( test ) {
 	var directoryName = "this foldername has spaces";
 
 	var options = {
-		regexp: "^\\w+$"
+		pattern: "^\\w+$"
 	};
 
-	try {
-
-		plugin.onDirectoryFound( options, basePath, fullPath, directoryName );
-
-	} catch ( error ) {
+	plugin.onDirectoryFound( options, basePath, fullPath, directoryName, function ( error ) {
 
 		test.equal( error.message, "The directory name \"this foldername has spaces\" is not valid." );
 
-	}
+	} );
 
 	test.expect( 1 );
 	test.done();
@@ -79,12 +75,13 @@ exports.success = function ( test ) {
 	var directoryName = "folder2";
 
 	var options = {
-		regexp: "^\\w+$"
+		pattern: "^\\w+$"
 	};
 
 	test.doesNotThrow( function () {
 
-		plugin.onDirectoryFound( options, basePath, fullPath, directoryName );
+		plugin.onDirectoryFound( options, basePath, fullPath, directoryName, function ( response ) {
+		} );
 
 	} );
 

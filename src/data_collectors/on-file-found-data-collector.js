@@ -28,13 +28,13 @@ var fileTypeService = require( "./../services/file-type-service.js" );
  * Private
  */
 
-function readLineContents ( path, filename, fileReadFunction ) {
+function readLineContents ( path, filename, responseFunction, fileReadFunction ) {
 
 	var file = path + filename;
 
 	var contents = fileService.readFile( file );
 
-	fileReadFunction( file, contents );
+	fileReadFunction( file, contents, responseFunction );
 
 }
 
@@ -48,25 +48,25 @@ exports.init = function () {
 
 };
 
-exports.onFileFound = function onFileFound ( path, filename ) {
+exports.onFileFound = function onFileFound ( path, filename, responseFunction ) {
 
 	if ( fileTypeService.isCSSFile( filename ) ) {
-		readLineContents( path, filename, observerService.CSSFileRead );
+		readLineContents( path, filename, responseFunction, observerService.CSSFileRead );
 		return;
 	}
 
 	if ( fileTypeService.isHTMLFile( filename ) ) {
-		readLineContents( path, filename, observerService.HTMLFileRead );
+		readLineContents( path, filename, responseFunction, observerService.HTMLFileRead );
 		return;
 	}
 
 	if ( fileTypeService.isLESSFile( filename ) ) {
-		readLineContents( path, filename, observerService.LESSFileRead );
+		readLineContents( path, filename, responseFunction, observerService.LESSFileRead );
 		return;
 	}
 
 	if ( fileTypeService.isJavaScriptFile( filename ) ) {
-		readLineContents( path, filename, observerService.JavaScriptFileRead );
+		readLineContents( path, filename, responseFunction, observerService.JavaScriptFileRead );
 		return;
 	}
 

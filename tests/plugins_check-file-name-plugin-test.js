@@ -28,7 +28,7 @@ var plugin = require( "../src/plugins/check-file-name-plugin.js" );
 exports.invalidOptions = function ( test ) {
 
 	var options = {
-	}
+	};
 
 	try {
 		plugin.onFileFound( undefined );
@@ -39,7 +39,7 @@ exports.invalidOptions = function ( test ) {
 	try {
 		plugin.onFileFound( options );
 	} catch ( error ) {
-		test.equal( error.message, "Invalid regexp option." );
+		test.equal( error.message, "Invalid pattern option." );
 	}
 
 	test.expect( 2 );
@@ -53,14 +53,14 @@ exports.invalidNames = function ( test ) {
 	var fileName = "planemo file.js";
 
 	var options = {
-		regexp: "^[\\w-]+\\.js|less$"
+		pattern: "^[\\w-]+\\.js|less$"
 	};
 
-	try {
-		plugin.onFileFound( options, path, fileName );
-	} catch ( error ) {
+	plugin.onFileFound( options, path, fileName, function ( error ) {
+
 		test.equal( error.message, "The file name \"planemo file.js\" is not valid." );
-	}
+
+	} );
 
 	test.expect( 1 );
 	test.done();
@@ -78,7 +78,7 @@ exports.validNames = function ( test ) {
 		];
 
 	var options = {
-		"regexp": "^\\w+|-\\.js|less$"
+		"pattern": "^\\w+|-\\.js|less$"
 	};
 
 	for ( var i in fileNames ) {
