@@ -30,10 +30,7 @@ Table of Contents
     * Via git clone (preferred way for plugin developers)
     * Download as a ZIP file (preferred way for people who really like ZIP files)
  * The configuration file
- * [Available plugin configurations][TOC-00]
-	* check-directory-name-plugin
-    * check-file-contents-less-plugin
-    * check-file-name-plugin
+ * [Available plugins][TOC-00]
  * Writing your own plugin
  * Running the testsplugins
  * Writing tests
@@ -298,7 +295,7 @@ License
 [30]: https://github.com/corgrath/planemo-open-source-software-quality-platform
 
 
-[TOC-00]: #available-plugin-configurations
+[TOC-00]: #available-plugins
 [TOC-01]: #continuous-build-status
 [TOC-02]: #the-configuration-file
 [TOC-03]: #plugin-and-data-collector-hooks
