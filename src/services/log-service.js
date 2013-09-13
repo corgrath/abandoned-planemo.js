@@ -21,6 +21,8 @@
 
 //var dateFormat = require( "dateformat" );
 
+var verboseService = require( "./verbose-service.js" );
+
 /*
  * Private functions
  */
@@ -43,6 +45,18 @@ function getFormattedTime () {
  */
 
 exports.log = function log ( object ) {
+
+	if ( verboseService.isVerbose() ) {
+
+		var timestamp = getFormattedTime();
+
+		console.log( "[" + timestamp + "] " + object );
+
+	}
+
+};
+
+exports.important = function log ( object ) {
 
 	var timestamp = getFormattedTime();
 

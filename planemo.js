@@ -25,12 +25,19 @@ var observerService = require( "./src/services/observer-service.js" );
 var dataCollectorService = require( "./src/services/data-collector-service.js" );
 var fileService = require( "./src/services/file-service.js" );
 var pluginService = require( "./src/services/plugin-service.js" );
+var verboseService = require( "./src/services/verbose-service.js" );
 
 /*
  * Get the configuration file
  */
 
 var configuration = planemoCoreService.getConfigurationFromArgument( process.argv[2] );
+
+/*
+ * Set the verbose setting
+ */
+
+verboseService.setVerbose( configuration.verbose );
 
 /*
  * Register data collectors

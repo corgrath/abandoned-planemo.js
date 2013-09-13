@@ -23,7 +23,7 @@ Fun fact #184: The word *Planemo* comes from *[planetary-mass object][08]*!
 
 Table of Contents
 -------------------------------------------------
- * [Versioning][TOC-05]
+ * [How the versioning works][TOC-05]
  * [Continuous build status][TOC-01]
  * [Downloading and running Planemo](#downloading-and-running-planemo)
     * Via npm (preferred way for end users)
@@ -40,7 +40,7 @@ Table of Contents
  * [License](#license)
 
 
-Versioning
+How the versioning works
 -------------------------------------------------
 Two things you need to know:
 
@@ -91,34 +91,36 @@ The configuration file
 In order to launch Planemo you need to specify a [JSON][13] formatted *configuration file* as the first argument. The best way to describe it is to look at a sample file, and then
 look at the property explanations below to better understand what and how the different parts works.
 
-    01	{
-	02		"source":
-	03			[
-	04				{
-	05					"basePath": "C:\\project\\",
-	06					"fullPath": "C:\\project\\src\\",
-	07					"directoryName": "src"
-	08				}
-	09			],
-	10		"plugins": {
-	11			"check-directory-name-plugin": {
-	12				"regexp": "^[a-z]+$"
-	13			},
-	14			"check-file-name-plugin": {
-	15				"regexp": "^[a-z|-]+\\.(?:js|html|css|less)$"
-	16			}
-	17		}
-	18	}
+		{
+	01		"source":
+				[
+					{
+	02					"basePath": "C:\\project\\",
+	03					"fullPath": "C:\\project\\src\\",
+	04					"directoryName": "src"
+					}
+				],
+	05		"verbose": false,
+	06		"plugins": {
+	07			"check-directory-name-plugin": {
+	08				"regexp": "^[a-z]+$"
+				},
+	07			"check-file-name-plugin": {
+	08				"regexp": "^[a-z|-]+\\.(?:js|html|css|less)$"
+				}
+			}
+		}
 
 Row explanations:
 
- * 02: The *source* property is required to specify the starting directory which Planemo will start analyzing files in.
- * 05: The starting directory without the final folder
- * 06: The starting directory with the final folder
- * 07: The name of the final folder
- * 10: Here the user can define a list of plugins that should be invoked during the code analysis
- * 11: The plugin name which should be used during the analysis is specified as a property
- * 11 - 13: The the value of the property is the *options* that should be sent to the plugin
+ * 01: The *source* property is required to specify the starting directory which Planemo will start analyzing files in.
+ * 02: The starting directory without the final folder
+ * 03: The starting directory with the final folder
+ * 04: The name of the final folder
+ * 05: Verbose setting, meaning if you want Planemo to be verbose or not. Valid options are *true* or *false*. If you are using plugins that should show warnings instead of errors, having *verbose* to *false* is recommended.
+ * 06: Here the user can define a list of plugins that should be invoked during the code analysis
+ * 07: The plugin name which should be used during the analysis is specified as a property
+ * 08: The the value of the property is the *options* that should be sent to the plugin
 
 Available plugin configurations
 -------------------------------------------------

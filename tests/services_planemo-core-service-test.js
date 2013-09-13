@@ -19,32 +19,32 @@
  * Dependencies
  */
 
-var nodeUnderscore = require( "underscore" );
+var planemoCoreService = require( "../src/services/planemo-core-service.js" );
 
 /*
- * Public functions
+ * Tests
  */
 
-exports.isNumber = function isNumber ( object ) {
+exports.testVerbose = function ( test ) {
 
-	return nodeUnderscore.isNumber( object );
+	var configuration = {
+	}
 
-};
+	try {
+		planemoCoreService.validateConfigurationObject( configuration );
+	} catch ( error ) {
+		test.equal( error.message, "No \"verbose\" setting was found in the configuration file." );
+	}
 
-exports.isFunction = function isNumber ( object ) {
+	configuration.verbose = "This is a string";
 
-	return nodeUnderscore.isFunction( object );
+	try {
+		planemoCoreService.validateConfigurationObject( configuration );
+	} catch ( error ) {
+		test.equal( error.message, "The \"verbose\" setting in the configuration file is not a Boolean (meaning the value is not true or false)." );
+	}
 
-};
-
-exports.isArray = function isArray ( object ) {
-
-	return nodeUnderscore.isArray( object );
-
-};
-
-exports.isBoolean = function isBoolean ( object ) {
-
-	return nodeUnderscore.isBoolean( object );
+	test.expect( 2 );
+	test.done();
 
 };
