@@ -25,23 +25,23 @@ Table of Contents
 -------------------------------------------------
  * [How the versioning works][TOC-05]
  * [Continuous build status][TOC-01]
- * [Downloading and running Planemo](#downloading-and-running-planemo)
+ * Downloading and running Planemo
     * Via npm (preferred way for end users)
     * Via git clone (preferred way for plugin developers)
     * Download as a ZIP file (preferred way for people who really like ZIP files)
- * [The configuration file](#the-configuration-file)
+ * The configuration file
  * [Available plugin configurations][TOC-00]
 	* check-directory-name-plugin
     * check-file-contents-less-plugin
     * check-file-name-plugin
  * Writing your own plugin
- * [Running the testsplugins](#running-the-tests)
- * [Writing tests](#writing-tests)
+ * Running the testsplugins
+ * Writing tests
  * Found a bug or have a questions?
  * Plugin and Data Collector hooks
- * [Major changes](#major-changes)
- * [Contributors](#contributors)
- * [License](#license)
+ * Major changes
+ * Contributors
+ * License
 
 
 How the versioning works
