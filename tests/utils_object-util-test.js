@@ -19,37 +19,26 @@
  * Dependencies
  */
 
-var nodeUnderscore = require( "underscore" );
-var errorUtil = require( "../utils/error-util.js" );
+var objectUtil = require( "../src/utils/object-util.js" );
 
 /*
- * Public functions
+ * Tests
  */
 
-exports.isNumber = function isNumber ( object ) {
+exports.testIsNumber = function ( test ) {
 
-	if ( object === undefined ) {
-		throw errorUtil.create( "Number is undefined." );
+	test.equal( objectUtil.isNumber( 0 ), true );
+	test.equal( objectUtil.isNumber( -1 ), true );
+
+	try {
+		objectUtil.isNumber();
+	} catch ( error ) {
+		test.equal( error.message, "Number is undefined." );
 	}
 
-	return nodeUnderscore.isNumber( object );
+	test.equal( objectUtil.isNumber( "Hello world" ), false );
 
-};
-
-exports.isFunction = function isNumber ( object ) {
-
-	return nodeUnderscore.isFunction( object );
-
-};
-
-exports.isArray = function isArray ( object ) {
-
-	return nodeUnderscore.isArray( object );
-
-};
-
-exports.isBoolean = function isBoolean ( object ) {
-
-	return nodeUnderscore.isBoolean( object );
+	test.expect( 4 );
+	test.done();
 
 };
