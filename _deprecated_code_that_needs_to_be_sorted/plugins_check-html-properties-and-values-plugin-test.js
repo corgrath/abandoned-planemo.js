@@ -19,7 +19,7 @@
  * Dependencies
  */
 
-var plugin = require( "../src/plugins/check-html-properties-and-values-plugin.js" );
+var plugin = require( "check-html-properties-and-values-plugin.js" );
 
 /*
  * Tests

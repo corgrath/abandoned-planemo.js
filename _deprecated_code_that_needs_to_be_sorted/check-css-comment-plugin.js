@@ -19,9 +19,9 @@
  * Dependencies
  */
 
-var observerService = require( "../services/observer-service.js" );
-var errorUtil = require( "../utils/error-util.js" );
-var stringUtil = require( "../utils/string-util.js" );
+var observerService = require( "../src/services/observer-service.js" );
+var errorUtil = require( "../src/utils/error-util.js" );
+var stringUtil = require( "../src/utils/string-util.js" );
 
 /*
  * Public functions
