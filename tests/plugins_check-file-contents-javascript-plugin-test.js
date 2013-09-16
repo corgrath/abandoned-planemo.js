@@ -51,9 +51,8 @@ exports.testMustContains = function ( test ) {
 	}
 
 	var file = "c:\\source.js";
-	var fileContents = "Hello world!";
 
-	plugin.onJavaScriptFileRead( options, file, fileContents, function ( response ) {
+	plugin.onJavaScriptFileRead( options, file, "Hello world", function ( response ) {
 		test.equal( response.message, "Did not found the pattern \"" + options.mustcontain[0] + "\"." );
 	} );
 
