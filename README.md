@@ -31,6 +31,10 @@ Table of Contents
     * Download as a ZIP file (preferred way for people who really like ZIP files)
  * The configuration file
  * [Available plugins][TOC-00]
+    * check-directory-name-plugin
+    * check-file-name-plugin
+    * check-file-contents-less-plugin
+    * check-file-contents-javascript-plugin
  * Writing your own plugin
  * Running the testsplugins
  * Writing tests
