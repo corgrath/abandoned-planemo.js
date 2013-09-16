@@ -131,9 +131,7 @@ Row explanations:
 
 Available plugins
 -------------------------------------------------
-[Documentation concerning this topic can be found here.][05]
-
-You can enable what plugins you want Planemo to run by defining them in your configuration file.
+You can enable what plugins you want Planemo to run by defining them in your [*configuration file*][TOC-02].
 
 Below is a list of all the current available plugins, a brief description of their individual options and an example.
 
