@@ -33,7 +33,7 @@ Table of Contents
  * [Available plugins][TOC-00]
     * check-directory-name-plugin
     * check-file-name-plugin
-    * check-file-contents-less-plugin
+    * [check-file-contents-less-plugin][TOC-07]
     * check-file-contents-javascript-plugin
  * Writing your own plugin
  * Running the testsplugins
@@ -368,6 +368,7 @@ License
 [TOC-04]: #writing-tests
 [TOC-05]: #versioning
 [TOC-06]: #writing-your-own-plugins
+[TOC-07]: #check-file-contents-less-plugin
 
 
 [C00]: https://github.com/corgrath
