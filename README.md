@@ -74,7 +74,7 @@ You can clone the Git project directly by typing `git clone git@github.com:corgr
 
 After it you need to install the Node.js dependencies with `npm install`.
 
-Now you should be able to start Planemo using a [configuration file][TOC-02] by using
+Now you should be able to start Planemo using a [*configuration file*][TOC-02] by using
 the command `node planemo <configuration file>`
 
 ### Download as a ZIP file (preferred way for people who really like ZIP files)
@@ -144,8 +144,6 @@ Example:
         "pattern": "^[a-z]+$"
     }
 
-
-
 ### check-file-name-plugin
 Checks a file name.
 
@@ -156,8 +154,6 @@ Example:
     "check-file-name-plugin": {
 		"pattern": "^[a-z|-]+\\.(?:js|html|css|less)$"
 	}
-
-
 
 ### check-file-contents-less-plugin
 Checks the contents of a LESS file.
@@ -176,10 +172,26 @@ Example:
         ]
     }
 
+### check-file-contents-javascript-plugin
+Checks the conents of a JavaScript file.
 
+ * disallow - An array of regular expression that must not occur in a found JavaScript file.
+ * mustcontain - An array of regular expressions that has to occur in a found JavaScript file.
 
+Example:
 
-
+	"check-file-contents-javascript-plugin": {
+		"disallow":
+			[
+				"TODO",
+				"FIXME",
+				"/\\*global.+console"
+			],
+		"mustcontain":
+			[
+				"@owner \\w+ \\w+ \\(\\w{3}\\)"
+			]
+	}
 
 
 Writing your own plugin

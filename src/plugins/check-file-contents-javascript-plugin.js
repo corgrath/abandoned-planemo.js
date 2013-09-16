@@ -29,13 +29,13 @@ var objectUtil = require( "../utils/object-util.js" );
 
 exports.init = function ( options ) {
 
-	observerService.onJavaScriptFileRead( function ( file, comment ) {
-		exports.onJavaScriptFileRead( options, file, comment );
+	observerService.onJavaScriptFileRead( function ( file, comment, responseCallbackFunction ) {
+		exports.onJavaScriptFileRead( options, file, comment, responseCallbackFunction );
 	} );
 
 };
 
-exports.onJavaScriptFileRead = function ( options, file, fileContents ) {
+exports.onJavaScriptFileRead = function ( options, file, fileContents, responseCallbackFunction ) {
 
 	if ( !options ) {
 		throw errorUtil.create( "No options were defined." );
@@ -60,7 +60,7 @@ exports.onJavaScriptFileRead = function ( options, file, fileContents ) {
 			if ( !regexp.test( fileContents ) ) {
 				var error = new Error( "Did not found the pattern \"" + pattern + "\"." );
 				error.file = file;
-				throw error;
+				responseCallbackFunction( error );
 			}
 
 		}
@@ -81,7 +81,7 @@ exports.onJavaScriptFileRead = function ( options, file, fileContents ) {
 			if ( regexp.test( fileContents ) ) {
 				var error = new Error( "Found the invalid pattern \"" + pattern + "\"." );
 				error.file = file;
-				throw error;
+				responseCallbackFunction( error );
 			}
 
 		}

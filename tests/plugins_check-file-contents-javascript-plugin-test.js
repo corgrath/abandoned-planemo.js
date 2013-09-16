@@ -39,7 +39,7 @@ exports.testOptions = function ( test ) {
 	test.expect( 1 );
 	test.done();
 
-}
+};
 
 exports.testMustContains = function ( test ) {
 
@@ -53,17 +53,9 @@ exports.testMustContains = function ( test ) {
 	var file = "c:\\source.js";
 	var fileContents = "Hello world!";
 
-	try {
-		plugin.onJavaScriptFileRead( options, file, fileContents );
-	} catch ( error ) {
-		test.equal( error.message, "Did not found the pattern \"" + options.mustcontain[0] + "\"." );
-	}
-
-	try {
-
-	} catch ( error ) {
-		test.equal( error.message, "Did not found the pattern \"" + options.mustcontain[0] + "\"." );
-	}
+	plugin.onJavaScriptFileRead( options, file, fileContents, function ( response ) {
+		test.equal( response.message, "Did not found the pattern \"" + options.mustcontain[0] + "\"." );
+	} );
 
 	test.doesNotThrow( function () {
 		plugin.onJavaScriptFileRead( options, file, "\\* @owner John Doe (jdo) */" );
@@ -72,7 +64,7 @@ exports.testMustContains = function ( test ) {
 	test.expect( 2 );
 	test.done();
 
-}
+};
 
 exports.testDisallow = function ( test ) {
 
@@ -85,21 +77,17 @@ exports.testDisallow = function ( test ) {
 			]
 	};
 
-	try {
-		plugin.onJavaScriptFileRead( options, file, "/*global console */" );
-	} catch ( error ) {
-		test.equal( error.message, "Found the invalid pattern \"" + options.disallow[0] + "\"." );
-		test.equal( error.file, file );
-	}
+	plugin.onJavaScriptFileRead( options, file, "/*global console */", function ( response ) {
+		test.equal( response.message, "Found the invalid pattern \"" + options.disallow[0] + "\"." );
+		test.equal( response.file, file );
+	} );
 
-	try {
-		plugin.onJavaScriptFileRead( options, file, "/*global pubsub, console */" );
-	} catch ( error ) {
-		test.equal( error.message, "Found the invalid pattern \"" + options.disallow[0] + "\"." );
-		test.equal( error.file, file );
-	}
+	plugin.onJavaScriptFileRead( options, file, "/*global pubsub, console */", function ( response ) {
+		test.equal( response.message, "Found the invalid pattern \"" + options.disallow[0] + "\"." );
+		test.equal( response.file, file );
+	} );
 
 	test.expect( 4 );
 	test.done();
 
-}
+};
