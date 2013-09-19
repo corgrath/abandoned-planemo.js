@@ -195,6 +195,25 @@ Example:
 			]
 	}
 
+### check-html-properties-and-values-plugin
+Checks the properties and values of a HTML-file.
+
+ * disallowPropertiesStartingWith - An array of Strings that properties should not start with
+ * disallowValuesStartingWith - An object structure where the property is a regular expression of an HTML-property, and the value is the HTML-value should not start in a specific way.
+
+Example:
+
+	"check-html-properties-and-values-plugin": {
+		"disallowPropertiesStartingWith":
+			[
+				"ng-",
+				"style"
+			],
+		"disallowValuesStartingWith": {
+			"-translation$": "^MyApplication\\."
+		}
+	}
+
 
 Writing your own plugin
 -------------------------------------------------
