@@ -57,7 +57,6 @@ exports.onDirectoryFound = function onDirectoryFound ( basePath, fullPath, direc
 
 	var items = fs.readdirSync( fullPath );
 
-	// console.log( items );
 	for ( var i in items ) {
 
 		var item = items[i];
@@ -82,4 +81,4 @@ exports.onDirectoryFound = function onDirectoryFound ( basePath, fullPath, direc
 
 	}
 
-}
+};
