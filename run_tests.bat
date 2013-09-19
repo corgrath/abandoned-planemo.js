@@ -1,1 +1,1 @@
-./node_modules/.bin/nodeunit tests
+./node_modules/.bin/mocha -R list tests/*

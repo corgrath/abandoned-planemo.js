@@ -29,12 +29,6 @@ var verboseService = require( "./src/services/verbose-service.js" );
 var pluginResponseService = require( "./src/services/plugin-response-service.js" );
 
 /*
- * Private
- */
-
-var errorDidHappen = false;
-
-/*
  * Get the configuration file
  */
 
@@ -89,6 +83,10 @@ for ( var i = 0; i < configuration.source.length; i++ ) {
 	observerService.directoryFound( basePath, fullPath, directoryName, pluginResponseService.handlePluginResponse );
 
 }
+
+/*
+ * Summarize the number of errors
+ */
 
 var numberOfErrors = pluginResponseService.getNumberOfErrors();
 

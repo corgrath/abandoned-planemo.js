@@ -1,35 +1,39 @@
 {
-  "name": "planemo",
-  "version": "0.0.5",
-  "description": "Planemo is a plugin-friendly open source software quality platform written in JavaScript running on the Node.js platform.",
-  "main": "planemo.js",
-  "directories": {
-    "test": "tests"
-  },
-  "dependencies": {
-    "mocha": "~1.13.0",
-    "css": "~1.4.1",
-    "htmlparser2": "~3.2.3",
-    "nodeunit": "~0.8.0",
-    "underscore": "~1.4.4",
-    "underscore.string": "~2.3.3"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "test": "./node_modules/.bin/mocha tests_mocha/*"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/corgrath/planemo-open-source-software-quality-platform/"
-  },
-  "keywords": [
-    "planemo",
-    "open source",
-    "software quality platform",
-    "static code analysis"
-  ],
-  "author": "Christoffer Pettersson, christoffer[at]christoffer[dot]me",
-  "license": "Apache 2.0",
-  "gitHead": "5482ea55845b218e9d3dd24d47d2dd5deaac57cf",
-  "readmeFilename": "README.md"
+	"name": "planemo",
+	"version": "0.0.5",
+	"description": "Planemo is a plugin-friendly open source software quality platform written in JavaScript running on the Node.js platform.",
+	"main": "planemo.js",
+	"directories": {
+		"test": "tests"
+	},
+	"dependencies": {
+		"mocha": "~1.13.0",
+		"chai": "~1.7.2",
+		"css": "~1.4.1",
+		"htmlparser2": "~3.2.3",
+		"underscore": "~1.4.4",
+		"underscore.string": "~2.3.3"
+	},
+	"devDependencies": {},
+	"scripts": {
+		"test": "./node_modules/.bin/mocha tests/*"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/corgrath/planemo-open-source-software-quality-platform/"
+	},
+	"keywords":
+		[
+			"planemo",
+			"open source",
+			"software quality platform",
+			"static code analysis"
+		],
+	"author": "Christoffer Pettersson, christoffer[at]christoffer[dot]me",
+	"license": "Apache 2.0",
+	"gitHead": "5482ea55845b218e9d3dd24d47d2dd5deaac57cf",
+	"readmeFilename": "README.md",
+	"bugs": {
+		"url": "https://github.com/corgrath/planemo-open-source-software-quality-platform/issues/"
+	}
 }

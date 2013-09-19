@@ -296,8 +296,8 @@ Writing tests
 -------------------------------------------------
 For obvious reasons, the [more tests we have for Planemo the happier we are][18]. So it is encouraged that we write supporting [unit tests][17] for our code.
 
-Planemo is currently using [nodeunit][24] as its test framework. If you are planning to write tests it would be a good idea to look at [their examples][19] and read
-their [API Documentation][25] to better understand how to write new or maintain old tests. If you looking for examples you can find them in the `/tests/` folder in this project.
+Planemo is currently using [Mocha][31] and [Chai][32] as a part of its test framework. If you are planning to write tests it would be a good idea to look at their individual
+examples and documentation to better understand how to write new or maintain old tests. If you looking for examples you can find them in the `/tests/` folder in this project.
 
 
 
@@ -345,18 +345,20 @@ License
 [16]: http://www.drone.io/
 [17]: http://en.wikipedia.org/wiki/Unit_testing
 [18]: http://en.wikipedia.org/wiki/Unit_testing#Benefits
-[19]: https://github.com/caolan/nodeunit#usage
+[19]:
 [20]: http://nodejs.org/
 [21]: https://help.github.com/articles/set-up-git/
 [22]: https://github.com/corgrath/planemo-javascript-open-source-software-quality-platform/archive/master.zip
 [23]: https://github.com/corgrath/planemo-open-source-software-quality-platform/issues
-[24]: https://github.com/caolan/nodeunit
-[25]: https://github.com/caolan/nodeunit#api-documentation
+[24]:
+[25]:
 [26]: http://en.wikipedia.org/wiki/Shell_%28computing%29
 [27]: http://en.wikipedia.org/wiki/Command_Prompt
 [28]: https://npmjs.org/package/planemo
 [29]: http://www.apache.org/licenses/LICENSE-2.0.html
 [30]: https://github.com/corgrath/planemo-open-source-software-quality-platform
+[31]: http://visionmedia.github.io/mocha/
+[32]: http://chaijs.com/
 
 
 [TOC-00]: #available-plugins

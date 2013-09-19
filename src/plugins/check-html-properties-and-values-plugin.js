@@ -19,9 +19,10 @@
  * Dependencies
  */
 
-var observerService = require( "../src/services/observer-service.js" );
-var stringUtil = require( "../src/utils/string-util.js" );
-var objectUtil = require( "../src/utils/object-util.js" );
+var observerService = require( "../services/observer-service.js" );
+var stringUtil = require( "../utils/string-util.js" );
+var objectUtil = require( "../utils/object-util.js" );
+var errorUtil = require( "../utils/error-util.js" );
 
 /*
  * Public functions
@@ -35,7 +36,7 @@ exports.init = function ( options ) {
 
 };
 
-exports.onHTMLPropertyValueRead = function ( options, file, elementName, property, value ) {
+exports.onHTMLPropertyValueRead = function ( options, file, elementName, property, value, responseCallbackFunction ) {
 
 	if ( options.disallowPropertiesStartingWith && !objectUtil.isArray( options.disallowPropertiesStartingWith ) ) {
 		throw new Error( "The \"disallowPropertiesStartingWith\" has to be an array." );
@@ -46,18 +47,17 @@ exports.onHTMLPropertyValueRead = function ( options, file, elementName, propert
 		for ( var i in options.disallowPropertiesStartingWith ) {
 
 			if ( stringUtil.startsWith( property, options.disallowPropertiesStartingWith[i] ) ) {
-				throw new Error( "Found HTML property \"" + property + "\" name that starts invalid in file \"" + file + "\"." );
+				responseCallbackFunction( errorUtil.create( "Found HTML property \"" + property + "\" name that starts invalid in file \"" + file + "\".", {
+					file: file,
+					elementName: elementName,
+					property: property,
+					value: value
+				} ) );
 			}
 
 		}
 
 	}
-
-	var options = {
-		"disallowValuesStartingWith": {
-			"-translation$": "^DataModelViewer\\."
-		}
-	};
 
 	/*
 	 * disallowValuesStartingWith
@@ -76,12 +76,16 @@ exports.onHTMLPropertyValueRead = function ( options, file, elementName, propert
 				var valueRegexp = new RegExp( valuePattern );
 
 				if ( !valueRegexp.test( value ) ) {
-					var error = new Error( "Found disallowed value \"" + value + "\" for property \"" + property + "\"." );
-					error.file = file;
-					error.elementName = elementName;
-					error.property = property;
-					error.value = value;
-					throw error;
+
+					var error = errorUtil.create( "Found disallowed value \"" + value + "\" for property \"" + property + "\".", {
+						file: file,
+						elementName: elementName,
+						property: property,
+						value: value
+					} );
+
+					responseCallbackFunction( error );
+
 				}
 
 			}
@@ -90,4 +94,4 @@ exports.onHTMLPropertyValueRead = function ( options, file, elementName, propert
 
 	}
 
-}
+};

@@ -37,7 +37,7 @@ exports.init = function ( options ) {
 exports.onLESSFileRead = function ( options, file, fileContents, responseFunction ) {
 
 	if ( !options ) {
-		throw new Error( "Invalid options." );
+		throw new Error( "No options were defined." );
 	}
 
 	for ( var i in options.disallow ) {
@@ -56,4 +56,4 @@ exports.onLESSFileRead = function ( options, file, fileContents, responseFunctio
 
 	}
 
-}
+};

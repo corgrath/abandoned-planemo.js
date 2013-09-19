@@ -27,6 +27,14 @@ var nodeUnderscoreString = require( "underscore.string" );
 
 exports.endsWith = function endsWith ( string, ends ) {
 
+	if ( ends === undefined ) {
+		throw new Error( "Ends cannot be undefined." );
+	}
+
+	if ( ends === "" ) {
+		throw new Error( "Ends cannot be an empty String." );
+	}
+
 	return nodeUnderscoreString.endsWith( string, ends );
 
 };
@@ -40,4 +48,5 @@ exports.startsWith = function startsWith ( string, startsWith ) {
 exports.contains = function contains ( string, contains ) {
 
 	return string.indexOf( contains ) !== -1;
+
 };

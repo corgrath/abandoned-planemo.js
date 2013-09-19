@@ -19,32 +19,39 @@
  * Dependencies
  */
 
-var planemoCoreService = require( "../src/services/planemo-core-service.js" );
+var expect = require( "chai" ).expect;
+
+var objectUtil = require( "../../src/utils/object-util.js" );
 
 /*
  * Tests
  */
 
-exports.testVerbose = function ( test ) {
+describe( "string util", function () {
 
-	var configuration = {
-	}
+	describe( "is number", function () {
 
-	try {
-		planemoCoreService.validateConfigurationObject( configuration );
-	} catch ( error ) {
-		test.equal( error.message, "No \"verbose\" setting was found in the configuration file." );
-	}
+		it( "should return true", function () {
 
-	configuration.verbose = "This is a string";
+			expect( objectUtil.isNumber( 0 ) ).to.be.true;
+			expect( objectUtil.isNumber( -1 ) ).to.be.true;
 
-	try {
-		planemoCoreService.validateConfigurationObject( configuration );
-	} catch ( error ) {
-		test.equal( error.message, "The \"verbose\" setting in the configuration file is not a Boolean (meaning the value is not true or false)." );
-	}
+		} );
 
-	test.expect( 2 );
-	test.done();
+		it( "should return false", function () {
 
-};
+			expect( objectUtil.isNumber( "Hello world" ) ).to.be.false;
+
+		} );
+
+		it( "should complain if not a number", function () {
+
+			expect(function () {
+				objectUtil.isNumber();
+			} ).to.throw( "Number is undefined." );
+
+		} );
+
+	} );
+
+} );
