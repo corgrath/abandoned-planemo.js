@@ -70,19 +70,12 @@ for ( var pluginName in configuration.plugins ) {
  * Go through each source directory in the configuration file and start the analysis tool
  */
 
-for ( var i = 0; i < configuration.source.length; i++ ) {
+var sourceRoot = configuration.source.root;
+logService.log( "Source directory is \"" + sourceRoot + "\"." );
 
-	var source = configuration.source[i];
+var sourceRootDetails = fileService.breakDownPath( sourceRoot );
 
-	var basePath = source.basePath;
-	var fullPath = source.fullPath;
-	var directoryName = source.directoryName;
-
-	logService.log( "Source directory is \"" + fullPath + "\"." );
-
-	observerService.directoryFound( basePath, fullPath, directoryName, pluginResponseService.handlePluginResponse );
-
-}
+observerService.directoryFound( sourceRootDetails.basePath, sourceRootDetails.fullPath, sourceRootDetails.directoryName, pluginResponseService.handlePluginResponse );
 
 /*
  * Summarize the number of errors

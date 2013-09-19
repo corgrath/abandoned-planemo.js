@@ -20,6 +20,7 @@
  */
 
 var nodeCSS = require( "css" );
+var logService = require( "./../services/log-service.js" );
 var observerService = require( "./../services/observer-service.js" );
 
 /*
@@ -34,7 +35,9 @@ exports.init = function () {
 
 exports.onCSSFileRead = function ( file, fileContents, responseFunction ) {
 
-	var css = nodeCSS.parse( fileContents )
+	logService.log( "Will parse CSS file \"" + file + "\"." );
+
+	var css = nodeCSS.parse( fileContents );
 
 	for ( var i in css.stylesheet.rules ) {
 

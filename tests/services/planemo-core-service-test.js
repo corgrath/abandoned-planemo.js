@@ -20,7 +20,7 @@
  */
 
 var expect = require( "chai" ).expect;
-
+var nodePath = require( "path" );
 var planemoCoreService = require( "../../src/services/planemo-core-service.js" );
 
 /*
@@ -29,11 +29,38 @@ var planemoCoreService = require( "../../src/services/planemo-core-service.js" )
 
 describe( "planemo core service", function () {
 
-	describe( "setVerbose", function () {
+	describe( "validateConfigurationObject", function () {
+
+		it( "should complain if source is not defined", function () {
+
+			var configuration = {
+			};
+
+			expect(function () {
+				planemoCoreService.validateConfigurationObject( configuration );
+			} ).to.throw( "The \"source\" setting in the configuration file is not defined." );
+
+		} );
+
+		it( "should complain if source root is not defined", function () {
+
+			var configuration = {
+				source: {
+				}
+			};
+
+			expect(function () {
+				planemoCoreService.validateConfigurationObject( configuration );
+			} ).to.throw( "The \"root\" in the \"source\" setting in the configuration file is not defined." );
+
+		} );
 
 		it( "should complain if no configuration file was defined", function () {
 
 			var configuration = {
+				source: {
+					root: ""
+				}
 			};
 
 			expect(function () {
@@ -45,6 +72,9 @@ describe( "planemo core service", function () {
 		it( "should complain if configuration file defined is not a string", function () {
 
 			var configuration = {
+				source: {
+					root: ""
+				},
 				verbose: "This is a string"
 			};
 

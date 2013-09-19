@@ -97,14 +97,9 @@ In order to launch Planemo you need to specify a [JSON][13] formatted *configura
 look at the property explanations below to better understand what and how the different parts works.
 
 		{
-	01		"source":
-				[
-					{
-	02					"basePath": "C:\\project\\",
-	03					"fullPath": "C:\\project\\src\\",
-	04					"directoryName": "src"
-					}
-				],
+	01		"source": {
+				"root": "C:\\project\\src\\"
+			}
 	05		"verbose": false,
 	06		"plugins": {
 	07			"check-directory-name-plugin": {
@@ -119,9 +114,6 @@ look at the property explanations below to better understand what and how the di
 Row explanations:
 
  * 01: The *source* property is required to specify the starting directory which Planemo will start analyzing files in.
- * 02: The starting directory without the final folder
- * 03: The starting directory with the final folder
- * 04: The name of the final folder
  * 05: Verbose setting, meaning if you want Planemo to be verbose or not. Valid options are *true* or *false*. If you are using plugins that should show warnings instead of errors, having *verbose* to *false* is recommended.
  * 06: Here the user can define a list of plugins that should be invoked during the code analysis
  * 07: The plugin name which should be used during the analysis is specified as a property

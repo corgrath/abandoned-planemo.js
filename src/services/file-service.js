@@ -109,4 +109,17 @@ exports.prettifyDirectory = function ( directory ) {
 		return directory + nodePath.sep;
 	}
 
-}
+};
+
+exports.breakDownPath = function ( fullPath ) {
+
+	var basePath = exports.prettifyDirectory( nodePath.dirname( fullPath ) );
+	var directoryName = nodePath.basename( fullPath );
+
+	return {
+		basePath: basePath,
+		fullPath: fullPath,
+		directoryName: directoryName
+	}
+
+};

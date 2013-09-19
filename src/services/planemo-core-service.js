@@ -19,6 +19,7 @@
  * Dependencies
  */
 
+var nodePath = require( "path" );
 var logService = require( "./log-service.js" );
 var fileService = require( "./file-service.js" );
 var errorUtil = require( "../utils/error-util.js" );
@@ -55,6 +56,14 @@ exports.getConfigurationFromArgument = function ( configurationArgumentFile ) {
 }
 
 exports.validateConfigurationObject = function ( configuration ) {
+
+	if ( configuration.source === undefined ) {
+		throw new Error( "The \"source\" setting in the configuration file is not defined." );
+	}
+
+	if ( configuration.source.root === undefined ) {
+		throw new Error( "The \"root\" in the \"source\" setting in the configuration file is not defined." );
+	}
 
 	if ( configuration.verbose === undefined ) {
 		throw errorUtil.create( "No \"verbose\" setting was found in the configuration file." );
