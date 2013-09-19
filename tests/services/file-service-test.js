@@ -39,6 +39,8 @@ describe( "file service", function () {
 
 			var actual = fileService.breakDownPath( path );
 
+			console.log( "actual.directoryName=[" + actual.directoryName + "]" );
+
 			expect( actual.basePath ).to.equal( "c:" + separator + "folder1" + separator + "folder2" + separator );
 			expect( actual.fullPath ).to.equal( "c:" + separator + "folder1" + separator + "folder2" + separator + "folder3" + separator );
 			expect( actual.directoryName ).to.equal( "folder3" );
