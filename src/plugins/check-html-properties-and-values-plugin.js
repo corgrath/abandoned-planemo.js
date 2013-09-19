@@ -30,8 +30,8 @@ var errorUtil = require( "../utils/error-util.js" );
 
 exports.init = function ( options ) {
 
-	observerService.onHTMLPropertyValueRead( function ( file, elementName, property, value ) {
-		exports.onHTMLPropertyValueRead( options, file, elementName, property, value );
+	observerService.onHTMLPropertyValueRead( function ( file, elementName, property, value, responseCallbackFunction ) {
+		exports.onHTMLPropertyValueRead( options, file, elementName, property, value, responseCallbackFunction );
 	} );
 
 };

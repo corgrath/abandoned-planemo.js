@@ -93,7 +93,11 @@ var numberOfErrors = pluginResponseService.getNumberOfErrors();
 if ( numberOfErrors > 0 ) {
 
 	logService.fail( "Planemo static code analysis failed with \"" + numberOfErrors + "\" errors." );
+	process.exit( 1 );
 
 } else {
+
 	logService.success( "Planemo static code analysis done. No errors found. It's a great day!" );
+	process.exit( 0 );
+
 }
