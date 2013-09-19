@@ -117,7 +117,6 @@ exports.breakDownPath = function ( fullPath ) {
 	var directoryName = nodePath.basename( fullPath );
 
 	if ( stringUtil.endsWith( directoryName, nodePath.sep ) ) {
-		console.log( "removing trailing " + directoryName );
 		directoryName = directoryName.substring( 0, directoryName.length - 1 );
 	}
 
