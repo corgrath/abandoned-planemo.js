@@ -104,8 +104,8 @@ exports.onDirectoryFound = function ( observer ) {
  * @param directory the directory name.
  */
 
-exports.directoryFound = function ( basePath, fullPath, directoryName, responseFunction ) {
-	notifyAll( KEY_DIRECTORY_FOUND, basePath, fullPath, directoryName, responseFunction );
+exports.directoryFound = function ( directoriesToIgnore, basePath, fullPath, directoryName, responseFunction ) {
+	notifyAll( KEY_DIRECTORY_FOUND, directoriesToIgnore, basePath, fullPath, directoryName, responseFunction );
 }
 
 // ------------- all above is confirmed

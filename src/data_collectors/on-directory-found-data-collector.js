@@ -24,6 +24,8 @@ var fs = require( "fs" );
 var fileService = require( "./../services/file-service.js" );
 var logService = require( "./../services/log-service.js" );
 var observerService = require( "./../services/observer-service.js" );
+var objectUtil = require( "./../utils/object-util.js" );
+var stringUtil = require( "./../utils/string-util.js" );
 
 /*
  * Public functions
@@ -35,7 +37,19 @@ exports.init = function () {
 
 };
 
-exports.onDirectoryFound = function onDirectoryFound ( basePath, fullPath, directoryName, responseFunction ) {
+exports.onDirectoryFound = function onDirectoryFound ( directoriesToIgnore, basePath, fullPath, directoryName, responseCallbackFunction ) {
+
+	/*
+	 * Validation
+	 */
+
+	if ( !directoriesToIgnore ) {
+		throw new Error( "Directories to ignore is undefined." );
+	}
+
+	if ( !objectUtil.isArray( directoriesToIgnore ) ) {
+		throw new Error( "Directories to ignore is not an Array." );
+	}
 
 	if ( !basePath ) {
 		throw new Error( "Base path \"" + basePath + "\" is invalid. Full path is \"" + fullPath + "\"." )
@@ -49,15 +63,27 @@ exports.onDirectoryFound = function onDirectoryFound ( basePath, fullPath, direc
 		throw new Error( "Full path \"" + directoryName + "\" is invalid." )
 	}
 
+	if ( !responseCallbackFunction ) {
+		throw new Error( "Response callback function is undefined." )
+	}
+
+	if ( !objectUtil.isFunction( responseCallbackFunction ) ) {
+		throw new Error( "Response callback function is not a function." )
+	}
+
 	var stats = fs.statSync( fullPath );
 
 	if ( !stats.isDirectory() ) {
 		throw new Error( "Path \"" + fullPath + "\" is a directory." )
 	}
 
+	/*
+	 * Logic
+	 */
+
 	var items = fs.readdirSync( fullPath );
 
-	for ( var i in items ) {
+	to_next_item_in_directory: for ( var i in items ) {
 
 		var item = items[i];
 		var newDirectory = fullPath + item;
@@ -67,15 +93,30 @@ exports.onDirectoryFound = function onDirectoryFound ( basePath, fullPath, direc
 
 			newDirectory = fileService.prettifyDirectory( newDirectory );
 
-			logService.log( "Found the directory \"" + newDirectory + "\"." )
+			logService.log( "Found the directory \"" + newDirectory + "\"." );
 
-			observerService.directoryFound( fullPath, newDirectory, item, responseFunction )
+			/*
+			 * Check if we should ignore the folder
+			 */
+
+			for ( var k in directoriesToIgnore ) {
+
+				var directoryToIgnore = directoriesToIgnore[k];
+
+				if ( stringUtil.startsWith( newDirectory, directoryToIgnore ) ) {
+					logService.log( "Ignoring to go into folder \"" + newDirectory + "\"." );
+					continue to_next_item_in_directory;
+				}
+
+			}
+
+			observerService.directoryFound( directoriesToIgnore, fullPath, newDirectory, item, responseCallbackFunction )
 
 		} else {
 
 			logService.log( "Found the file \"" + newDirectory + "\"." );
 
-			observerService.fileFound( fullPath, item, responseFunction );
+			observerService.fileFound( fullPath, item, responseCallbackFunction );
 
 		}
 

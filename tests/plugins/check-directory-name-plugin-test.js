@@ -31,6 +31,10 @@ describe( "check directory name plugin", function () {
 
 	describe( "on directory found", function () {
 
+		var directoriesToIgnore =
+			[
+			];
+
 		it( "should complain for invalid options", function () {
 
 			expect(function () {
@@ -60,7 +64,7 @@ describe( "check directory name plugin", function () {
 				pattern: "^\\w+$"
 			};
 
-			plugin.onDirectoryFound( options, basePath, fullPath, directoryName, function ( error ) {
+			plugin.onDirectoryFound( options, directoriesToIgnore, basePath, fullPath, directoryName, function ( error ) {
 				expect( error.message ).to.equal( "The directory name \"this foldername has spaces\" is not valid." );
 				done();
 			} );
@@ -77,7 +81,7 @@ describe( "check directory name plugin", function () {
 				pattern: "^\\w+$"
 			};
 
-			plugin.onDirectoryFound( options, basePath, fullPath, directoryName, function ( error ) {
+			plugin.onDirectoryFound( options, directoriesToIgnore, basePath, fullPath, directoryName, function ( error ) {
 				expect( error ).to.be.undefined;
 			} );
 

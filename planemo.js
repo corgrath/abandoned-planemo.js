@@ -75,7 +75,7 @@ logService.log( "Source directory is \"" + sourceRoot + "\"." );
 
 var sourceRootDetails = fileService.breakDownPath( sourceRoot );
 
-observerService.directoryFound( sourceRootDetails.basePath, sourceRootDetails.fullPath, sourceRootDetails.directoryName, pluginResponseService.handlePluginResponse );
+observerService.directoryFound( configuration.source.ignore, sourceRootDetails.basePath, sourceRootDetails.fullPath, sourceRootDetails.directoryName, pluginResponseService.handlePluginResponse );
 
 /*
  * Summarize the number of errors
@@ -94,3 +94,7 @@ if ( numberOfErrors > 0 ) {
 	process.exit( 0 );
 
 }
+
+//module.exports = function ( configFile ) {
+//
+//}

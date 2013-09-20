@@ -28,13 +28,13 @@ var errorUtil = require( "../utils/error-util.js" );
 
 exports.init = function ( options ) {
 
-	observerService.onDirectoryFound( function checkDirectoryNameOnDirectoryFound ( basePath, fullPath, directoryName, responseFunction ) {
-		exports.onDirectoryFound( options, basePath, fullPath, directoryName, responseFunction );
+	observerService.onDirectoryFound( function checkDirectoryNameOnDirectoryFound ( directoriesToIgnore, basePath, fullPath, directoryName, responseFunction ) {
+		exports.onDirectoryFound( options, directoriesToIgnore, basePath, fullPath, directoryName, responseFunction );
 	} );
 
 };
 
-exports.onDirectoryFound = function onDirectoryFound ( options, basePath, fullPath, directoryName, responseFunction ) {
+exports.onDirectoryFound = function onDirectoryFound ( options, directoriesToIgnore, basePath, fullPath, directoryName, responseFunction ) {
 
 	if ( !options ) {
 		throw errorUtil.create( "No options were defined." );
