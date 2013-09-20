@@ -35,5 +35,6 @@
 	"readmeFilename": "README.md",
 	"bugs": {
 		"url": "https://github.com/corgrath/planemo-open-source-software-quality-platform/issues/"
-	}
+	},
+	"bin": "./bin/planemo.js"
 }

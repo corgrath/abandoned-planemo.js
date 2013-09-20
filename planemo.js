@@ -28,73 +28,81 @@ var pluginService = require( "./src/services/plugin-service.js" );
 var verboseService = require( "./src/services/verbose-service.js" );
 var pluginResponseService = require( "./src/services/plugin-response-service.js" );
 
-/*
- * Get the configuration file
+/**
+ * Planemo main function.
+ *
+ * @param configurationFile - Path to the configuration file.
+ * @param reporterFile - Path to a reporter file.
  */
 
-var configuration = planemoCoreService.getConfigurationFromArgument( process.argv[2] );
+module.exports = function ( configurationFile, reporter ) {
 
-/*
- * Set the verbose setting
- */
 
-verboseService.setVerbose( configuration.verbose );
+	/*
+	 * Get the configuration file
+	 */
 
-/*
- * Register data collectors
- */
+	var configuration = planemoCoreService.getConfigurationFromArgument( configurationFile );
 
-var dataCollectors = fileService.getAllFilesInDirectory( "./src/data_collectors/" );
+	/*
+	 * Set the verbose setting
+	 */
 
-for ( var i in dataCollectors ) {
+	verboseService.setVerbose( configuration.verbose );
 
-	var dataCollectorFileName = dataCollectors[i];
+	/*
+	 * Register data collectors
+	 */
 
-	dataCollectorService.register( dataCollectorFileName );
+	var dataCollectors = fileService.getAllFilesInDirectory( "./src/data_collectors/" );
 
-}
+	for ( var i in dataCollectors ) {
 
-/*
- * Go through all the plugins and register them into Planemo
- */
+		var dataCollectorFileName = dataCollectors[i];
 
-for ( var pluginName in configuration.plugins ) {
+		dataCollectorService.register( dataCollectorFileName );
 
-	var options = configuration.plugins[pluginName];
+	}
 
-	pluginService.register( pluginName, options );
+	/*
+	 * Go through all the plugins and register them into Planemo
+	 */
 
-}
+	for ( var pluginName in configuration.plugins ) {
 
-/*
- * Go through each source directory in the configuration file and start the analysis tool
- */
+		var options = configuration.plugins[pluginName];
 
-var sourceRoot = configuration.source.root;
-logService.log( "Source directory is \"" + sourceRoot + "\"." );
+		pluginService.register( pluginName, options );
 
-var sourceRootDetails = fileService.breakDownPath( sourceRoot );
+	}
 
-observerService.directoryFound( configuration.source.ignore, sourceRootDetails.basePath, sourceRootDetails.fullPath, sourceRootDetails.directoryName, pluginResponseService.handlePluginResponse );
+	/*
+	 * Go through each source directory in the configuration file and start the analysis tool
+	 */
 
-/*
- * Summarize the number of errors
- */
+	var sourceRoot = configuration.source.root;
+	logService.log( "Source directory is \"" + sourceRoot + "\"." );
 
-var numberOfErrors = pluginResponseService.getNumberOfErrors();
+	var sourceRootDetails = fileService.breakDownPath( sourceRoot );
 
-if ( numberOfErrors > 0 ) {
+	observerService.directoryFound( configuration.source.ignore, sourceRootDetails.basePath, sourceRootDetails.fullPath, sourceRootDetails.directoryName, pluginResponseService.handlePluginResponse );
 
-	logService.fail( "Planemo static code analysis failed with \"" + numberOfErrors + "\" errors." );
-	process.exit( 1 );
+	/*
+	 * Summarize the number of errors
+	 */
 
-} else {
+	var numberOfErrors = pluginResponseService.getNumberOfErrors();
 
-	logService.success( "Planemo static code analysis done. No errors found. It's a great day!" );
-	process.exit( 0 );
+	if ( numberOfErrors > 0 ) {
 
-}
+		logService.fail( "Planemo static code analysis failed with \"" + numberOfErrors + "\" errors." );
+		process.exit( 1 );
 
-//module.exports = function ( configFile ) {
-//
-//}
+	} else {
+
+		logService.success( "Planemo static code analysis done. No errors found. It's a great day!" );
+		process.exit( 0 );
+
+	}
+
+};
