@@ -20,25 +20,26 @@
  */
 
 var logService = require( "../services/log-service.js" );
+var reporterService = require( "../services/reporter-service.js" );
 
 /*
  * Private
  */
 
-var numberOfErrors = 0;
+var errors = [];
 
 /*
  * Public functions
  */
 
-exports.handlePluginResponse = function ( response ) {
+exports.handlePluginResponse = function ( reporters, error ) {
 
-	if ( response.name === "Error" ) {
+	if ( error.name === "Error" ) {
 
-		logService.error( response );
+		reporterService.onPluginError( reporters, error );
 
 		// Increase the number of errors
-		numberOfErrors++;
+		errors.push( error );
 
 	} else {
 
@@ -48,8 +49,8 @@ exports.handlePluginResponse = function ( response ) {
 
 };
 
-exports.getNumberOfErrors = function () {
+exports.getErrors = function () {
 
-	return numberOfErrors;
+	return errors;
 
 };

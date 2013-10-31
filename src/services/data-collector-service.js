@@ -19,26 +19,56 @@
  * Dependencies
  */
 
-var logService = require( "../services/log-service.js" );
-var fileService = require( "../services/file-service.js" );
+var assert = require( "../utils/argument-assertion-util.js" );
+var reporterService = require( "../services/reporter-service.js" );
 
 /*
- * Public functions
+ * Private
  */
 
-exports.register = function ( dataCollectorName ) {
+var dataCollectors =
+	[
+		"on-css-file-read-data-collector",
+		"on-directory-found-data-collector",
+		"on-file-found-data-collector",
+		"on-html-file-read-data-collector",
+		"on-javascript-file-read-data-collector"
+	];
 
-	var physicalFile = "./src/data_collectors/" + dataCollectorName;
+function register ( reporters, dataCollectorName ) {
+
+	/*
+	 * Assert
+	 */
+
+	assert.isObject( reporters, "Report is undefined." );
+
+	/*
+	 * Logic
+	 */
+
 	var requireFile = "../data_collectors/" + dataCollectorName;
-
-	if ( !fileService.fileExists( physicalFile ) ) {
-		logService.error( "The data collector file does not exist \"" + physicalFile + "\"." );
-	}
 
 	var collector = require( requireFile );
 
 	collector.init();
 
-	logService.log( "Initializion of the data collector \"" + dataCollectorName + "\" is done." );
+	reporterService.onDataCollectorRegistered( reporters, dataCollectorName );
+
+};
+
+/*
+ * Public functions
+ */
+
+exports.init = function ( reporters ) {
+
+	for ( var i in dataCollectors ) {
+
+		var dataCollectorFileName = dataCollectors[i];
+
+		register( reporters, dataCollectorFileName );
+
+	}
 
 };

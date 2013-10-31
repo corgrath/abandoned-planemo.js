@@ -19,90 +19,96 @@
  * Dependencies
  */
 
-var logService = require( "./src/services/log-service.js" );
 var planemoCoreService = require( "./src/services/planemo-core-service.js" );
+var assert = require( "./src/utils/argument-assertion-util.js" );
 var observerService = require( "./src/services/observer-service.js" );
 var dataCollectorService = require( "./src/services/data-collector-service.js" );
 var fileService = require( "./src/services/file-service.js" );
 var pluginService = require( "./src/services/plugin-service.js" );
-var verboseService = require( "./src/services/verbose-service.js" );
 var pluginResponseService = require( "./src/services/plugin-response-service.js" );
+var defaultReporterFactory = require( "./src/factories/default-reporter-factory.js" );
+var reporterService = require( "./src/services/reporter-service.js" );
 
-/**
- * Planemo main function.
- *
- * @param configurationFile - Path to the configuration file.
- * @param reporterFile - Path to a reporter file.
+/*
+ * Public
  */
 
-module.exports = function ( configurationFile, reporter ) {
+exports.getDefaultReporterFactory = function () {
+	return defaultReporterFactory.create();
+};
 
+exports.start = function ( configuration, reporters, callbackFunction ) {
+
+	/*
+	 * Asserts
+	 */
+
+	assert.isObject( configuration, "Configuration file" );
+	assert.isArray( reporters, "Reporters" );
+	assert.isFunction( callbackFunction, "Callback response function" );
+
+	/*
+	 * Inform the reporter we are starting
+	 */
+
+	reporterService.onStart( reporters );
 
 	/*
 	 * Get the configuration file
 	 */
 
-	var configuration = planemoCoreService.getConfigurationFromArgument( configurationFile );
+	planemoCoreService.validateConfiguration( configuration );
 
 	/*
-	 * Set the verbose setting
+	 * Register the data collectors
 	 */
 
-	verboseService.setVerbose( configuration.verbose );
-
-	/*
-	 * Register data collectors
-	 */
-
-	var dataCollectors = fileService.getAllFilesInDirectory( "./src/data_collectors/" );
-
-	for ( var i in dataCollectors ) {
-
-		var dataCollectorFileName = dataCollectors[i];
-
-		dataCollectorService.register( dataCollectorFileName );
-
-	}
+	dataCollectorService.init( reporters );
 
 	/*
 	 * Go through all the plugins and register them into Planemo
 	 */
 
-	for ( var pluginName in configuration.plugins ) {
-
-		var options = configuration.plugins[pluginName];
-
-		pluginService.register( pluginName, options );
-
-	}
+	pluginService.init( reporters, configuration.plugins );
 
 	/*
 	 * Go through each source directory in the configuration file and start the analysis tool
 	 */
 
 	var sourceRoot = configuration.source.root;
-	logService.log( "Source directory is \"" + sourceRoot + "\"." );
+
+	reporterService.verbose( reporters, "Source directory is \"" + sourceRoot + "\"." );
 
 	var sourceRootDetails = fileService.breakDownPath( sourceRoot );
 
-	observerService.directoryFound( configuration.source.ignore, sourceRootDetails.basePath, sourceRootDetails.fullPath, sourceRootDetails.directoryName, pluginResponseService.handlePluginResponse );
+	var onPluginError = function ( response ) {
+		pluginResponseService.handlePluginResponse( reporters, response );
+	};
+
+	observerService.directoryFound( reporters, configuration.source.ignore, sourceRootDetails.basePath, sourceRootDetails.fullPath, sourceRootDetails.directoryName, onPluginError );
 
 	/*
 	 * Summarize the number of errors
 	 */
 
-	var numberOfErrors = pluginResponseService.getNumberOfErrors();
+	var results = {
+		errors: pluginResponseService.getErrors()
+	};
 
-	if ( numberOfErrors > 0 ) {
+	//	if ( numberOfErrors > 0 ) {
+	//
+	//		logService.fail( "Planemo static code analysis failed with \"" + numberOfErrors + "\" errors." );
+	//
+	//	} else {
+	//
+	//		reporter.success( results );
+	//
+	//	}
 
-		logService.fail( "Planemo static code analysis failed with \"" + numberOfErrors + "\" errors." );
-		process.exit( 1 );
+	reporterService.onEnd( reporters, results );
 
-	} else {
+	var error = undefined;
 
-		logService.success( "Planemo static code analysis done. No errors found. It's a great day!" );
-		process.exit( 0 );
-
-	}
+	callbackFunction( error, results );
 
 };

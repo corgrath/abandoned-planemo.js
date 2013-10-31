@@ -19,26 +19,56 @@
  * Dependencies
  */
 
-var logService = require( "../services/log-service.js" );
-var fileService = require( "../services/file-service.js" );
+var assert = require( "assert" );
+var reporterService = require( "../services/reporter-service.js" );
 
 /*
- * Public functions
+ * Private
  */
 
-exports.register = function ( pluginName, options ) {
+function register ( reporters, pluginName, options ) {
 
-	var pluginPhysicalFileCore = "./src/plugins/" + pluginName + ".js";
+	/*
+	 * Asserts
+	 */
+
+	assert( reporters, "Reporters is undefined." );
+	assert( pluginName, "Plugin name is undefined." );
+	assert( options, "Options is undefined." );
+
 	var pluginFileForRequire = "../plugins/" + pluginName + ".js";
-
-	if ( !fileService.fileExists( pluginPhysicalFileCore ) ) {
-		throw new Error( "Could not find the physical file for the plugin \"" + pluginPhysicalFileCore + "\"." );
-	}
 
 	var plugin = require( pluginFileForRequire );
 
 	plugin.init( options );
 
-	logService.log( "Registered the plugin \"" + pluginName + "\"." );
+	reporterService.onPluginRegistered( reporters, pluginName );
+
+};
+
+/*
+ * Public functions
+ */
+
+exports.init = function ( reporters, plugins ) {
+
+	/*
+	 * Asserts
+	 */
+
+	assert( reporters, "Reporters is not defined." );
+	assert( plugins, "Array of plugins is undefined." );
+
+	/*
+	 * Go through all the plugins
+	 */
+
+	for ( var pluginName in plugins ) {
+
+		var options = plugins[pluginName];
+
+		register( reporters, pluginName, options );
+
+	}
 
 };

@@ -33,16 +33,20 @@ exports.init = function () {
 
 exports.onJavaScriptFileRead = function onFileRead ( file, contents, responseFunction ) {
 
-	var lines = contents.split( "\n" );
+	if ( contents.length > 0 ) {
 
-	if ( lines.length !== 0 ) {
+		var lines = contents.split( "\n" );
 
-		for ( var i in lines ) {
+		if ( lines.length !== 0 ) {
 
-			var lineNumber = (i + 1);
-			var lineContents = lines[i].substring( 0, lines[i].length - 1 );
+			for ( var i in lines ) {
 
-			observerService.JavaScriptFileLineRead( file, lineNumber, lineContents, responseFunction );
+				var lineNumber = (i + 1);
+				var lineContents = lines[i].substring( 0, lines[i].length - 1 );
+
+				observerService.JavaScriptFileLineRead( file, lineNumber, lineContents, responseFunction );
+
+			}
 
 		}
 

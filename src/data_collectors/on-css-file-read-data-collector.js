@@ -20,8 +20,9 @@
  */
 
 var nodeCSS = require( "css" );
-var logService = require( "./../services/log-service.js" );
 var observerService = require( "./../services/observer-service.js" );
+var reporterService = require( "./../services/reporter-service.js" );
+var argument = require( "./../utils/argument-assertion-util.js" );
 
 /*
  * Public functions
@@ -33,9 +34,22 @@ exports.init = function () {
 
 };
 
-exports.onCSSFileRead = function ( file, fileContents, responseFunction ) {
+exports.onCSSFileRead = function ( reporters, file, fileContents, responseFunction ) {
 
-	logService.log( "Will parse CSS file \"" + file + "\"." );
+	/*
+	 * String
+	 */
+
+	argument.isArray( reporters, "Reporter is undefined." );
+	argument.isString( file, "File is undefined." );
+	argument.isString( fileContents, "File contents is undefined." );
+	argument.isFunction( responseFunction, "Reponse function is undefined." );
+
+	/*
+	 * Logic
+	 */
+
+	reporterService.verbose( reporters, "Will parse CSS file \"" + file + "\"." );
 
 	var css = nodeCSS.parse( fileContents );
 

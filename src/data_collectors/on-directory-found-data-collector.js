@@ -19,11 +19,12 @@
  * Dependencies
  */
 
+var assert = require( "assert" );
 var fs = require( "fs" );
 
 var fileService = require( "./../services/file-service.js" );
-var logService = require( "./../services/log-service.js" );
 var observerService = require( "./../services/observer-service.js" );
+var reporterService = require( "./../services/reporter-service.js" );
 var objectUtil = require( "./../utils/object-util.js" );
 var stringUtil = require( "./../utils/string-util.js" );
 
@@ -37,11 +38,13 @@ exports.init = function () {
 
 };
 
-exports.onDirectoryFound = function onDirectoryFound ( directoriesToIgnore, basePath, fullPath, directoryName, responseCallbackFunction ) {
+exports.onDirectoryFound = function onDirectoryFound ( reporters, directoriesToIgnore, basePath, fullPath, directoryName, responseCallbackFunction ) {
 
 	/*
 	 * Validation
 	 */
+
+	assert( reporters );
 
 	if ( !directoriesToIgnore ) {
 		throw new Error( "Directories to ignore is undefined." );
@@ -93,7 +96,7 @@ exports.onDirectoryFound = function onDirectoryFound ( directoriesToIgnore, base
 
 			newDirectory = fileService.prettifyDirectory( newDirectory );
 
-			logService.log( "Found the directory \"" + newDirectory + "\"." );
+			reporterService.verbose( reporters, "Found the directory \"" + newDirectory + "\"." );
 
 			/*
 			 * Check if we should ignore the folder
@@ -104,19 +107,19 @@ exports.onDirectoryFound = function onDirectoryFound ( directoriesToIgnore, base
 				var directoryToIgnore = directoriesToIgnore[k];
 
 				if ( stringUtil.startsWith( newDirectory, directoryToIgnore ) ) {
-					logService.log( "Ignoring to go into folder \"" + newDirectory + "\"." );
+					reporterService.verbose( reporters, "Ignoring to go into folder \"" + newDirectory + "\"." );
 					continue to_next_item_in_directory;
 				}
 
 			}
 
-			observerService.directoryFound( directoriesToIgnore, fullPath, newDirectory, item, responseCallbackFunction )
+			observerService.directoryFound( reporters, directoriesToIgnore, fullPath, newDirectory, item, responseCallbackFunction )
 
 		} else {
 
-			logService.log( "Found the file \"" + newDirectory + "\"." );
+			reporterService.verbose( reporters, "Found the file \"" + newDirectory + "\"." );
 
-			observerService.fileFound( fullPath, item, responseCallbackFunction );
+			observerService.fileFound( reporters, fullPath, item, responseCallbackFunction );
 
 		}
 

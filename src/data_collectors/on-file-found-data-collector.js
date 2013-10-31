@@ -21,20 +21,26 @@
 
 var fileService = require( "./../services/file-service.js" );
 var observerService = require( "./../services/observer-service.js" );
-var logService = require( "./../services/log-service.js" );
 var fileTypeService = require( "./../services/file-type-service.js" );
+var assert = require( "./../utils/argument-assertion-util.js" )
 
 /*
  * Private
  */
 
-function readLineContents ( path, filename, responseFunction, fileReadFunction ) {
+function readLineContents ( reporter, path, filename, responseFunction, fileReadFunction ) {
+
+	assert.isObject( reporter, "Reporter is undefined." );
+	assert.isString( path, "Path is undefined." );
+	assert.isString( filename, "File name is undefined." );
+	assert.isFunction( responseFunction, "Response function is undefined." );
+	assert.isFunction( fileReadFunction, "File read function is undefined." );
 
 	var file = path + filename;
 
-	var contents = fileService.readFile( file );
+	var contents = fileService.readFile( reporter, file );
 
-	fileReadFunction( file, contents, responseFunction );
+	fileReadFunction( reporter, file, contents, responseFunction );
 
 }
 
@@ -48,25 +54,38 @@ exports.init = function () {
 
 };
 
-exports.onFileFound = function onFileFound ( path, filename, responseFunction ) {
+exports.onFileFound = function onFileFound ( reporter, path, filename, responseFunction ) {
+
+	/*
+	 * Assertions
+	 */
+
+	assert.isObject( reporter, "Reporter is undefined." );
+	assert.isString( path, "Path is undefined." );
+	assert.isString( filename, "File name is undefined." );
+	assert.isFunction( responseFunction, "Response function is undefined." );
+
+	/*
+	 * Check the file type
+	 */
 
 	if ( fileTypeService.isCSSFile( filename ) ) {
-		readLineContents( path, filename, responseFunction, observerService.CSSFileRead );
+		readLineContents( reporter, path, filename, responseFunction, observerService.CSSFileRead );
 		return;
 	}
 
 	if ( fileTypeService.isHTMLFile( filename ) ) {
-		readLineContents( path, filename, responseFunction, observerService.HTMLFileRead );
+		readLineContents( reporter, path, filename, responseFunction, observerService.HTMLFileRead );
 		return;
 	}
 
 	if ( fileTypeService.isLESSFile( filename ) ) {
-		readLineContents( path, filename, responseFunction, observerService.LESSFileRead );
+		readLineContents( reporter, path, filename, responseFunction, observerService.LESSFileRead );
 		return;
 	}
 
 	if ( fileTypeService.isJavaScriptFile( filename ) ) {
-		readLineContents( path, filename, responseFunction, observerService.JavaScriptFileRead );
+		readLineContents( reporter, path, filename, responseFunction, observerService.JavaScriptFileRead );
 		return;
 	}
 

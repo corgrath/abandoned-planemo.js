@@ -22,6 +22,7 @@
 var htmlparser = require( "htmlparser2" );
 
 var observerService = require( "./../services/observer-service.js" );
+var argument = require( "./../utils/argument-assertion-util.js" );
 
 /*
  * Public functions
@@ -33,7 +34,12 @@ exports.init = function () {
 
 };
 
-exports.onHTMLFileRead = function onFileRead ( file, fileContents, responseFunction ) {
+exports.onHTMLFileRead = function onFileRead ( reporter, file, fileContents, responseFunction ) {
+
+	argument.isObject( reporter, "Reporter is undefined." );
+	argument.isString( file, "File is undefined." );
+	argument.isString( fileContents, "File contents name is undefined" );
+	argument.isFunction( responseFunction, "Response function is undefined." );
 
 	var parser = new htmlparser.Parser( {
 
@@ -41,7 +47,7 @@ exports.onHTMLFileRead = function onFileRead ( file, fileContents, responseFunct
 
 			for ( var property in attributes ) {
 
-				observerService.HTMLPropertyValueRead( file, elementName, property, attributes[property], responseFunction );
+				observerService.HTMLPropertyValueRead( reporter, file, elementName, property, attributes[property], responseFunction );
 
 			}
 

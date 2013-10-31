@@ -20,6 +20,7 @@
  */
 
 var observerService = require( "../services/observer-service.js" );
+var argument = require( "../utils/argument-assertion-util.js" );
 
 /*
  * Public functions
@@ -27,15 +28,31 @@ var observerService = require( "../services/observer-service.js" );
 
 exports.init = function ( options ) {
 
-	observerService.onCSSPropertyAndAttributeRead( function ( file, selectors, property, value ) {
+	argument.isObject( options, "Options is undefined." );
 
-		exports.onCSSPropertyAndAttributeRead( options, file, selectors, property, value );
+	observerService.onCSSPropertyAndAttributeRead( function ( reporter, file, selectors, property, value, responseCallbackFunction ) {
+
+		argument.isObject( reporter, "Reporter is undefined." );
+		argument.isString( file, "File is undefined." );
+		argument.isString( selectors, "Selectors name is undefined." );
+		argument.isString( property, "Property name is undefined." );
+		argument.isString( value, "Value name is undefined." );
+		argument.isString( responseCallbackFunction, "Response callback function is undefined." );
+
+		exports.onCSSPropertyAndAttributeRead( options, reporter, file, selectors, property, value );
 
 	} );
 
 };
 
-exports.onCSSPropertyAndAttributeRead = function ( options, file, selectors, property, value ) {
+exports.onCSSPropertyAndAttributeRead = function ( options, reporters, file, selectors, property, value, responseCallbackFunction ) {
+
+	argument.isObject( reporters, "Reporters is undefined." );
+	argument.isString( file, "File is undefined." );
+	argument.isString( selectors, "Selectors name is undefined." );
+	argument.isString( property, "Property name is undefined." );
+	argument.isString( value, "Value name is undefined." );
+	argument.isString( responseCallbackFunction, "Response callback function is undefined." );
 
 	if ( !options ) {
 		throw new Error( "Invalid options." );
@@ -55,7 +72,7 @@ exports.onCSSPropertyAndAttributeRead = function ( options, file, selectors, pro
 				error.selectors = selectors;
 				error.property = property;
 				error.value = value;
-				throw error;
+				responseCallbackFunction( error );
 			}
 
 		}

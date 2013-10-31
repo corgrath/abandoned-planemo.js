@@ -19,6 +19,8 @@
  * Dependencies
  */
 
+var assert = require( "assert" );
+
 var observerService = require( "../services/observer-service.js" );
 var errorUtil = require( "../utils/error-util.js" );
 
@@ -28,21 +30,20 @@ var errorUtil = require( "../utils/error-util.js" );
 
 exports.init = function ( options ) {
 
-	observerService.onDirectoryFound( function checkDirectoryNameOnDirectoryFound ( directoriesToIgnore, basePath, fullPath, directoryName, responseFunction ) {
-		exports.onDirectoryFound( options, directoriesToIgnore, basePath, fullPath, directoryName, responseFunction );
+	observerService.onDirectoryFound( function ( reporter, directoriesToIgnore, basePath, fullPath, directoryName, responseFunction ) {
+		exports.onDirectoryFound( options, reporter, directoriesToIgnore, basePath, fullPath, directoryName, responseFunction );
 	} );
 
 };
 
-exports.onDirectoryFound = function onDirectoryFound ( options, directoriesToIgnore, basePath, fullPath, directoryName, responseFunction ) {
+exports.onDirectoryFound = function ( options, reporter, directoriesToIgnore, basePath, fullPath, directoryName, responseFunction ) {
 
-	if ( !options ) {
-		throw errorUtil.create( "No options were defined." );
-	}
+	/*
+	 * Asserts
+	 */
 
-	if ( !options.pattern ) {
-		throw errorUtil.create( "Invalid pattern option." );
-	}
+	assert( options, "No options were defined." );
+	assert( options.pattern, "Invalid pattern option." );
 
 	var regexp = new RegExp( options.pattern );
 
@@ -58,4 +59,4 @@ exports.onDirectoryFound = function onDirectoryFound ( options, directoriesToIgn
 
 	}
 
-}
+};

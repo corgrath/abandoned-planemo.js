@@ -19,43 +19,16 @@
  * Dependencies
  */
 
-var nodePath = require( "path" );
+var assert = require( "assert" );
+
 var logService = require( "./log-service.js" );
 var fileService = require( "./file-service.js" );
-var errorUtil = require( "../utils/error-util.js" );
-var objectUtil = require( "../utils/object-util.js" );
 
 /*
  * Public
  */
 
-exports.getConfigurationFromArgument = function ( configurationArgumentFile ) {
-
-	if ( !configurationArgumentFile ) {
-		throw new Error( "No configuration file was specified as an argument." );
-	}
-
-	logService.important( "Got the configuration file argument \"" + configurationArgumentFile + "\"." );
-
-	var exists = fileService.fileExists( configurationArgumentFile );
-
-	if ( !exists ) {
-		logService.error( "The file \"" + configurationArgumentFile + "\" does not exist." );
-	} else {
-		logService.important( "Found the configuration file \"" + configurationArgumentFile + "\" on disk." );
-	}
-
-	var configurationFilecontents = fileService.readFile( configurationArgumentFile );
-
-	var configuration = JSON.parse( configurationFilecontents );
-
-	exports.validateConfigurationObject( configuration );
-
-	return configuration;
-
-}
-
-exports.validateConfigurationObject = function ( configuration ) {
+exports.validateConfiguration = function ( configuration ) {
 
 	if ( configuration.source === undefined ) {
 		throw new Error( "The \"source\" setting in the configuration file is not defined." );
@@ -63,14 +36,6 @@ exports.validateConfigurationObject = function ( configuration ) {
 
 	if ( configuration.source.root === undefined ) {
 		throw new Error( "The \"root\" in the \"source\" setting in the configuration file is not defined." );
-	}
-
-	if ( configuration.verbose === undefined ) {
-		throw errorUtil.create( "No \"verbose\" setting was found in the configuration file." );
-	}
-
-	if ( !objectUtil.isBoolean( configuration.verbose ) ) {
-		throw errorUtil.create( "The \"verbose\" setting in the configuration file is not a Boolean (meaning the value is not true or false)." );
 	}
 
 };

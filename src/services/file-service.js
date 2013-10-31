@@ -21,9 +21,10 @@
 
 var fs = require( "fs" );
 var nodePath = require( "path" );
+var assert = require( "assert" );
 
-var logService = require( "./log-service.js" );
 var stringUtil = require( "../utils/string-util.js" );
+var reporterService = require( "../services/reporter-service.js" );
 
 /*
  * Public functions
@@ -49,19 +50,19 @@ exports.isFile = function ( file ) {
 
 	return fs.existsSync( file ) && fs.lstatSync( file ).isFile();
 
-}
+};
 
 exports.getAllItemsInDirectory = function ( directory ) {
 
 	if ( !exports.directoryExists( directory ) ) {
-		throw new Error( "The directory \"" + directory + "\" does not exist." );
+		throw new Error( "The directory \"" + directory + "\" (\"" + nodePath.resolve( directory ) + "\") does not exist." );
 	}
 
 	var items = fs.readdirSync( directory );
 
 	return items;
 
-}
+};
 
 exports.getAllFilesInDirectory = function ( directory ) {
 
@@ -83,15 +84,18 @@ exports.getAllFilesInDirectory = function ( directory ) {
 
 	return files;
 
-}
+};
 
-exports.readFile = function ( file ) {
+exports.readFile = function ( reporters, file ) {
+
+	assert( reporters, "Reporters is undefined." );
+	assert( file, "File is undefined." );
 
 	if ( fs.existsSync( file ) ) {
 
 		var data = fs.readFileSync( file, "UTF-8" );
 
-		logService.log( "Read \"" + Buffer.byteLength( data, "UTF-8" ) + "\" bytes from the file \"" + file + "\"." );
+		reporterService.verbose( reporters, "Read \"" + Buffer.byteLength( data, "UTF-8" ) + "\" bytes from the file \"" + file + "\"." );
 
 		return data;
 

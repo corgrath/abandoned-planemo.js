@@ -20,6 +20,7 @@
  */
 
 var logService = require( "../services/log-service.js" );
+var argument = require( "../utils/argument-assertion-util.js" );
 var objectUtil = require( "../utils/object-util.js" );
 
 /*
@@ -104,29 +105,36 @@ exports.onDirectoryFound = function ( observer ) {
  * @param directory the directory name.
  */
 
-exports.directoryFound = function ( directoriesToIgnore, basePath, fullPath, directoryName, responseFunction ) {
-	notifyAll( KEY_DIRECTORY_FOUND, directoriesToIgnore, basePath, fullPath, directoryName, responseFunction );
-}
+exports.directoryFound = function ( reporters, directoriesToIgnore, basePath, fullPath, directoryName, responseFunction ) {
+	notifyAll( KEY_DIRECTORY_FOUND, reporters, directoriesToIgnore, basePath, fullPath, directoryName, responseFunction );
+};
 
 // ------------- all above is confirmed
 {
 	exports.onFileFound = function ( observer ) {
 		addObserver( observer, KEY_FILE_FOUND );
-	}
+	};
 
-	exports.fileFound = function ( path, fileName, responseFunction ) {
-		notifyAll( KEY_FILE_FOUND, path, fileName, responseFunction );
-	}
+	exports.fileFound = function ( reporters, path, fileName, responseFunction ) {
+
+		argument.isObject( reporters );
+		argument.isString( path );
+		argument.isString( fileName );
+		argument.isFunction( responseFunction );
+
+		notifyAll( KEY_FILE_FOUND, reporters, path, fileName, responseFunction );
+
+	};
 }
 
 {
 	exports.onFileRead = function ( observer ) {
 		addObserver( observer, KEY_ON_FILE_READ );
-	}
+	};
 
-	exports.fileRead = function ( file, fileContents, responseFunction ) {
-		notifyAll( KEY_ON_FILE_READ, file, fileContents, responseFunction );
-	}
+	exports.fileRead = function ( reporters, file, fileContents, responseFunction ) {
+		notifyAll( KEY_ON_FILE_READ, reporters, file, fileContents, responseFunction );
+	};
 }
 
 {
@@ -134,8 +142,14 @@ exports.directoryFound = function ( directoriesToIgnore, basePath, fullPath, dir
 		addObserver( observer, KEY_ON_CSS_FILE_READ );
 	}
 
-	exports.CSSFileRead = function ( file, fileContents, responseFunction ) {
-		notifyAll( KEY_ON_CSS_FILE_READ, file, fileContents, responseFunction );
+	exports.CSSFileRead = function ( reporters, file, fileContents, responseFunction ) {
+
+		argument.isObject( reporters, "Reporters is undefined." );
+		argument.isString( file, "File is undefined." );
+		argument.isString( fileContents, "File contents is undefined." );
+		argument.isFunction( responseFunction, "Reponse function is undefined." );
+
+		notifyAll( KEY_ON_CSS_FILE_READ, reporters, file, fileContents, responseFunction );
 	}
 }
 
@@ -152,11 +166,18 @@ exports.directoryFound = function ( directoriesToIgnore, basePath, fullPath, dir
 {
 	exports.onHTMLFileRead = function ( observer ) {
 		addObserver( observer, KEY_ON_HTML_FILE_READ );
-	}
+	};
 
-	exports.HTMLFileRead = function ( file, fileContents, responseFunction ) {
-		notifyAll( KEY_ON_HTML_FILE_READ, file, fileContents, responseFunction );
-	}
+	exports.HTMLFileRead = function ( reporters, file, fileContents, responseFunction ) {
+
+		argument.isObject( reporters, "Reporter is undefined." );
+		argument.isString( file, "File is undefined." );
+		argument.isString( fileContents, "File contents" );
+		argument.isFunction( responseFunction, "Response function is undefined." );
+
+		notifyAll( KEY_ON_HTML_FILE_READ, reporters, file, fileContents, responseFunction );
+
+	};
 }
 
 {
@@ -182,21 +203,31 @@ exports.directoryFound = function ( directoriesToIgnore, basePath, fullPath, dir
 {
 	exports.onHTMLPropertyValueRead = function ( observer ) {
 		addObserver( observer, KEY_ON_HTML_PROPERTY_VALUE_READ );
-	}
+	};
 
-	exports.HTMLPropertyValueRead = function ( file, elementName, property, value, responseFunction ) {
-		notifyAll( KEY_ON_HTML_PROPERTY_VALUE_READ, file, elementName, property, value, responseFunction );
-	}
+	exports.HTMLPropertyValueRead = function ( reporters, file, elementName, property, value, responseFunction ) {
+
+		argument.isObject( reporters, "Reporter is undefined." );
+		argument.isString( file, "File is undefined." );
+		argument.isString( elementName, "Element name is undefined" );
+		argument.isString( property, "Property is undefined." );
+		argument.isString( property, "Property is undefined." );
+		argument.isString( value, "Value is undefined." );
+		argument.isFunction( responseFunction, "Response function is undefined." );
+
+		notifyAll( KEY_ON_HTML_PROPERTY_VALUE_READ, reporters, file, elementName, property, value, responseFunction );
+
+	};
 }
 
 {
 	exports.onCSSPropertyAndAttributeRead = function ( observer ) {
 		addObserver( observer, KEY_ON_CSS_PROPERTY_AND_ATTRIBUTE_READ );
-	}
+	};
 
 	exports.CSSPropertyAndAttributeRead = function ( file, selectors, property, value, responseFunction ) {
 		notifyAll( KEY_ON_CSS_PROPERTY_AND_ATTRIBUTE_READ, file, selectors, property, value, responseFunction );
-	}
+	};
 }
 
 {
