@@ -19,6 +19,8 @@
  * Dependencies
  */
 
+var path = require( "path" );
+
 var planemoCoreService = require( "./src/services/planemo-core-service.js" );
 var assert = require( "./src/utils/argument-assertion-util.js" );
 var observerService = require( "./src/services/observer-service.js" );
@@ -78,6 +80,8 @@ exports.start = function ( configuration, reporters, callbackFunction ) {
 	var sourceRoot = configuration.source.root;
 
 	reporterService.verbose( reporters, "Source directory is \"" + sourceRoot + "\"." );
+	reporterService.verbose( reporters, "Source directory is normalize \"" + path.normalize(sourceRoot) );
+	reporterService.verbose( reporters, "Source directory is resolve \"" + path.resolve(sourceRoot) );
 
 	var sourceRootDetails = fileService.breakDownPath( sourceRoot );
 
