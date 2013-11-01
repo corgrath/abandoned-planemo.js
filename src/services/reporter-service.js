@@ -16,10 +16,18 @@
  */
 
 /*
+ * Dependencies
+ */
+
+var assert = require( "../utils/argument-assertion-util.js" );
+
+/*
  * Public functions
  */
 
 exports.onStart = function ( reporters ) {
+
+	assert.isArray( reporters, "Reporters" );
 
 	reporters.forEach( function ( reporter ) {
 		reporter.onStart();

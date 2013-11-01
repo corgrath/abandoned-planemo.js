@@ -45,7 +45,7 @@ exports.isObject = function ( o, name ) {
 
 exports.isArray = function isArray ( object, objectName ) {
 
-	exports.isObject( object );
+	exports.isObject( object, objectName );
 
 	var type = Object.prototype.toString.call( object );
 
