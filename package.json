@@ -17,7 +17,7 @@
 	},
 	"devDependencies": {},
 	"scripts": {
-		"drone-io-test": "./node_modules/.bin/jscoverage src/ src-instrumented/;./node_modules/.bin/mocha -R list --recursive tests/"
+		"drone-io-test": "./node_modules/.bin/jscoverage src/ src-instrumented/;./node_modules/.bin/mocha --recursive tests/"
 	},
 	"repository": {
 		"type": "git",
