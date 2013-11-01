@@ -17,7 +17,8 @@
 	},
 	"devDependencies": {},
 	"scripts": {
-		"test": "./node_modules/.bin/mocha -R list --recursive tests/"
+		"test": "./node_modules/.bin/mocha -R list --recursive tests/",
+		"test-droid-io": "./node_modules/.bin/mocha -R list --recursive tests/"
 	},
 	"repository": {
 		"type": "git",
