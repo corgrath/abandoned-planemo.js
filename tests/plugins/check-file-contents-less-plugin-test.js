@@ -21,7 +21,7 @@
 
 var expect = require( "chai" ).expect;
 
-var plugin = require( "../../src/plugins/check-file-contents-less-plugin.js" );
+var plugin = require( "../../src-instrumented/plugins/check-file-contents-less-plugin.js" );
 
 /*
  * Tests
@@ -44,13 +44,12 @@ describe( "check file contents less plugin", function () {
 			var doneCallback = false;
 
 			var options = {
-				disallow:
-					[
-						"-moz-",
-						"-webkit-",
-						"-o-",
-						"-ms-"
-					]
+				disallow: [
+					"-moz-",
+					"-webkit-",
+					"-o-",
+					"-ms-"
+				]
 			};
 
 			var file = "c:\\source.js";

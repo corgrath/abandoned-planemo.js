@@ -21,7 +21,7 @@
 
 var expect = require( "chai" ).expect;
 
-var stringUtil = require( "../../src/utils/string-util.js" );
+var stringUtil = require( "../../src-instrumented/utils/string-util.js" );
 
 /*
  * Tests

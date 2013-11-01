@@ -12,11 +12,12 @@
 		"css": "~1.4.1",
 		"htmlparser2": "~3.2.3",
 		"underscore": "~1.4.4",
-		"underscore.string": "~2.3.3"
+		"underscore.string": "~2.3.3",
+		"jscoverage": "~0.3.8"
 	},
 	"devDependencies": {},
 	"scripts": {
-		"test": "./node_modules/.bin/mocha -R list tests/*"
+		"test": "./node_modules/.bin/mocha -R list --recursive tests/"
 	},
 	"repository": {
 		"type": "git",

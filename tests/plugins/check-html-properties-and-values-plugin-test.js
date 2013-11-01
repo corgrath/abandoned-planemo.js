@@ -21,13 +21,15 @@
 
 var expect = require( "chai" ).expect;
 
-var plugin = require( "../../src/plugins/check-html-properties-and-values-plugin.js" );
+var plugin = require( "../../src-instrumented/plugins/check-html-properties-and-values-plugin.js" );
 
 /*
  * Tests
  */
 
 describe( "check html properties and values plugin", function () {
+
+	var reporters = [];
 
 	describe( "on html property value read", function () {
 
@@ -42,7 +44,7 @@ describe( "check html properties and values plugin", function () {
 			var value = "ng-click";
 
 			expect(function () {
-				plugin.onHTMLPropertyValueRead( options, file, elementName, property, value, function ( error ) {
+				plugin.onHTMLPropertyValueRead( options, reporters, file, elementName, property, value, function ( error ) {
 				} );
 			} ).to.throw( "The \"disallowPropertiesStartingWith\" has to be an array." );
 
@@ -51,10 +53,9 @@ describe( "check html properties and values plugin", function () {
 		it( "should complain if it finds properties that starts invalid", function ( done ) {
 
 			var options = {
-				disallowPropertiesStartingWith:
-					[
-						"ng-"
-					]
+				disallowPropertiesStartingWith: [
+					"ng-"
+				]
 			};
 
 			var file = "c:\\source.js";
@@ -62,7 +63,7 @@ describe( "check html properties and values plugin", function () {
 			var property = "ng-click";
 			var value = "about();";
 
-			plugin.onHTMLPropertyValueRead( options, file, elementName, property, value, function ( error ) {
+			plugin.onHTMLPropertyValueRead( options, reporters, file, elementName, property, value, function ( error ) {
 				expect( error.message ).to.equal( "Found HTML property \"ng-click\" name that starts invalid in file \"c:\\source.js\"." );
 				expect( error.file ).to.equal( file );
 				expect( error.elementName ).to.equal( elementName );
@@ -86,7 +87,7 @@ describe( "check html properties and values plugin", function () {
 			var property = "data-title-translation";
 			var value = "DataModelShower.Key.Value";
 
-			plugin.onHTMLPropertyValueRead( options, file, elementName, property, value, function ( error ) {
+			plugin.onHTMLPropertyValueRead( options, reporters, file, elementName, property, value, function ( error ) {
 				expect( error.message ).to.equal( "Found disallowed value \"DataModelShower.Key.Value\" for property \"data-title-translation\"." );
 				expect( error.file ).to.equal( file );
 				expect( error.elementName ).to.equal( elementName );

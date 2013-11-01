@@ -21,7 +21,7 @@
 
 var expect = require( "chai" ).expect;
 
-var plugin = require( "../../src/plugins/check-file-name-plugin.js" );
+var plugin = require( "../../src-instrumented/plugins/check-file-name-plugin.js" );
 
 /*
  * Tests

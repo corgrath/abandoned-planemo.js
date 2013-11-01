@@ -21,13 +21,15 @@
 
 var expect = require( "chai" ).expect;
 
-var plugin = require( "../../src/plugins/check-directory-name-plugin.js" );
+var plugin = require( "../../src-instrumented/plugins/check-directory-name-plugin.js" );
 
 /*
  * Tests
  */
 
 describe( "check directory name plugin", function () {
+
+	var reporters = [];
 
 	describe( "on directory found", function () {
 
@@ -64,7 +66,7 @@ describe( "check directory name plugin", function () {
 				pattern: "^\\w+$"
 			};
 
-			plugin.onDirectoryFound( options, directoriesToIgnore, basePath, fullPath, directoryName, function ( error ) {
+			plugin.onDirectoryFound( options, reporters, directoriesToIgnore, basePath, fullPath, directoryName, function ( error ) {
 				expect( error.message ).to.equal( "The directory name \"this foldername has spaces\" is not valid." );
 				done();
 			} );
@@ -81,7 +83,7 @@ describe( "check directory name plugin", function () {
 				pattern: "^\\w+$"
 			};
 
-			plugin.onDirectoryFound( options, directoriesToIgnore, basePath, fullPath, directoryName, function ( error ) {
+			plugin.onDirectoryFound( options, reporters, directoriesToIgnore, basePath, fullPath, directoryName, function ( error ) {
 				expect( error ).to.be.undefined;
 			} );
 

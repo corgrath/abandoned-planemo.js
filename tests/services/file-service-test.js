@@ -21,7 +21,7 @@
 
 var expect = require( "chai" ).expect;
 var nodePath = require( "path" );
-var fileService = require( "../../src/services/file-service.js" );
+var fileService = require( "../../src-instrumented/services/file-service.js" );
 
 /*
  * Tests

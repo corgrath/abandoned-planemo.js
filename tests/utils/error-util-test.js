@@ -21,7 +21,7 @@
 
 var expect = require( "chai" ).expect;
 
-var errorUtil = require( "../../src/utils/error-util.js" );
+var errorUtil = require( "../../src-instrumented/utils/error-util.js" );
 
 /*
  * Tests

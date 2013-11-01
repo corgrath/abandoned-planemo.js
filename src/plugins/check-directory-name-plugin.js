@@ -30,13 +30,13 @@ var errorUtil = require( "../utils/error-util.js" );
 
 exports.init = function ( options ) {
 
-	observerService.onDirectoryFound( function ( reporter, directoriesToIgnore, basePath, fullPath, directoryName, responseFunction ) {
-		exports.onDirectoryFound( options, reporter, directoriesToIgnore, basePath, fullPath, directoryName, responseFunction );
+	observerService.onDirectoryFound( function ( reporters, directoriesToIgnore, basePath, fullPath, directoryName, responseFunction ) {
+		exports.onDirectoryFound( options, reporters, directoriesToIgnore, basePath, fullPath, directoryName, responseFunction );
 	} );
 
 };
 
-exports.onDirectoryFound = function ( options, reporter, directoriesToIgnore, basePath, fullPath, directoryName, responseFunction ) {
+exports.onDirectoryFound = function ( options, reporters, directoriesToIgnore, basePath, fullPath, directoryName, responseFunction ) {
 
 	/*
 	 * Asserts

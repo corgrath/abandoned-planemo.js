@@ -31,35 +31,35 @@ var argument = require( "../utils/argument-assertion-util.js" );
 
 exports.init = function ( options ) {
 
-	observerService.onHTMLPropertyValueRead( function ( reporter, file, elementName, property, value, responseCallbackFunction ) {
+	observerService.onHTMLPropertyValueRead( function ( reporters, file, elementName, property, value, responseCallbackFunction ) {
 
 		argument.isObject( options, "Options is undefined." );
-		argument.isObject( reporter, "Reporter is undefined." );
+		argument.isArray( reporters, "Reporters is undefined." );
 		argument.isString( file, "File is undefined." );
 		argument.isString( elementName, "Element name is undefined." );
 		argument.isString( property, "Property name is undefined." );
 		argument.isString( value, "Value name is undefined." );
 		argument.isString( responseCallbackFunction, "Response callback function is undefined." );
 
-		exports.onHTMLPropertyValueRead( options, reporter, file, elementName, property, value, responseCallbackFunction );
+		exports.onHTMLPropertyValueRead( options, reporters, file, elementName, property, value, responseCallbackFunction );
 
 	} );
 
 };
 
-exports.onHTMLPropertyValueRead = function ( options, reporter, file, elementName, property, value, responseCallbackFunction ) {
+exports.onHTMLPropertyValueRead = function ( options, reporters, file, elementName, property, value, responseCallbackFunction ) {
 
 	/*
 	 * Assert
 	 */
 
 	argument.isObject( options, "Options is undefined." );
-	argument.isObject( reporter, "Reporter is undefined." );
+	argument.isArray( reporters, "Reporters is undefined." );
 	argument.isString( file, "File is undefined." );
 	argument.isString( elementName, "Element name is undefined." );
 	argument.isString( property, "Property name is undefined." );
 	argument.isString( value, "Value name is undefined." );
-	argument.isString( responseCallbackFunction, "Response callback function is undefined." );
+	argument.isFunction( responseCallbackFunction, "Response callback function is undefined." );
 
 	if ( options.disallowPropertiesStartingWith && !objectUtil.isArray( options.disallowPropertiesStartingWith ) ) {
 		throw new Error( "The \"disallowPropertiesStartingWith\" has to be an array." );

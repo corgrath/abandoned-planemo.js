@@ -20,8 +20,7 @@
  */
 
 var expect = require( "chai" ).expect;
-var nodePath = require( "path" );
-var planemoCoreService = require( "../../src/services/planemo-core-service.js" );
+var planemoCoreService = require( "../../src-instrumented/services/planemo-core-service.js" );
 
 /*
  * Tests
@@ -37,7 +36,7 @@ describe( "planemo core service", function () {
 			};
 
 			expect(function () {
-				planemoCoreService.validateConfigurationObject( configuration );
+				planemoCoreService.validateConfiguration( configuration );
 			} ).to.throw( "The \"source\" setting in the configuration file is not defined." );
 
 		} );
@@ -50,37 +49,8 @@ describe( "planemo core service", function () {
 			};
 
 			expect(function () {
-				planemoCoreService.validateConfigurationObject( configuration );
+				planemoCoreService.validateConfiguration( configuration );
 			} ).to.throw( "The \"root\" in the \"source\" setting in the configuration file is not defined." );
-
-		} );
-
-		it( "should complain if no configuration file was defined", function () {
-
-			var configuration = {
-				source: {
-					root: ""
-				}
-			};
-
-			expect(function () {
-				planemoCoreService.validateConfigurationObject( configuration );
-			} ).to.throw( "No \"verbose\" setting was found in the configuration file." );
-
-		} );
-
-		it( "should complain if configuration file defined is not a string", function () {
-
-			var configuration = {
-				source: {
-					root: ""
-				},
-				verbose: "This is a string"
-			};
-
-			expect(function () {
-				planemoCoreService.validateConfigurationObject( configuration );
-			} ).to.throw( "The \"verbose\" setting in the configuration file is not a Boolean (meaning the value is not true or false)." );
 
 		} );
 

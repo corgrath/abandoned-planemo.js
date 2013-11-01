@@ -98,7 +98,7 @@ exports.start = function ( configuration, reporters ) {
 	 * Summarize the errors
 	 */
 
-	var errors = pluginResponseService.getErrors()
+	var errors = pluginResponseService.getErrors();
 
 	reporterService.onFinished( reporters, errors );
 

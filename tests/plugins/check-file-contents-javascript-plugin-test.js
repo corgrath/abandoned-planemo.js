@@ -21,7 +21,7 @@
 
 var expect = require( "chai" ).expect;
 
-var plugin = require( "../../src/plugins/check-file-contents-javascript-plugin.js" );
+var plugin = require( "../../src-instrumented/plugins/check-file-contents-javascript-plugin.js" );
 
 /*
  * Tests
@@ -42,10 +42,9 @@ describe( "check file contents javascript plugin", function () {
 		it( "should support must contain 1", function ( done ) {
 
 			var options = {
-				mustcontain:
-					[
-						"@owner \\w+ \\w+ \\(\\w{3}\\)"
-					]
+				mustcontain: [
+					"@owner \\w+ \\w+ \\(\\w{3}\\)"
+				]
 			};
 
 			var file = "c:\\source.js";
@@ -60,10 +59,9 @@ describe( "check file contents javascript plugin", function () {
 		it( "should support must contain 2", function () {
 
 			var options = {
-				mustcontain:
-					[
-						"@owner \\w+ \\w+ \\(\\w{3}\\)"
-					]
+				mustcontain: [
+					"@owner \\w+ \\w+ \\(\\w{3}\\)"
+				]
 			};
 
 			var file = "c:\\source.js";
@@ -79,10 +77,9 @@ describe( "check file contents javascript plugin", function () {
 			var file = "c:\\folder\\file.txt";
 
 			var options = {
-				disallow:
-					[
-						"/\\*global.+console"
-					]
+				disallow: [
+					"/\\*global.+console"
+				]
 			};
 
 			plugin.onJavaScriptFileRead( options, file, "/*global console */", function ( response ) {
@@ -98,10 +95,9 @@ describe( "check file contents javascript plugin", function () {
 			var file = "c:\\folder\\file.txt";
 
 			var options = {
-				disallow:
-					[
-						"/\\*global.+console"
-					]
+				disallow: [
+					"/\\*global.+console"
+				]
 			};
 
 			plugin.onJavaScriptFileRead( options, file, "/*global pubsub, console */", function ( response ) {

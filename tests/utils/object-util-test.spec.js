@@ -21,13 +21,13 @@
 
 var expect = require( "chai" ).expect;
 
-var objectUtil = require( "../../src/utils/object-util.js" );
+var objectUtil = require( "../../src-instrumented/utils/object-util.js" );
 
 /*
  * Tests
  */
 
-describe( "string util", function () {
+describe( "object util", function () {
 
 	describe( "is number", function () {
 
