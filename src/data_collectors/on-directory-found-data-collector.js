@@ -96,7 +96,7 @@ exports.onDirectoryFound = function onDirectoryFound ( reporters, directoriesToI
 
 			newDirectory = fileService.prettifyDirectory( newDirectory );
 
-			reporterService.onVerbose( reporters, "Found the directory \"" + newDirectory + "\"." );
+			reporterService.onVerbose( reporters, "Found the directory \"" + newDirectory + "\" (\"" + fileService.getResolvedPath( newDirectory ) + "\")." );
 
 			/*
 			 * Check if we should ignore the folder
@@ -107,7 +107,7 @@ exports.onDirectoryFound = function onDirectoryFound ( reporters, directoriesToI
 				var directoryToIgnore = directoriesToIgnore[k];
 
 				if ( stringUtil.startsWith( newDirectory, directoryToIgnore ) ) {
-					reporterService.onVerbose( reporters, "Ignoring to go into folder \"" + newDirectory + "\"." );
+					reporterService.onVerbose( reporters, "Ignoring to go into folder \"" + newDirectory + "\" (\"" + fileService.getResolvedPath( newDirectory ) + "\")." );
 					continue to_next_item_in_directory;
 				}
 
@@ -117,7 +117,7 @@ exports.onDirectoryFound = function onDirectoryFound ( reporters, directoriesToI
 
 		} else {
 
-			reporterService.onVerbose( reporters, "Found the file \"" + newDirectory + "\"." );
+			reporterService.onVerbose( reporters, "Found the file \"" + newDirectory + "\" (\"" + fileService.getResolvedPath( newDirectory ) + "\")." );
 
 			observerService.fileFound( reporters, fullPath, item, responseCallbackFunction );
 
