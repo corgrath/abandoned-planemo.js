@@ -30,6 +30,12 @@ var reporterService = require( "../services/reporter-service.js" );
  * Public functions
  */
 
+exports.getResolvedPath = function ( path ) {
+
+	return nodePath.resolve( path );
+
+};
+
 exports.fileExists = function log ( file ) {
 
 	if ( !file ) {
