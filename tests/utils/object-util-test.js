@@ -54,4 +54,39 @@ describe( "object util", function () {
 
 	} );
 
+	describe( "is function", function () {
+
+		it( "should be valid function", function () {
+
+			var fn = function () {
+			};
+
+			expect( objectUtil.isFunction( fn ) ).to.be.true;
+
+		} );
+
+		it( "should not be valid function", function () {
+
+			expect( objectUtil.isFunction( "this is a string" ) ).to.be.false;
+
+		} );
+
+	} );
+
+	describe( "is boolean", function () {
+
+		it( "should be valid with true", function () {
+			expect( objectUtil.isBoolean( true ) ).to.be.true;
+		} );
+
+		it( "should not be valid with false", function () {
+			expect( objectUtil.isBoolean( false ) ).to.be.true;
+		} );
+
+		it( "should not be valid with false", function () {
+			expect( objectUtil.isBoolean( "this is a string" ) ).to.be.false;
+		} );
+
+	} );
+
 } );
