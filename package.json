@@ -17,9 +17,7 @@
 	},
 	"devDependencies": {},
 	"scripts": {
-		"droid-io-instrument": "./node_modules/.bin/jscoverage src/ src-instrumented/",
-		"droid-io-test": "./node_modules/.bin/mocha -R list --recursive tests/",
-		"droid-io": "./node_modules/.bin/jscoverage src/ src-instrumented/;./node_modules/.bin/mocha -R list --recursive tests/"
+		"drone-io-test": "./node_modules/.bin/jscoverage src/ src-instrumented/;./node_modules/.bin/mocha -R list --recursive tests/"
 	},
 	"repository": {
 		"type": "git",
