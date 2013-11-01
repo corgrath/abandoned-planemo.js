@@ -43,6 +43,14 @@ describe( "string util", function () {
 
 		} );
 
+		it( "should fail it ends is an empty string", function () {
+			try {
+				stringUtil.endsWith( "hello world", "" );
+			} catch ( error ) {
+				expect( error.message ).to.equal( "Ends cannot be an empty String." );
+			}
+		} );
+
 		it( "should complain if needle is undefined with right properties", function () {
 
 			try {
@@ -50,6 +58,16 @@ describe( "string util", function () {
 			} catch ( error ) {
 				expect( error.message ).to.equal( "Ends cannot be undefined." );
 			}
+
+		} );
+
+	} );
+
+	describe( "contains", function () {
+
+		it( "shound contain", function () {
+
+			expect( stringUtil.contains( "hello world", "hello" ) ).to.be.true;
 
 		} );
 
