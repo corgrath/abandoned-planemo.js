@@ -32,6 +32,10 @@ var defaultReporterFactory = require( "./src/factories/default-reporter-factory.
 var reporterService = require( "./src/services/reporter-service.js" );
 
 /*
+ * Private
+ */
+
+/*
  * Public
  */
 
@@ -39,15 +43,18 @@ exports.getDefaultReporterFactory = function () {
 	return defaultReporterFactory.create();
 };
 
-exports.start = function ( configuration, reporters, callbackFunction ) {
+exports.start = function ( configuration, reporters ) {
 
 	/*
 	 * Asserts
 	 */
 
 	assert.isObject( configuration, "Configuration file" );
-	assert.isArray( reporters, "Reporters" );
-	assert.isFunction( callbackFunction, "Callback response function" );
+
+	if ( !reporters ) {
+		reporters = [exports.getDefaultReporterFactory()];
+		reporterService.onVerbose( reporters, "No reporters were defined. Using the default built-in reporter." );
+	}
 
 	/*
 	 * Inform the reporter we are starting
@@ -79,9 +86,9 @@ exports.start = function ( configuration, reporters, callbackFunction ) {
 
 	var sourceRoot = configuration.source.root;
 
-	reporterService.verbose( reporters, "Source directory is \"" + sourceRoot + "\"." );
-	reporterService.verbose( reporters, "Source directory is normalize \"" + path.normalize(sourceRoot) );
-	reporterService.verbose( reporters, "Source directory is resolve \"" + path.resolve(sourceRoot) );
+	reporterService.onVerbose( reporters, "Source directory is \"" + sourceRoot + "\"." );
+	reporterService.onVerbose( reporters, "Source directory is normalize \"" + path.normalize( sourceRoot ) );
+	reporterService.onVerbose( reporters, "Source directory is resolve \"" + path.resolve( sourceRoot ) );
 
 	var sourceRootDetails = fileService.breakDownPath( sourceRoot );
 
@@ -92,27 +99,11 @@ exports.start = function ( configuration, reporters, callbackFunction ) {
 	observerService.directoryFound( reporters, configuration.source.ignore, sourceRootDetails.basePath, sourceRootDetails.fullPath, sourceRootDetails.directoryName, onPluginError );
 
 	/*
-	 * Summarize the number of errors
+	 * Summarize the errors
 	 */
 
-	var results = {
-		errors: pluginResponseService.getErrors()
-	};
+	var errors = pluginResponseService.getErrors()
 
-	//	if ( numberOfErrors > 0 ) {
-	//
-	//		logService.fail( "Planemo static code analysis failed with \"" + numberOfErrors + "\" errors." );
-	//
-	//	} else {
-	//
-	//		reporter.success( results );
-	//
-	//	}
-
-	reporterService.onEnd( reporters, results );
-
-	var error = undefined;
-
-	callbackFunction( error, results );
+	reporterService.onFinished( reporters, errors );
 
 };

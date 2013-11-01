@@ -28,7 +28,7 @@ var objectUtil = require( "../utils/object-util.js" );
  */
 
 var observers = {
-}
+};
 
 var KEY_DIRECTORY_FOUND = "KEY_DIRECTORY_FOUND";
 var KEY_FILE_FOUND = "KEY_FILE_FOUND";

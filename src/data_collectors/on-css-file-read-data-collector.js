@@ -49,7 +49,7 @@ exports.onCSSFileRead = function ( reporters, file, fileContents, responseFuncti
 	 * Logic
 	 */
 
-	reporterService.verbose( reporters, "Will parse CSS file \"" + file + "\"." );
+	reporterService.onVerbose( reporters, "Will parse CSS file \"" + file + "\"." );
 
 	var css = nodeCSS.parse( fileContents );
 

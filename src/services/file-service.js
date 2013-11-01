@@ -95,7 +95,7 @@ exports.readFile = function ( reporters, file ) {
 
 		var data = fs.readFileSync( file, "UTF-8" );
 
-		reporterService.verbose( reporters, "Read \"" + Buffer.byteLength( data, "UTF-8" ) + "\" bytes from the file \"" + file + "\"." );
+		reporterService.onVerbose( reporters, "Read \"" + Buffer.byteLength( data, "UTF-8" ) + "\" bytes from the file \"" + file + "\"." );
 
 		return data;
 

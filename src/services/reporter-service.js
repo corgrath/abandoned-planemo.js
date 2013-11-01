@@ -43,10 +43,10 @@ exports.onPluginRegistered = function ( reporters, pluginName ) {
 
 };
 
-exports.verbose = function ( reporters, message ) {
+exports.onVerbose = function ( reporters, message ) {
 
 	reporters.forEach( function ( reporter ) {
-		reporter.verbose( message );
+		reporter.onVerbose( message );
 	} );
 
 };
@@ -59,10 +59,10 @@ exports.onPluginError = function ( reporters, error ) {
 
 };
 
-exports.onEnd = function ( reporters, results ) {
+exports.onFinished = function ( reporters, errors ) {
 
 	reporters.forEach( function ( reporter ) {
-		reporter.onEnd( results );
+		reporter.onFinished( errors );
 	} );
 
 };

@@ -19,7 +19,6 @@
  * Dependencies
  */
 
-var logService = require( "../services/log-service.js" );
 var reporterService = require( "../services/reporter-service.js" );
 
 /*

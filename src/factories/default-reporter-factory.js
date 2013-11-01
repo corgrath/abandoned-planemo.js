@@ -31,36 +31,41 @@ exports.create = function () {
 
 		onStart: function () {
 
-			logService.log( "Starting the Planemo." );
+			logService.log( "Starting Planemo." );
 
 		},
-		verbose: function ( message ) {
+
+		onVerbose: function ( message ) {
 
 			logService.log( "[VERBOSE] " + message );
 
 		},
+
 		onDataCollectorRegistered: function ( dataCollectorName ) {
 
 			logService.log( "Registered the data collector \"" + dataCollectorName + "\"." );
 
 		},
+
 		onPluginRegistered: function ( pluginName ) {
 
 			logService.log( "Registered the plugin \"" + pluginName + "\"." );
 
 		},
+
 		onPluginError: function ( error ) {
 			logService.error( error );
 		},
-		onEnd: function ( results ) {
 
-			if ( results.errors.length > 0 ) {
+		onFinished: function ( errors ) {
 
-				logService.fail( "Planemo static code analysis failed with \"" + results.errors.length + "\" errors." );
+			if ( errors.length > 0 ) {
+
+				logService.fail( "Planemo static code analysis failed with \"" + errors.length + "\" errors." );
 
 			} else {
 
-				logService.success( "Planemo static code analysis done. No errors found. It's a great day!" );
+				logService.success( "Planemo static code analysis done. No errors found. Happy times!" );
 
 			}
 
