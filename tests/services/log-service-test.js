@@ -33,7 +33,7 @@ var mockConsole = {
 	getLog: function () {
 		return this.message;
 	}
-}
+};
 
 /*
  * Tests
