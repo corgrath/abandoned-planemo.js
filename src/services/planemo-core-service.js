@@ -19,10 +19,28 @@
  * Dependencies
  */
 
-var assert = require( "assert" );
-
-var logService = require( "./log-service.js" );
+var assert = require( "../utils/argument-assertion-util.js" );
 var fileService = require( "./file-service.js" );
+
+/*
+ * Private
+ */
+
+function validateConfigurationSourceIgnore ( configuration ) {
+
+	assert.isArray( configuration.source.ignore, "configuration.source.ignore" );
+
+	for ( var i in configuration.source.ignore ) {
+
+		var directory = configuration.source.ignore[i];
+
+		if ( !fileService.directoryExists( directory ) ) {
+			throw new Error( "The ignored directory \"" + directory + "\" does not exist." );
+		}
+
+	}
+
+}
 
 /*
  * Public
@@ -37,5 +55,7 @@ exports.validateConfiguration = function ( configuration ) {
 	if ( configuration.source.root === undefined ) {
 		throw new Error( "The \"root\" in the \"source\" setting in the configuration file is not defined." );
 	}
+
+	validateConfigurationSourceIgnore( configuration );
 
 };
