@@ -82,9 +82,9 @@ exports.start = function ( configuration, reporters ) {
 	 * Go through each source directory in the configuration file and start the analysis tool
 	 */
 
-	var sourceRoot = configuration.source.root;
+	var sourceRoot = fileService.getResolvedPath( configuration.source.root );
 
-	reporterService.onVerbose( reporters, "Source directory is \"" + sourceRoot + "\" (\"" + fileService.getResolvedPath( sourceRoot ) + "\")." );
+	reporterService.onVerbose( reporters, "Source directory is \"" + sourceRoot + "\"." );
 
 	var sourceRootDetails = fileService.breakDownPath( sourceRoot );
 

@@ -35,6 +35,20 @@ describe( "file service", function () {
 
 			var separator = nodePath.sep;
 
+			var path = "c:" + separator + "folder1" + separator + "folder2" + separator + "folder3";
+
+			var actual = fileService.breakDownPath( path );
+
+			expect( actual.basePath ).to.equal( "c:" + separator + "folder1" + separator + "folder2" + separator );
+			expect( actual.fullPath ).to.equal( "c:" + separator + "folder1" + separator + "folder2" + separator + "folder3" + separator );
+			expect( actual.directoryName ).to.equal( "folder3" );
+
+		} );
+
+		it( "should be able to break down a path into more details ending with separator", function () {
+
+			var separator = nodePath.sep;
+
 			var path = "c:" + separator + "folder1" + separator + "folder2" + separator + "folder3" + separator;
 
 			var actual = fileService.breakDownPath( path );

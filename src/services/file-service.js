@@ -123,6 +123,10 @@ exports.prettifyDirectory = function ( directory ) {
 
 exports.breakDownPath = function ( fullPath ) {
 
+	if ( !stringUtil.endsWith( fullPath, nodePath.sep ) ) {
+		fullPath = fullPath + nodePath.sep;
+	}
+
 	var basePath = exports.prettifyDirectory( nodePath.dirname( fullPath ) );
 	var directoryName = nodePath.basename( fullPath );
 
