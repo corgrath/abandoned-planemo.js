@@ -41,6 +41,22 @@ var mockConsole = {
 
 describe( "log service", function () {
 
+	describe( "log ", function () {
+
+		it( "should have correct output", function () {
+
+			var mockDate = new Date();
+
+			var message = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. 槥ちゅ りゅにょい 裪嶥りゃきゅ.";
+			var expected = "[" + mockDate.toUTCString() + "] " + message;
+
+			logService.log( message, mockDate, mockConsole );
+			expect( mockConsole.getLog() ).to.equal( expected );
+
+		} );
+
+	} );
+
 	describe( "fail ", function () {
 
 		it( "should have correct output", function () {

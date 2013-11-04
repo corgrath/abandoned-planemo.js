@@ -61,6 +61,12 @@ exports.start = function ( configuration, reporters ) {
 	reporterService.onStart( reporters );
 
 	/*
+	 * Resolve any relative paths
+	 */
+
+	planemoCoreService.resolveRelativePaths( configuration )
+
+	/*
 	 * Get the configuration file
 	 */
 

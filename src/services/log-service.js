@@ -21,14 +21,15 @@
 
 var ANSI_RED = "\x1b[31m";
 var ANSI_GREEN = "\x1b[32m";
-//var ANSI_CYAN = "\x1b[36m";
-//var ANSI_WHITE = "\x1b[37m";
 var ANSI_CANCEL = "\x1b[0m";
 
-function getFormattedTime () {
+function getFormattedTime ( myDate ) {
 
-	//	return dateFormat( "yyyy-mm-dd hh:MM:ss" );
-	return new Date().toUTCString();
+	if ( !myDate ) {
+		myDate = new Date();
+	}
+
+	return myDate.toUTCString();
 
 }
 
@@ -36,11 +37,15 @@ function getFormattedTime () {
  * Public functions
  */
 
-exports.log = function log ( object ) {
+exports.log = function log ( object, myDate, myConsole ) {
 
-	var timestamp = getFormattedTime();
+	var timestamp = getFormattedTime( myDate );
 
-	console.log( "[" + timestamp + "] " + object );
+	if ( !myConsole ) {
+		myConsole = console;
+	}
+
+	myConsole.log( "[" + timestamp + "] " + object );
 
 };
 
@@ -65,12 +70,6 @@ exports.error = function error ( error ) {
 	console.log( "\n" );
 
 };
-
-//exports.fail = function error ( message ) {
-//
-//	console.log( "\n" + ANSI_RED + message + ANSI_CANCEL + "\n" );
-//
-//};
 
 exports.fail = function error ( message, myConsole ) {
 

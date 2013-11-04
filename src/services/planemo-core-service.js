@@ -20,6 +20,7 @@
  */
 
 var assert = require( "../utils/argument-assertion-util.js" );
+var logService = require( "./log-service.js" );
 var fileService = require( "./file-service.js" );
 
 /*
@@ -46,6 +47,26 @@ function validateConfigurationSourceIgnore ( configuration ) {
  * Public
  */
 
+exports.resolveRelativePaths = function ( configuration ) {
+
+	if ( configuration && configuration.source && configuration.source.root ) {
+		configuration.source.root = fileService.getResolvedPath( configuration.source.root );
+		logService.log( "The root path has been resolved to \"" + configuration.source.root + "\"." );
+	}
+
+	if ( configuration && configuration.source && configuration.source.ignore ) {
+
+		for ( var i in configuration.source.ignore ) {
+
+			configuration.source.ignore[i] = fileService.getResolvedPath( configuration.source.ignore[i] );
+			logService.log( "The ignored path has been resolved to \"" + configuration.source.ignore[i] + "\"." );
+
+		}
+
+	}
+
+};
+
 exports.validateConfiguration = function ( configuration ) {
 
 	if ( configuration.source === undefined ) {
@@ -54,6 +75,10 @@ exports.validateConfiguration = function ( configuration ) {
 
 	if ( configuration.source.root === undefined ) {
 		throw new Error( "The \"root\" in the \"source\" setting in the configuration file is not defined." );
+	}
+
+	if ( !fileService.directoryExists( configuration.source.root ) ) {
+		throw new Error( "The root directory \"" + configuration.source.root + "\" does not exist." );
 	}
 
 	validateConfigurationSourceIgnore( configuration );

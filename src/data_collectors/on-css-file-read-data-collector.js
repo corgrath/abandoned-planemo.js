@@ -51,7 +51,14 @@ exports.onCSSFileRead = function ( reporters, file, fileContents, responseFuncti
 
 	reporterService.onVerbose( reporters, "Will parse CSS file \"" + file + "\"." );
 
-	var css = nodeCSS.parse( fileContents );
+	var css;
+
+	try {
+		css = nodeCSS.parse( fileContents );
+	} catch ( error ) {
+		console.log( "File=" + file );
+		throw error;
+	}
 
 	for ( var i in css.stylesheet.rules ) {
 
