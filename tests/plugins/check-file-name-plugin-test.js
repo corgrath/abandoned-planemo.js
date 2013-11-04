@@ -27,7 +27,9 @@ var plugin = require( "../../src-instrumented/plugins/check-file-name-plugin.js"
  * Tests
  */
 
-describe( "check directory name plugin", function () {
+describe( "check file name plugin", function () {
+
+	var reporters = [];
 
 	describe( "on file found", function () {
 
@@ -39,27 +41,16 @@ describe( "check directory name plugin", function () {
 
 		} );
 
-		it( "should complain if no pattern option was defined", function () {
-
-			var options = {
-			};
-
-			expect(function () {
-				plugin.onFileFound( options );
-			} ).to.throw( "Invalid pattern option." );
-
-		} );
-
-		it( "should complain if invalid name was found", function ( done ) {
+		it( "should complain if invalid javascript name was found", function ( done ) {
 
 			var path = "c:\\folder1\\";
 			var fileName = "planemo file.js";
 
 			var options = {
-				pattern: "^[\\w-]+\\.js|less$"
+				javascript: "^[\\w-]+\\.js$"
 			};
 
-			plugin.onFileFound( options, path, fileName, function ( error ) {
+			plugin.onFileFound( options, reporters, path, fileName, function ( error ) {
 
 				expect( error.message ).to.equal( "The file name \"" + fileName + "\" is not valid." );
 				done();
@@ -86,7 +77,7 @@ describe( "check directory name plugin", function () {
 
 				var fileName = fileNames[i];
 
-				plugin.onFileFound( options, path, fileName, function ( error ) {
+				plugin.onFileFound( options, reporters, path, fileName, function ( error ) {
 					expect( error ).to.be.undefined;
 				} );
 

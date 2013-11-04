@@ -20,7 +20,29 @@
  */
 
 var observerService = require( "../services/observer-service.js" );
+var fileTypeService = require( "../services/file-type-service.js" );
 var errorUtils = require( "../utils/error-util.js" );
+
+/*
+ * Private
+ */
+
+function testFileName ( fileName, path, pattern, responseCallbackFunction ) {
+
+	var regexp = new RegExp( pattern );
+
+	var isLegalFilename = regexp.test( fileName );
+
+	if ( !isLegalFilename ) {
+
+		responseCallbackFunction( errorUtils.create( "The file name \"" + fileName + "\" is not valid.", {
+			path: path,
+			fileName: fileName
+		} ) );
+
+	}
+
+}
 
 /*
  * Public functions
@@ -28,32 +50,27 @@ var errorUtils = require( "../utils/error-util.js" );
 
 exports.init = function ( options ) {
 
-	observerService.onFileFound( function ( reporters, path, fileName, responseFunction ) {
-		exports.onFileFound( options, reporters, path, fileName, responseFunction );
+	observerService.onFileFound( function ( reporters, path, fileName, responseCallbackFunction ) {
+		exports.onFileFound( options, reporters, path, fileName, responseCallbackFunction );
 	} );
 
 };
 
-exports.onFileFound = function ( options, reporters, path, fileName, responseFunction ) {
+exports.onFileFound = function ( options, reporters, path, fileName, responseCallbackFunction ) {
 
 	if ( !options ) {
 		throw new Error( "No options were defined." );
 	}
 
-	if ( !options.pattern ) {
-		throw new Error( "Invalid pattern option." );
+	if ( options.javascript && fileTypeService.isJavaScriptFile( fileName ) ) {
+
+		testFileName( fileName, path, options.javascript, responseCallbackFunction );
+
 	}
 
-	var regexp = new RegExp( options.pattern );
+	if ( options.html && fileTypeService.isHTMLFile( fileName ) ) {
 
-	var isLegalFilename = regexp.test( fileName );
-
-	if ( !isLegalFilename ) {
-
-		responseFunction( errorUtils.create( "The file name \"" + fileName + "\" is not valid.", {
-			path: path,
-			fileName: fileName
-		} ) );
+		testFileName( fileName, path, options.html, responseCallbackFunction );
 
 	}
 

@@ -54,7 +54,9 @@ exports.create = function () {
 		},
 
 		onPluginError: function ( error ) {
+
 			logService.error( error );
+
 		},
 
 		onFinished: function ( errors ) {
