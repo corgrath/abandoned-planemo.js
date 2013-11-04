@@ -51,7 +51,7 @@ exports.onDirectoryFound = function ( options, reporters, directoriesToIgnore, b
 
 	if ( !isLegalFilename ) {
 
-		responseFunction( errorUtil.create( "The directory name \"" + directoryName + "\" is not valid.", {
+		responseFunction( errorUtil.create2( "The directory name \"" + directoryName + "\" is not valid.", options.customMessage, {
 			basePath: basePath,
 			fullPath: fullPath,
 			directoryName: directoryName

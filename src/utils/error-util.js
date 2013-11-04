@@ -36,3 +36,25 @@ exports.create = function ( message, data ) {
 	return error;
 
 };
+
+exports.create2 = function ( message, customMessage, data ) {
+
+	if ( !message ) {
+		throw new Error( "Invalid message." );
+	}
+
+	var error = new Error( message );
+	console.log( "customMessage=" + customMessage )
+	if ( customMessage ) {
+		error.customMessage = customMessage;
+	}
+
+	for ( var property in data ) {
+
+		error[property] = data[property];
+
+	}
+
+	return error;
+
+};
