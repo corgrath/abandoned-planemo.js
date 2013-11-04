@@ -28,13 +28,13 @@ var errorUtils = require( "../utils/error-util.js" );
 
 exports.init = function ( options ) {
 
-	observerService.onLESSFileRead( function ( file, fileContents, responseFunction ) {
-		exports.onLESSFileRead( options, file, fileContents, responseFunction );
+	observerService.onLESSFileRead( function ( repoters, file, fileContents, responseFunction ) {
+		exports.onLESSFileRead( options, repoters, file, fileContents, responseFunction );
 	} );
 
 };
 
-exports.onLESSFileRead = function ( options, file, fileContents, responseFunction ) {
+exports.onLESSFileRead = function ( options, repoters, file, fileContents, responseFunction ) {
 
 	if ( !options ) {
 		throw new Error( "No options were defined." );

@@ -63,15 +63,15 @@ exports.onFileFound = function ( options, reporters, path, fileName, responseCal
 	}
 
 	if ( options.javascript && fileTypeService.isJavaScriptFile( fileName ) ) {
-
 		testFileName( fileName, path, options.javascript, responseCallbackFunction );
-
 	}
 
 	if ( options.html && fileTypeService.isHTMLFile( fileName ) ) {
-
 		testFileName( fileName, path, options.html, responseCallbackFunction );
+	}
 
+	if ( options.less && fileTypeService.isLESSFile( fileName ) ) {
+		testFileName( fileName, path, options.less, responseCallbackFunction );
 	}
 
 };

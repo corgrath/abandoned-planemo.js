@@ -195,8 +195,8 @@ exports.directoryFound = function ( reporters, directoriesToIgnore, basePath, fu
 		addObserver( observer, KEY_ON_LESS_FILE_READ );
 	}
 
-	exports.LESSFileRead = function ( file, fileContents, responseFunction ) {
-		notifyAll( KEY_ON_LESS_FILE_READ, file, fileContents, responseFunction );
+	exports.LESSFileRead = function ( reporters, file, fileContents, responseFunction ) {
+		notifyAll( KEY_ON_LESS_FILE_READ, reporters, file, fileContents, responseFunction );
 	}
 }
 

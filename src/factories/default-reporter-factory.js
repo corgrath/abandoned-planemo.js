@@ -37,13 +37,13 @@ exports.create = function () {
 
 		onVerbose: function ( message ) {
 
-			logService.log( "[VERBOSE] " + message );
+			logService.log( "[on-verbose] " + message );
 
 		},
 
 		onDataCollectorRegistered: function ( dataCollectorName ) {
 
-			logService.log( "Registered the data collector \"" + dataCollectorName + "\"." );
+			logService.log( "[on-data-collector-registered] Registered the data collector \"" + dataCollectorName + "\"." );
 
 		},
 
