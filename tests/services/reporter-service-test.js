@@ -47,11 +47,11 @@ describe( "reporter service", function () {
 
 		} );
 
-		it( "should broad cast on start", function ( done ) {
+		it( "should broadcast onStart", function ( done ) {
 
 			var reporters = [
 				{
-					onStart: function ( message ) {
+					onStart: function () {
 						done();
 					}
 				}
@@ -59,7 +59,77 @@ describe( "reporter service", function () {
 
 			reporterService.onStart( reporters );
 
-		} )
+		} );
+
+		it( "should broadcast onDataCollectorRegistered ", function ( done ) {
+
+			var reporters = [
+				{
+					onDataCollectorRegistered: function () {
+						done();
+					}
+				}
+			];
+
+			reporterService.onDataCollectorRegistered( reporters );
+
+		} );
+
+		it( "should broadcast onPluginRegistered  ", function ( done ) {
+
+			var reporters = [
+				{
+					onPluginRegistered: function () {
+						done();
+					}
+				}
+			];
+
+			reporterService.onPluginRegistered( reporters );
+
+		} );
+
+		it( "should broadcast onVerbose", function ( done ) {
+
+			var reporters = [
+				{
+					onVerbose: function () {
+						done();
+					}
+				}
+			];
+
+			reporterService.onVerbose( reporters );
+
+		} );
+
+		it( "should broadcast onPluginError", function ( done ) {
+
+			var reporters = [
+				{
+					onPluginError: function () {
+						done();
+					}
+				}
+			];
+
+			reporterService.onPluginError( reporters );
+
+		} );
+
+		it( "should broadcast onFinished", function ( done ) {
+
+			var reporters = [
+				{
+					onFinished: function () {
+						done();
+					}
+				}
+			];
+
+			reporterService.onFinished( reporters );
+
+		} );
 
 	} );
 
