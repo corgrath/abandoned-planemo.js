@@ -29,6 +29,8 @@ var plugin = require( "../../src-instrumented/plugins/check-file-contents-less-p
 
 describe( "check file contents less plugin", function () {
 
+	var reporters = [];
+
 	describe( "on less file read", function () {
 
 		it( "should complain for invalid options", function () {
@@ -56,7 +58,7 @@ describe( "check file contents less plugin", function () {
 
 			var fileContents = ".class { -webkit-transparency: none; } ";
 
-			plugin.onLESSFileRead( options, file, fileContents, function ( response ) {
+			plugin.onLESSFileRead( options, reporters, file, fileContents, function ( response ) {
 				doneCallback = true;
 				expect( response.message ).to.equal( "Found disallowed pattern \"" + options.disallow[1] + "\"." );
 				done();
