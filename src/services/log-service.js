@@ -66,8 +66,18 @@ exports.error = function error ( error ) {
 
 };
 
-exports.fail = function error ( message ) {
+//exports.fail = function error ( message ) {
+//
+//	console.log( "\n" + ANSI_RED + message + ANSI_CANCEL + "\n" );
+//
+//};
 
-	console.log( "\n" + ANSI_RED + message + ANSI_CANCEL + "\n" );
+exports.fail = function error ( message, myConsole ) {
+
+	if ( !myConsole ) {
+		myConsole = console;
+	}
+
+	myConsole.log( "\n" + ANSI_RED + message + ANSI_CANCEL + "\n" );
 
 };

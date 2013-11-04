@@ -28,13 +28,13 @@ var errorUtils = require( "../utils/error-util.js" );
 
 exports.init = function ( options ) {
 
-	observerService.onFileFound( function ( path, fileName, responseFunction ) {
-		exports.onFileFound( options, path, fileName, responseFunction );
+	observerService.onFileFound( function ( reporters, path, fileName, responseFunction ) {
+		exports.onFileFound( options, reporters, path, fileName, responseFunction );
 	} );
 
 };
 
-exports.onFileFound = function ( options, path, fileName, responseFunction ) {
+exports.onFileFound = function ( options, reporters, path, fileName, responseFunction ) {
 
 	if ( !options ) {
 		throw new Error( "No options were defined." );

@@ -47,4 +47,20 @@ describe( "file service", function () {
 
 	} );
 
+	describe( "getResolvedPath ", function () {
+
+		/*
+		 * It's a lame test. Not sure if we can make this any smarter.
+		 */
+
+		it( "should return a resolved version of the path", function () {
+
+			var actual = fileService.getResolvedPath( __dirname + "\\made-up-folder\\" );
+
+			expect( actual ).to.not.equal( __dirname );
+
+		} );
+
+	} );
+
 } );
