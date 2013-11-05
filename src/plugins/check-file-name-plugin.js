@@ -27,7 +27,7 @@ var errorUtils = require( "../utils/error-util.js" );
  * Private
  */
 
-function testFileName ( fileName, path, pattern, responseCallbackFunction ) {
+function testFileName ( fileName, path, pattern, customMessage, responseCallbackFunction ) {
 
 	var regexp = new RegExp( pattern );
 
@@ -35,7 +35,7 @@ function testFileName ( fileName, path, pattern, responseCallbackFunction ) {
 
 	if ( !isLegalFilename ) {
 
-		responseCallbackFunction( errorUtils.create( "The file name \"" + fileName + "\" is not valid.", {
+		responseCallbackFunction( errorUtils.create2( "The file name \"" + fileName + "\" is not valid.", customMessage, {
 			path: path,
 			fileName: fileName
 		} ) );
@@ -63,15 +63,15 @@ exports.onFileFound = function ( options, reporters, path, fileName, responseCal
 	}
 
 	if ( options.javascript && fileTypeService.isJavaScriptFile( fileName ) ) {
-		testFileName( fileName, path, options.javascript, responseCallbackFunction );
+		testFileName( fileName, path, options.javascript, options.customMessage, responseCallbackFunction );
 	}
 
 	if ( options.html && fileTypeService.isHTMLFile( fileName ) ) {
-		testFileName( fileName, path, options.html, responseCallbackFunction );
+		testFileName( fileName, path, options.html, options.customMessage, responseCallbackFunction );
 	}
 
 	if ( options.less && fileTypeService.isLESSFile( fileName ) ) {
-		testFileName( fileName, path, options.less, responseCallbackFunction );
+		testFileName( fileName, path, options.less, options.customMessage, responseCallbackFunction );
 	}
 
 };
