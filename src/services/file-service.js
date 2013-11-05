@@ -21,8 +21,8 @@
 
 var fs = require( "fs" );
 var nodePath = require( "path" );
-var assert = require( "assert" );
 
+var assert = require( "../utils/argument-assertion-util.js" );
 var stringUtil = require( "../utils/string-util.js" );
 var reporterService = require( "../services/reporter-service.js" );
 
@@ -61,7 +61,7 @@ exports.isFile = function ( file ) {
 exports.getAllItemsInDirectory = function ( directory ) {
 
 	if ( !exports.directoryExists( directory ) ) {
-		throw new Error( "The directory \"" + directory + "\" (\"" + nodePath.resolve( directory ) + "\") does not exist." );
+		throw new Error( "The directory \"" + directory + "\" does not exist." );
 	}
 
 	var items = fs.readdirSync( directory );
@@ -82,7 +82,7 @@ exports.getAllFilesInDirectory = function ( directory ) {
 
 		var item = items[i];
 
-		if ( exports.isFile( directory + item ) ) {
+		if ( exports.isFile( directory + nodePath.sep + item ) ) {
 			files.push( item );
 		}
 
@@ -94,8 +94,8 @@ exports.getAllFilesInDirectory = function ( directory ) {
 
 exports.readFile = function ( reporters, file ) {
 
-	assert( reporters, "Reporters is undefined." );
-	assert( file, "File is undefined." );
+	assert.isArray( reporters, "reporters" );
+	assert.isString( file, "file" );
 
 	if ( fs.existsSync( file ) ) {
 

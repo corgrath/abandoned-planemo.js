@@ -44,7 +44,7 @@ exports.create2 = function ( message, customMessage, data ) {
 	}
 
 	var error = new Error( message );
-	console.log( "customMessage=" + customMessage )
+
 	if ( customMessage ) {
 		error.customMessage = customMessage;
 	}
