@@ -35,9 +35,10 @@ function testFileName ( fileName, path, pattern, customMessage, responseCallback
 
 	if ( !isLegalFilename ) {
 
-		responseCallbackFunction( errorUtils.create2( "The file name \"" + fileName + "\" is not valid.", customMessage, {
+		responseCallbackFunction( errorUtils.create2( "The file name \"" + fileName + "\" is not valid as it does not comply with the pattern \"" + pattern + "\".", customMessage, {
 			path: path,
-			fileName: fileName
+			fileName: fileName,
+			patter: pattern
 		} ) );
 
 	}
