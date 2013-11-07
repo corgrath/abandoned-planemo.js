@@ -33,23 +33,23 @@ describe( "check-for-empty-files-plugin", function () {
 	var reporters = [];
 	var customMessage = "";
 
-	//	it( "should complain if found empty file", function ( done ) {
-	//
-	//		var ignoredFiles = [];
-	//		var path = __dirname;
-	//		var fileName = "empty_files.txt";
-	//		var file = path + nodePath.sep + fileName;
-	//
-	//		plugin.onFileFound( reporters, customMessage, ignoredFiles, path, fileName, file, function ( error ) {
-	//
-	//			var size = 0;
-	//
-	//			expect( error.message ).to.equal( "The file name \"" + fileName + "\" has the size \"" + size + "\" bytes." );
-	//			done();
-	//
-	//		} );
-	//
-	//	} );
+	it( "should complain if found empty file", function ( done ) {
+
+		var ignoredFiles = [];
+		var path = __dirname;
+		var fileName = "empty_files.txt";
+		var file = path + nodePath.sep + fileName;
+
+		plugin.onFileFound( reporters, customMessage, ignoredFiles, path, fileName, file, function ( error ) {
+
+			var size = 0;
+
+			expect( error.message ).to.equal( "The file name \"" + fileName + "\" has \"" + size + "\" bytes in size." );
+			done();
+
+		} );
+
+	} );
 
 	it( "should not complain since the file should be ignored", function ( done ) {
 

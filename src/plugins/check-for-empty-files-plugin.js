@@ -90,7 +90,7 @@ exports.onFileFound = function ( reporters, customMessage, ignoredFiles, path, f
 
 	if ( size === 0 ) {
 
-		responseFunction( errorUtil.create2( "The file name \"" + fileName + "\" has the size \"" + size + "\" bytes.", customMessage, {
+		responseFunction( errorUtil.create2( "The file name \"" + fileName + "\" has \"" + size + "\" bytes in size.", customMessage, {
 			path: path,
 			fileName: fileName,
 			file: file,
