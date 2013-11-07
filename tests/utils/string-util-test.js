@@ -73,4 +73,20 @@ describe( "string util", function () {
 
 	} );
 
+	describe( "startsWith", function () {
+
+		it( "shound start with", function () {
+
+			expect( stringUtil.startsWith( "hello world", "hello" ) ).to.be.true;
+
+		} );
+
+		it( "shound not start with", function () {
+
+			expect( stringUtil.startsWith( "hello world", "world" ) ).to.be.false;
+
+		} );
+
+	} );
+
 } );
