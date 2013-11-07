@@ -19,8 +19,8 @@
  * Dependencies
  */
 
-var observerService = require( "../services/observer-service.js" );
-var argument = require( "../utils/argument-assertion-util.js" );
+var observerService = require( "../../src/services/observer-service.js" );
+var argument = require( "../../src/utils/argument-assertion-util.js" );
 
 /*
  * Public functions
