@@ -33,12 +33,10 @@ exports.init = function ( options ) {
 
 	var ignoredFiles = options["ignored-files"];
 
-	//	console.log( options["ignored-files"] );
-
 	for ( var i in ignoredFiles ) {
 
 		ignoredFiles[i] = fileService.getResolvedPath( ignoredFiles[i] );
-		//		console.log( "new ignored file is:" + ignoredFiles[i] );
+
 		if ( !fileService.fileExists( ignoredFiles[i] ) ) {
 			throw new Error( "The ignored file \"" + ignoredFiles[i] + "\" does not exist." );
 		}
@@ -64,20 +62,14 @@ exports.onFileFound = function ( reporters, customMessage, ignoredFiles, path, f
 		assert.isFunction( doneCallbackFunction );
 	}
 
-	//	console.log( ignoredFiles );
-
-	//	console.log( "\nfile:" + file + "\n" );
-
 	for ( var i in ignoredFiles ) {
 
 		var ignoredFile = ignoredFiles[i];
 
-		//		console.log( "       file:" + file );
-		//		console.log( "ignoredFile:" + ignoredFile );
-
 		if ( ignoredFile === file ) {
+
 			reporterService.onVerbose( reporters, "check-for-empty-files-plugin: Ignoring the file \"" + file + "\"." )
-			//			console.log( "\nignoring the file:" + ignoredFile + "\n" );
+
 			if ( doneCallbackFunction ) {
 				doneCallbackFunction();
 			}
@@ -98,10 +90,8 @@ exports.onFileFound = function ( reporters, customMessage, ignoredFiles, path, f
 		} ) );
 
 	}
-	//	console.log( "going to call done now" );
-	//	console.log( doneCallbackFunction );
+
 	if ( doneCallbackFunction ) {
-		//		console.log( "callingall done now" );
 		doneCallbackFunction();
 	}
 

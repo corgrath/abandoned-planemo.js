@@ -31,7 +31,7 @@ exports.create = function () {
 
 		onStart: function () {
 
-			logService.log( "Starting Planemo." );
+			logService.log( "[on-start] Starting Planemo." );
 
 		},
 
@@ -49,7 +49,7 @@ exports.create = function () {
 
 		onPluginRegistered: function ( pluginName ) {
 
-			logService.log( "Registered the plugin \"" + pluginName + "\"." );
+			logService.log( "[on-plugin-registered] Registered the plugin \"" + pluginName + "\"." );
 
 		},
 
@@ -63,11 +63,11 @@ exports.create = function () {
 
 			if ( errors.length > 0 ) {
 
-				logService.fail( "Planemo static code analysis failed with \"" + errors.length + "\" errors." );
+				logService.fail( "[on-finished] Planemo static code analysis failed with \"" + errors.length + "\" errors." );
 
 			} else {
 
-				logService.success( "Planemo static code analysis done. No errors found. Happy times!" );
+				logService.success( "[on-finished] Planemo static code analysis done. No errors found. Happy times!" );
 
 			}
 
