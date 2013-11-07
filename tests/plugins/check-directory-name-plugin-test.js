@@ -67,7 +67,8 @@ describe( "check directory name plugin", function () {
 			};
 
 			plugin.onDirectoryFound( options, reporters, directoriesToIgnore, basePath, fullPath, directoryName, function ( error ) {
-				expect( error.message ).to.equal( "The directory name \"this foldername has spaces\" is not valid as it does not comply with the pattern \"^\\w+$\"." );
+
+				expect( error.message ).to.equal( "The directory name \"this foldername has spaces\" is not valid as it does not comply with the pattern \"" + options.pattern + "\"." );
 				done();
 			} );
 

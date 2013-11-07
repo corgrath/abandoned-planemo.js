@@ -141,3 +141,11 @@ exports.breakDownPath = function ( fullPath ) {
 	}
 
 };
+
+exports.getStat = function ( path, fileName ) {
+
+	var file = path + nodePath.sep + fileName;
+
+	return fs.statSync( file );
+
+};

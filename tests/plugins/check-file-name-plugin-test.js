@@ -52,7 +52,7 @@ describe( "check file name plugin", function () {
 
 			plugin.onFileFound( options, reporters, path, fileName, function ( error ) {
 
-				expect( error.message ).to.equal( "The file name \"" + fileName + "\" is not valid." );
+				expect( error.message ).to.equal( "The file name \"" + fileName + "\" is not valid as it does not comply with the pattern \"" + options.javascript + "\"." );
 				done();
 
 			} );
