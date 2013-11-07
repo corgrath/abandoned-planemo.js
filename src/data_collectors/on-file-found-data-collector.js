@@ -54,7 +54,7 @@ exports.init = function () {
 
 };
 
-exports.onFileFound = function onFileFound ( reporter, path, filename, responseFunction ) {
+exports.onFileFound = function ( reporter, path, filename, file, responseFunction ) {
 
 	/*
 	 * Assertions
@@ -63,6 +63,7 @@ exports.onFileFound = function onFileFound ( reporter, path, filename, responseF
 	assert.isObject( reporter, "Reporter is undefined." );
 	assert.isString( path, "Path is undefined." );
 	assert.isString( filename, "File name is undefined." );
+	assert.isString( file, "File is undefined." );
 	assert.isFunction( responseFunction, "Response function is undefined." );
 
 	/*

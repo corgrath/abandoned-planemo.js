@@ -20,6 +20,7 @@
  */
 
 var expect = require( "chai" ).expect;
+var nodePath = require( "path" );
 
 var plugin = require( "../../src-instrumented/plugins/check-for-empty-files-plugin.js" );
 
@@ -29,23 +30,46 @@ var plugin = require( "../../src-instrumented/plugins/check-for-empty-files-plug
 
 describe( "check-for-empty-files-plugin", function () {
 
-	var options = {
-	};
-
 	var reporters = [];
+	var customMessage = "";
 
-	it( "should complain if found empty file", function ( done ) {
+	//	it( "should complain if found empty file", function ( done ) {
+	//
+	//		var ignoredFiles = [];
+	//		var path = __dirname;
+	//		var fileName = "empty_files.txt";
+	//		var file = path + nodePath.sep + fileName;
+	//
+	//		plugin.onFileFound( reporters, customMessage, ignoredFiles, path, fileName, file, function ( error ) {
+	//
+	//			var size = 0;
+	//
+	//			expect( error.message ).to.equal( "The file name \"" + fileName + "\" has the size \"" + size + "\" bytes." );
+	//			done();
+	//
+	//		} );
+	//
+	//	} );
+
+	it( "should not complain since the file should be ignored", function ( done ) {
 
 		var path = __dirname;
 		var fileName = "empty_files.txt";
+		var file = path + nodePath.sep + fileName;
+		var ignoredFiles = [
+			path + nodePath.sep + fileName
+		];
 
-		plugin.onFileFound( options, reporters, path, fileName, function ( error ) {
+		var numberOfErrors = 0;
+		//		console.log( "file2=" + file );
+		plugin.onFileFound( reporters, customMessage, ignoredFiles, path, fileName, file, function () {
 
-			var size = 0;
+			numberOfErrors++;
 
-			expect( error.message ).to.equal( "The file name \"" + fileName + "\" has the size \"" + size + "\" bytes." );
+		}, function () {
+			//			console.log( "TEST DONE" );
+			expect( numberOfErrors ).to.equal( 0 );
 			done();
-
 		} );
 
 	} );

@@ -51,13 +51,13 @@ function testFileName ( fileName, path, pattern, customMessage, responseCallback
 
 exports.init = function ( options ) {
 
-	observerService.onFileFound( function ( reporters, path, fileName, responseCallbackFunction ) {
-		exports.onFileFound( options, reporters, path, fileName, responseCallbackFunction );
+	observerService.onFileFound( function ( reporters, path, fileName, file, responseCallbackFunction ) {
+		exports.onFileFound( options, reporters, path, fileName, file, responseCallbackFunction );
 	} );
 
 };
 
-exports.onFileFound = function ( options, reporters, path, fileName, responseCallbackFunction ) {
+exports.onFileFound = function ( options, reporters, path, fileName, file, responseCallbackFunction ) {
 
 	if ( !options ) {
 		throw new Error( "No options were defined." );

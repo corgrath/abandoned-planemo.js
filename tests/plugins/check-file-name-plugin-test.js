@@ -45,12 +45,13 @@ describe( "check file name plugin", function () {
 
 			var path = "c:\\folder1\\";
 			var fileName = "planemo file.js";
+			var file = path + fileName;
 
 			var options = {
 				javascript: "^[\\w-]+\\.js$"
 			};
 
-			plugin.onFileFound( options, reporters, path, fileName, function ( error ) {
+			plugin.onFileFound( options, reporters, path, fileName, file, function ( error ) {
 
 				expect( error.message ).to.equal( "The file name \"" + fileName + "\" is not valid as it does not comply with the pattern \"" + options.javascript + "\"." );
 				done();
@@ -76,8 +77,9 @@ describe( "check file name plugin", function () {
 			for ( var i in fileNames ) {
 
 				var fileName = fileNames[i];
+				var file = path + fileName;
 
-				plugin.onFileFound( options, reporters, path, fileName, function ( error ) {
+				plugin.onFileFound( options, reporters, path, fileName, file, function ( error ) {
 					expect( error ).to.be.undefined;
 				} );
 

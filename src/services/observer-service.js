@@ -115,14 +115,15 @@ exports.directoryFound = function ( reporters, directoriesToIgnore, basePath, fu
 		addObserver( observer, KEY_FILE_FOUND );
 	};
 
-	exports.fileFound = function ( reporters, path, fileName, responseFunction ) {
+	exports.fileFound = function ( reporters, path, fileName, file, responseFunction ) {
 
 		argument.isObject( reporters );
 		argument.isString( path );
 		argument.isString( fileName );
+		argument.isString( file );
 		argument.isFunction( responseFunction );
 
-		notifyAll( KEY_FILE_FOUND, reporters, path, fileName, responseFunction );
+		notifyAll( KEY_FILE_FOUND, reporters, path, fileName, file, responseFunction );
 
 	};
 }

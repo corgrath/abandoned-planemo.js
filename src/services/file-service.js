@@ -25,6 +25,7 @@ var nodePath = require( "path" );
 var assert = require( "../utils/argument-assertion-util.js" );
 var stringUtil = require( "../utils/string-util.js" );
 var reporterService = require( "../services/reporter-service.js" );
+var fileService = require( "../services/file-service.js" );
 
 /*
  * Public functions
@@ -142,10 +143,14 @@ exports.breakDownPath = function ( fullPath ) {
 
 };
 
-exports.getStat = function ( path, fileName ) {
+exports.getFileSize = function ( file ) {
 
-	var file = path + nodePath.sep + fileName;
+	if ( !fileService.fileExists( file ) ) {
+		throw new Error( "The file \"" + file + "\" does not exist." );
+	}
 
-	return fs.statSync( file );
+	var stat = fs.statSync( file );
+
+	return stat.size;
 
 };

@@ -21,7 +21,9 @@
 
 var observerService = require( "../services/observer-service.js" );
 var errorUtil = require( "../utils/error-util.js" );
+var assert = require( "../utils/argument-assertion-util.js" );
 var fileService = require( "../services/file-service.js" );
+var reporterService = require( "../services/reporter-service.js" );
 
 /*
  * Public functions
@@ -29,26 +31,78 @@ var fileService = require( "../services/file-service.js" );
 
 exports.init = function ( options ) {
 
-	observerService.onFileFound( function ( reporters, path, fileName, responseFunction ) {
-		exports.onFileFound( options, reporters, path, fileName, responseFunction );
+	var ignoredFiles = options["ignored-files"];
+
+	//	console.log( options["ignored-files"] );
+
+	for ( var i in ignoredFiles ) {
+
+		ignoredFiles[i] = fileService.getResolvedPath( ignoredFiles[i] );
+		//		console.log( "new ignored file is:" + ignoredFiles[i] );
+		if ( !fileService.fileExists( ignoredFiles[i] ) ) {
+			throw new Error( "The ignored file \"" + ignoredFiles[i] + "\" does not exist." );
+		}
+
+	}
+
+	observerService.onFileFound( function ( reporters, path, fileName, file, responseFunction ) {
+		exports.onFileFound( reporters, options.customMessage, ignoredFiles, path, fileName, file, responseFunction, undefined );
 	} );
 
 };
 
-exports.onFileFound = function ( options, reporters, path, fileName, responseFunction ) {
+exports.onFileFound = function ( reporters, customMessage, ignoredFiles, path, fileName, file, responseFunction, doneCallbackFunction ) {
 
-	var stat = fileService.getStat( path, fileName );
+	assert.isArray( reporters );
+	assert.isString( customMessage );
+	assert.isArray( ignoredFiles );
+	assert.isString( path );
+	assert.isString( fileName );
+	assert.isString( file );
+	assert.isFunction( responseFunction );
+	if ( doneCallbackFunction ) {
+		assert.isFunction( doneCallbackFunction );
+	}
 
-	var size = stat.size;
+	//	console.log( ignoredFiles );
 
-	if ( stat.size === 0 ) {
+	//	console.log( "\nfile:" + file + "\n" );
 
-		responseFunction( errorUtil.create2( "The file name \"" + fileName + "\" has the size \"" + size + "\" bytes.", options.customMessage, {
+	for ( var i in ignoredFiles ) {
+
+		var ignoredFile = ignoredFiles[i];
+
+		//		console.log( "       file:" + file );
+		//		console.log( "ignoredFile:" + ignoredFile );
+
+		if ( ignoredFile === file ) {
+			reporterService.onVerbose( reporters, "check-for-empty-files-plugin: Ignoring the file \"" + file + "\"." )
+			//			console.log( "\nignoring the file:" + ignoredFile + "\n" );
+			if ( doneCallbackFunction ) {
+				doneCallbackFunction();
+			}
+			return;
+		}
+
+	}
+
+	var size = fileService.getFileSize( file );
+
+	if ( size === 0 ) {
+
+		responseFunction( errorUtil.create2( "The file name \"" + fileName + "\" has the size \"" + size + "\" bytes.", customMessage, {
 			path: path,
 			fileName: fileName,
+			file: file,
 			size: size
 		} ) );
 
+	}
+	//	console.log( "going to call done now" );
+	//	console.log( doneCallbackFunction );
+	if ( doneCallbackFunction ) {
+		//		console.log( "callingall done now" );
+		doneCallbackFunction();
 	}
 
 };

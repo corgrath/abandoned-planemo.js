@@ -90,9 +90,9 @@ exports.onDirectoryFound = function onDirectoryFound ( reporters, directoriesToI
 
 		var item = items[i];
 		var newDirectory = fullPath + item;
-		var stat = fs.statSync( newDirectory );
+		var file = fullPath + item;
 
-		if ( stat.isDirectory() ) {
+		if ( fileService.directoryExists( newDirectory ) ) {
 
 			newDirectory = fileService.prettifyDirectory( newDirectory );
 
@@ -117,9 +117,9 @@ exports.onDirectoryFound = function onDirectoryFound ( reporters, directoriesToI
 
 		} else {
 
-			reporterService.onVerbose( reporters, "Found the file \"" + newDirectory + "\" (\"" + fileService.getResolvedPath( newDirectory ) + "\")." );
+			reporterService.onVerbose( reporters, "Found the file \"" + file + "\"." );
 
-			observerService.fileFound( reporters, fullPath, item, responseCallbackFunction );
+			observerService.fileFound( reporters, fullPath, item, file, responseCallbackFunction );
 
 		}
 
