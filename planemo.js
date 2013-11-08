@@ -28,6 +28,7 @@ var pluginService = require( "./src/services/plugin-service.js" );
 var pluginResponseService = require( "./src/services/plugin-response-service.js" );
 var defaultReporterFactory = require( "./src/factories/default-reporter-factory.js" );
 var reporterService = require( "./src/services/reporter-service.js" );
+var packageJSONService = require( "./src/services/package-json-service.js" );
 
 /*
  * Private
@@ -58,7 +59,9 @@ exports.start = function ( configuration, reporters ) {
 	 * Inform the reporter we are starting
 	 */
 
-	reporterService.onStart( reporters );
+	var version = packageJSONService.getVersion();
+
+	reporterService.onStart( reporters, version );
 
 	/*
 	 * Resolve any relative paths

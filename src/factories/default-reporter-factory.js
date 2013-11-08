@@ -29,9 +29,9 @@ exports.create = function () {
 
 	return {
 
-		onStart: function () {
+		onStart: function ( version ) {
 
-			logService.log( "[on-start] Starting Planemo." );
+			logService.log( "[on-start] Starting Planemo, version " + version + "." );
 
 		},
 
