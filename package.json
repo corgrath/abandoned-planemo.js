@@ -1,21 +1,22 @@
 {
 	"name": "planemo",
-	"version": "0.0.19",
+	"version": "1.0.0",
 	"description": "Planemo is a plugin-friendly open source software quality platform written in JavaScript running on the Node.js platform.",
 	"main": "planemo.js",
 	"directories": {
 		"test": "tests"
 	},
 	"dependencies": {
-		"mocha": "~1.13.0",
 		"chai": "~1.7.2",
 		"css": "~1.4.1",
 		"htmlparser2": "~3.2.3",
+		"jscoverage": "~0.3.8",
+		"mocha": "~1.13.0",
 		"underscore": "~1.4.4",
-		"underscore.string": "~2.3.3",
-		"jscoverage": "~0.3.8"
+		"underscore.string": "~2.3.3"
 	},
-	"devDependencies": {},
+	"devDependencies": {
+	},
 	"scripts": {
 		"drone-io-test": "./node_modules/.bin/jscoverage src/ src-instrumented/;./node_modules/.bin/mocha -R list --recursive tests/"
 	},
