@@ -54,6 +54,57 @@ describe( "planemo core service", function () {
 
 		} );
 
+		it( "should complain if source root is not defined", function () {
+
+			var configuration = {
+				source: {
+				}
+			};
+
+			expect(function () {
+				planemoCoreService.validateConfiguration( configuration );
+			} ).to.throw( "The \"root\" in the \"source\" setting in the configuration file is not defined." );
+
+		} );
+
+		it( "should complain if an ignored source directory does not exist", function () {
+
+			var faultyIgnoredDirectoryPath = "This is not a valid directory path";
+
+			var configuration = {
+				source: {
+					root: __dirname,
+					ignore: [
+						__dirname,
+						faultyIgnoredDirectoryPath
+					]
+				}
+			};
+
+			expect(function () {
+				planemoCoreService.validateConfiguration( configuration );
+			} ).to.throw( "The ignored directory \"" + faultyIgnoredDirectoryPath + "\" does not exist." );
+
+		} );
+
+		it( "should all pass", function () {
+
+			var configuration = {
+				source: {
+					root: __dirname,
+					ignore: [
+						__dirname,
+						__dirname
+					]
+				}
+			};
+
+			expect(function () {
+				planemoCoreService.validateConfiguration( configuration );
+			} ).to.not.throw();
+
+		} );
+
 	} );
 
 } );

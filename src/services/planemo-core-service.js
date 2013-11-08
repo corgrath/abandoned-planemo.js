@@ -20,6 +20,7 @@
  */
 
 var assert = require( "../utils/argument-assertion-util.js" );
+var expect = require( "../utils/argument-assertion-util.js" ).expect;
 var logService = require( "./log-service.js" );
 var fileService = require( "./file-service.js" );
 
@@ -29,7 +30,7 @@ var fileService = require( "./file-service.js" );
 
 function validateConfigurationSourceIgnore ( configuration ) {
 
-	assert.isArray( configuration.source.ignore, "configuration.source.ignore" );
+	expect( configuration.source.ignore, "configuration.source.ignore" ).toBeAnArray();
 
 	for ( var i in configuration.source.ignore ) {
 

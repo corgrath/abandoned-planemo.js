@@ -93,8 +93,21 @@ exports.expect = function ( object, objectName ) {
 
 	};
 
+	function toBeAnArray () {
+
+		exports.isObject( object, objectName );
+
+		var type = Object.prototype.toString.call( object );
+
+		if ( type !== "[object Array]" ) {
+			throw new Error( getObjectName() + " is not an array but a \"" + type + "\"." );
+		}
+
+	};
+
 	return {
-		toBeType: toBeType
+		toBeType: toBeType,
+		toBeAnArray: toBeAnArray
 	}
 
 };
