@@ -133,7 +133,7 @@ describe( "file service", function () {
 
 			var actual = fileService.getAllFilesInDirectory( __dirname );
 
-			expect( actual.length ).to.equal( 5 );
+			expect( actual.length ).to.equal( 6 );
 
 		} );
 

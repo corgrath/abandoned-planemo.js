@@ -26,14 +26,23 @@ var logService = require( "../../src-instrumented/services/log-service.js" );
  * Mocks
  */
 
-var mockConsole = {
-	log: function ( message ) {
-		this.message = message;
-	},
-	getLog: function () {
-		return this.message;
-	}
-};
+createMockConsole = function () {
+
+	return new function () {
+
+		var message = "";
+
+		this.log = function ( m ) {
+			message += m;
+		};
+
+		this.getLog = function () {
+			return message;
+		};
+
+	};
+
+}
 
 /*
  * Tests
@@ -41,9 +50,11 @@ var mockConsole = {
 
 describe( "log service", function () {
 
-	describe( "log ", function () {
+	describe( "log", function () {
 
 		it( "should have correct output", function () {
+
+			var mockConsole = createMockConsole();
 
 			var mockDate = new Date();
 
@@ -57,15 +68,61 @@ describe( "log service", function () {
 
 	} );
 
-	describe( "fail ", function () {
+	describe( "success", function () {
 
 		it( "should have correct output", function () {
 
+			var mockConsole = createMockConsole();
+			var mockDate = new Date();
+
+			var message = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. 槥ちゅ りゅにょい 裪嶥りゃきゅ.";
+			var expected = "\x1b[32m[" + mockDate.toUTCString() + "] " + message + "\x1b[0m";
+
+			logService.success( message, mockDate, mockConsole );
+			expect( mockConsole.getLog() ).to.equal( expected );
+
+		} );
+
+	} );
+
+	describe( "fail", function () {
+
+		it( "should have correct output", function () {
+
+			var mockConsole = createMockConsole();
 			var message = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. 槥ちゅ りゅにょい 裪嶥りゃきゅ.";
 			var expected = "\n\u001b[31m" + message + "\u001b[0m\n";
 
 			logService.fail( message, mockConsole );
 			expect( mockConsole.getLog() ).to.equal( expected );
+
+		} );
+
+	} );
+
+	describe( "error", function () {
+
+		it( "should throw error since it is not an Error object", function () {
+
+			var mockConsole = createMockConsole();
+
+			expect(function () {
+				logService.error( "This is a string.", mockConsole );
+			} ).to.throw( "An argument is not the expected type \"Error\"." );
+
+		} );
+
+		it( "should be working with multiple properties", function () {
+
+			var mockConsole = createMockConsole();
+			var message = "This is the error message";
+			var error = new Error( message );
+			error["property one"] = "Hello world!";
+
+			console.log( mockConsole.getLog() );
+
+			logService.error( error, mockConsole );
+			expect( mockConsole.getLog() ).to.equal( "\u001b[31m" + message + "\u001b[0m\u001b[31mproperty one = \"Hello world!\"\u001b[0m\n" );
 
 		} );
 

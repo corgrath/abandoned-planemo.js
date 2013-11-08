@@ -16,6 +16,13 @@
  */
 
 /*
+ * Dependencies
+ */
+
+var assert = require( "../utils/argument-assertion-util.js" );
+var expect = assert.expect;
+
+/*
  * Private functions
  */
 
@@ -37,7 +44,7 @@ function getFormattedTime ( myDate ) {
  * Public functions
  */
 
-exports.log = function log ( object, myDate, myConsole ) {
+exports.log = function ( object, myDate, myConsole ) {
 
 	var timestamp = getFormattedTime( myDate );
 
@@ -49,29 +56,39 @@ exports.log = function log ( object, myDate, myConsole ) {
 
 };
 
-exports.success = function log ( object ) {
+exports.success = function ( object, myDate, myConsole ) {
 
-	var timestamp = getFormattedTime();
+	var timestamp = getFormattedTime( myDate );
 
-	console.log( ANSI_GREEN + "[" + timestamp + "] " + object + ANSI_CANCEL );
+	if ( !myConsole ) {
+		myConsole = console;
+	}
+
+	myConsole.log( ANSI_GREEN + "[" + timestamp + "] " + object + ANSI_CANCEL );
 
 };
 
-exports.error = function error ( error ) {
+exports.error = function ( error, _console ) {
+
+	expect( error ).toBeType( Error );
 
 	var message = error.message;
 
-	console.log( ANSI_RED + message + ANSI_CANCEL );
-
-	for ( var property in error ) {
-		console.log( ANSI_RED + property + " = " + JSON.stringify( error[property], null, "\t" ) + ANSI_CANCEL );
+	if ( !_console ) {
+		_console = console;
 	}
 
-	console.log( "\n" );
+	_console.log( ANSI_RED + message + ANSI_CANCEL );
+
+	for ( var property in error ) {
+		_console.log( ANSI_RED + property + " = " + JSON.stringify( error[property], null, "\t" ) + ANSI_CANCEL );
+	}
+
+	_console.log( "\n" );
 
 };
 
-exports.fail = function error ( message, myConsole ) {
+exports.fail = function ( message, myConsole ) {
 
 	if ( !myConsole ) {
 		myConsole = console;

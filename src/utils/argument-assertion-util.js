@@ -74,3 +74,27 @@ exports.isFunction = function ( f, name ) {
 	shouldBe( f, "function", name );
 
 };
+
+exports.expect = function ( object, objectName ) {
+
+	function getObjectName () {
+
+		return objectName ? objectName : "An argument";
+
+	};
+
+	function toBeType ( expectedType ) {
+
+		var isSameType = object instanceof expectedType;
+
+		if ( !isSameType ) {
+			throw new Error( getObjectName() + " is not the expected type \"" + expectedType.name + "\"." );
+		}
+
+	};
+
+	return {
+		toBeType: toBeType
+	}
+
+};
