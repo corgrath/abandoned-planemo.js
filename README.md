@@ -29,7 +29,7 @@ Table of Contents
     * Via npm (preferred way for end users)
     * Via git clone (preferred way for plugin developers)
     * Download as a ZIP file (preferred way for people who really like ZIP files)
- * The configuration object
+ * [The configuration object][TOC-02]
  * [Available plugins][TOC-00]
     * check-directory-name-plugin
     * check-file-name-plugin
@@ -422,7 +422,7 @@ License
 
 [TOC-00]: #available-plugins
 [TOC-01]: #continuous-build-status
-[TOC-02]: #the-configuration-file
+[TOC-02]: #the-configuration-object
 [TOC-03]: #plugin-and-data-collector-hooks
 [TOC-04]: #writing-tests
 [TOC-05]: #versioning
