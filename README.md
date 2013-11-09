@@ -29,12 +29,13 @@ Table of Contents
     * Via npm (preferred way for end users)
     * Via git clone (preferred way for plugin developers)
     * Download as a ZIP file (preferred way for people who really like ZIP files)
- * The configuration file
+ * The configuration object
  * [Available plugins][TOC-00]
     * check-directory-name-plugin
     * check-file-name-plugin
     * [check-file-contents-less-plugin][TOC-07]
     * check-file-contents-javascript-plugin
+    * [Creating a bootstrap script to configure and start Planemo][TOC-08]
  * Writing your own plugin
  * Running the testsplugins
  * Writing tests
@@ -64,13 +65,12 @@ Planemo is continuously built by [Drone.io][16]. You can find the build history 
 
 Downloading and running Planemo
 -------------------------------------------------
-Planemo runs on Node.js, so make sure you have that [installed][20]. If you want to contribute you need to have [Git installed][21] as well.
+Planemo runs on [Node.js][20], so make sure you have that [installed][20]. If you want to contribute you need to have [Git installed][21] as well.
 
-### Via npm (preferred way for end users)
+### Via npm (preferred way for end users and production)
 
 Since Planemo is [published on npm][28], you maybe simply type `npm install planemo`. This should download Planemo and all its dependencies.
 
-To start Planemo you may simply type `cd node_modules/planemo/ && node planemo <configuration file>`.
 
 ### Via git clone (preferred way for plugin developers)
 
@@ -78,8 +78,6 @@ You can clone the Git project directly by typing `git clone git@github.com:corgr
 
 After it you need to install the Node.js dependencies with `npm install`.
 
-Now you should be able to start Planemo using a [*configuration file*][TOC-02] by using
-the command `node planemo <configuration file>`
 
 ### Download as a ZIP file (preferred way for people who really like ZIP files)
 
@@ -87,11 +85,50 @@ On the Planemo GitHub page there is a button on the page with the text *"Downloa
 
 After it you need to install the Node.js dependencies with `npm install`.
 
-Now you should be able to start Planemo using a [configuration file][23] by using the command `node planemo <configuration file>`
+### Creating a bootstrap script to configure and start Planemo
+
+	Planemo is built as a library, so in order to configure and start Planemo you need to create your own main-script. An example would look like this:
+
+	var planemo = require( "./planemo.js" );
+
+	var configuration = {
+		"source": {
+			"root": "c:\\project\\src\\",
+			"ignore": [
+				"c:\\project\\src\\libs\\"
+			]
+		},
+		"plugins": {
+			"check-directory-name-plugin": {
+				"pattern": "^[a-z|-]+$"
+			},
+			"check-file-name-plugin": {
+				"javascript": "^[a-z|-]+\\.(?:spec\\.js|js)$",
+				"html": "^[a-z|-]+\\.(?:ng\\.html|html)$",
+				"less": "^[a-z|-]+\\.less$"
+			},
+			"check-for-empty-files-plugin": {
+				"ignored-files": [
+					"c:\\project\\src\\placeholder.txt"
+				]
+			}
+		}
+	};
+
+	var reporter = planemo.getDefaultReporterFactory();
+
+	// By overriding the onVerbose, we are making the default reporter more quiet
+	reporter.onVerbose = function () {
+	};
+
+	var reporters = [reporter];
+
+	planemo.start( configuration, reporters );
 
 
 
-The configuration file
+
+The configuration object
 -------------------------------------------------
 In order to launch Planemo you need to specify a [JSON][13] formatted *configuration file* as the first argument. The best way to describe it is to look at a sample file, and then
 look at the property explanations below to better understand what and how the different parts works.
@@ -380,6 +417,7 @@ License
 [TOC-05]: #versioning
 [TOC-06]: #writing-your-own-plugins
 [TOC-07]: #check-file-contents-less-plugin
+[TOC-08]: #
 
 
 [C00]: https://github.com/corgrath
