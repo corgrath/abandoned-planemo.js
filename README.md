@@ -169,9 +169,70 @@ Row explanations:
 
 
 
-Available plugins
+Reporters
 -------------------------------------------------
-You can enable what plugins you want Planemo to run by defining them in your [*configuration file*][TOC-02].
+The second argument when starting the Planemo tool is providing an array of Reporters. This will allow the user to control all notifications
+and errors Planemo wants to report. A best example to see how to create your own Reporter is to view the default reporter you can fetch with
+`planemo.planemo.getDefaultReporterFactory();':
+
+	exports.create = function () {
+
+		return {
+
+			onStart: function ( version ) {
+
+				logService.log( "[on-start] Starting Planemo, version " + version + "." );
+
+			},
+
+			onVerbose: function ( message ) {
+
+				logService.log( "[on-verbose] " + message );
+
+			},
+
+			onDataCollectorRegistered: function ( dataCollectorName ) {
+
+				logService.log( "[on-data-collector-registered] Registered the data collector \"" + dataCollectorName + "\"." );
+
+			},
+
+			onPluginRegistered: function ( pluginName ) {
+
+				logService.log( "[on-plugin-registered] Registered the plugin \"" + pluginName + "\"." );
+
+			},
+
+			onPluginError: function ( error ) {
+
+				logService.error( error );
+
+			},
+
+			onFinished: function ( errors ) {
+
+				if ( errors.length > 0 ) {
+
+					logService.fail( "[on-finished] Planemo static code analysis failed with \"" + errors.length + "\" errors." );
+
+				} else {
+
+					logService.success( "[on-finished] Planemo static code analysis done. No errors found. Happy times!" );
+
+				}
+
+			}
+
+		}
+
+	};
+
+
+
+
+NOT UP TO DATE - Available plugins
+-------------------------------------------------
+You can enable what plugins you want Planemo to run by defining them in your [*configuration object*][TOC-02].
 
 Below is a list of all the current available plugins, a brief description of their individual options and an example.
 
@@ -255,7 +316,7 @@ Example:
 	}
 
 
-Writing your own plugin
+NOT UP TO DATE - Writing your own plugin
 -------------------------------------------------
 Writing new plugins to Planemo is fairly easy. A plugin is a stand alone file that is located in the `/plugins/` folder.
 
@@ -331,7 +392,7 @@ Row explanations:
 
  * 01 - 16: This is the [Apache 2.0 license][29] information all source files needs to embed.
  * 22 - 23: Module dependencies are declared here
- * 29: Each Plugin needs to have a public `exports.init` function. The *argument* to the function will be the *options* the user has specified in the [*configuration file*][TOC-02]. The Plugin developer can come up with any (or no) options as they like. However, all options should be properly documented for other Planemo end users.
+ * 29: Each Plugin needs to have a public `exports.init` function. The *argument* to the function will be the *options* the user has specified in the [*configuration object*][TOC-02]. The Plugin developer can come up with any (or no) options as they like. However, all options should be properly documented for other Planemo end users.
  * 31: In this plugin we simply hook into a new function once a new directory found is found. A plugin can hook function into a wide range of [hooks][TOC-03]. In this plugin we are only interested in the `onDirectoryFound` hook.
  * 37: This is the primary function that will be called each time Planemo finds a directory. Since we did a fancy closure hook on row 32, we now get both the user options (*options*) and the hook information details ( *basePath*, *fullPath*, *directoryName*) and a specific callback function (`responseFunction`) to our function. The reason why this function is public (meaning its declared on the export object like `export.onDirectoryFound = `) is because we want to be able to [unit test it later][TOC-04].
  * 39-45: Basic validation to make sure that the options are as we expect them to be.
@@ -339,7 +400,7 @@ Row explanations:
 
 
 
-Plugin and Data Collector hooks
+NOT UP TO DATE - Plugin and Data Collector hooks
 -------------------------------------------------
 Not yet written.
 
@@ -347,7 +408,7 @@ Not yet written.
 
 Running the tests
 -------------------------------------------------
-You can execute the tests by running `npm test` if you are running from a [Windows Command Prompt][27] or `run_tests.bat` is you are using a [Shell][26], such as [Git Bash][12].
+You can execute the tests by running `run_tests_in_git_bash.bat` if is you are using a [Shell][26], such as [Git Bash][12].
 
 
 
@@ -357,6 +418,11 @@ For obvious reasons, the [more tests we have for Planemo the happier we are][18]
 
 Planemo is currently using [Mocha][31] and [Chai][32] as a part of its test framework. If you are planning to write tests it would be a good idea to look at their individual
 examples and documentation to better understand how to write new or maintain old tests. If you looking for examples you can find them in the `/tests/` folder in this project.
+
+
+Code Coverage
+-------------------------------------------------
+Code coverage report can be found [here][19].
 
 
 
@@ -404,7 +470,7 @@ License
 [16]: http://www.drone.io/
 [17]: http://en.wikipedia.org/wiki/Unit_testing
 [18]: http://en.wikipedia.org/wiki/Unit_testing#Benefits
-[19]:
+[19]: https://rawgithub.com/corgrath/planemo-open-source-software-quality-platform/master/coverage.html
 [20]: http://nodejs.org/
 [21]: https://help.github.com/articles/set-up-git/
 [22]: https://github.com/corgrath/planemo-javascript-open-source-software-quality-platform/archive/master.zip
