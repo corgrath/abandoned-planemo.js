@@ -2,7 +2,7 @@
 
 
 
-Planemo [we are working on creating 1.0!]
+Planemo
 =================================================
 Planemo is a [plugin-friendly][07] [open source][06] [software quality platform][09] written in [JavaScript][11] running on the [Node.js platform][01].
 
@@ -52,6 +52,7 @@ Two things you need to know:
 
  * The [code on GitHub][30] should be regarded as unstable builds. We don't have any restrictions when and how things can be checked in there (within common sense though).
  * The [project on npm][28] should be regarded as the stable builds. We will only publish a new version to npm once we feel Planemo is stable and has any new end user value.
+   If you need to find the documentation for that certain npm version, please read the README on the [npm page][28].
 
 
 
@@ -89,7 +90,7 @@ After it you need to install the Node.js dependencies with `npm install`.
 
 	Planemo is built as a library, so in order to configure and start Planemo you need to create your own main-script. An example would look like this:
 
-	var planemo = require( "./planemo.js" );
+	var planemo = require( "planemo.js" );
 
 	var configuration = {
 		"source": {
@@ -130,31 +131,41 @@ After it you need to install the Node.js dependencies with `npm install`.
 
 The configuration object
 -------------------------------------------------
-In order to launch Planemo you need to specify a [JSON][13] formatted *configuration file* as the first argument. The best way to describe it is to look at a sample file, and then
+In order to launch Planemo you need to feed it a *configuration object* as the first argument. The best way to describe it is to look at a sample object, and then
 look at the property explanations below to better understand what and how the different parts works.
 
-		{
-	01		"source": {
-				"root": "C:\\project\\src\\"
-			}
-	05		"verbose": false,
-	06		"plugins": {
-	07			"check-directory-name-plugin": {
-	08				"regexp": "^[a-z]+$"
+		var configuration = {
+			"source": {
+	1			"root": "c:\\project\\src\\",
+	2			"ignore": [
+					"c:\\project\\src\\libs\\"
+				]
+			},
+	3		"plugins": {
+	4			"check-directory-name-plugin": {
+	5				"pattern": "^[a-z|-]+$"
 				},
-	07			"check-file-name-plugin": {
-	08				"regexp": "^[a-z|-]+\\.(?:js|html|css|less)$"
+	4			"check-file-name-plugin": {
+	5				"javascript": "^[a-z|-]+\\.(?:spec\\.js|js)$",
+					"html": "^[a-z|-]+\\.(?:ng\\.html|html)$",
+					"less": "^[a-z|-]+\\.less$"
+				},
+	4			"check-for-empty-files-plugin": {
+	5				"ignored-files": [
+						"c:\\project\\src\\placeholder.txt"
+					]
 				}
 			}
-		}
+		};
+
 
 Row explanations:
 
- * 01: The *source* property is required to specify the starting directory which Planemo will start analyzing files in.
- * 05: Verbose setting, meaning if you want Planemo to be verbose or not. Valid options are *true* or *false*. If you are using plugins that should show warnings instead of errors, having *verbose* to *false* is recommended.
- * 06: Here the user can define a list of plugins that should be invoked during the code analysis
- * 07: The plugin name which should be used during the analysis is specified as a property
- * 08: The the value of the property is the *options* that should be sent to the plugin
+ * 1: The *source* property is required to specify the starting directory which Planemo will start analyzing files in.
+ * 2: If you need to ignore certain directories of files, you can add them here.
+ * 3: Here the user can define a list of plugins that should be invoked during the code analysis.
+ * 4: The plugin name which should be used during the analysis is specified as a property.
+ * 5: The the value of the property is the *options* that should be sent to the plugin. Each plugin has their own options.
 
 
 
@@ -417,7 +428,7 @@ License
 [TOC-05]: #versioning
 [TOC-06]: #writing-your-own-plugins
 [TOC-07]: #check-file-contents-less-plugin
-[TOC-08]: #
+[TOC-08]: #creating-a-bootstrap-script-to-configure-and-start-planemo
 
 
 [C00]: https://github.com/corgrath
