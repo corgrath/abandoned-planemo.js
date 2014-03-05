@@ -1,4 +1,8 @@
-![Planemo logotype](https://raw.github.com/corgrath/planemo-javascript-open-source-software-quality-platform/master/resources/planemo_github_version.png)
+This project has been abandoned in favor of Planemo.dart, a version written in [Dart][A1]
+=================================================
+
+https://github.com/corgrath/planemo.dart
+=================================================
 
 
 
@@ -53,14 +57,6 @@ Two things you need to know:
  * The [code on GitHub][30] should be regarded as unstable builds. We don't have any restrictions when and how things can be checked in there (within common sense though).
  * The [project on npm][28] should be regarded as the stable builds. We will only publish a new version to npm once we feel Planemo is stable and has any new end user value.
    If you need to find the documentation for that certain npm version, please read the README on the [npm page][28].
-
-
-
-Continuous build status
--------------------------------------------------
-Planemo is continuously built by [Drone.io][16]. You can find the build history [here][15].
-
-[![Build Status](https://drone.io/github.com/corgrath/planemo-open-source-software-quality-platform/status.png)](https://drone.io/github.com/corgrath/planemo-open-source-software-quality-platform/latest)
 
 
 
@@ -498,3 +494,5 @@ License
 
 
 [C00]: https://github.com/corgrath
+
+[A1]: https://www.dartlang.org/
