@@ -1,4 +1,4 @@
-This project has been abandoned in favor of [Planemo.dart][2], a version written in [Dart][1]
+This project has been abandoned in favor of [Planemo.dart][2], a version written in [Dart programming language][1].
 
 View the [old readme][2] document.
 
